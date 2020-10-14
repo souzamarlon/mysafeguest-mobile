@@ -7,7 +7,7 @@ import { persistReducer } from 'redux-persist';
 export default (reducers) => {
   const persistedReducer = persistReducer(
     {
-      key: 'watchingtheguards',
+      key: 'mysafeguest',
       storage: AsyncStorage,
       whitelist: ['auth', 'user'],
     },

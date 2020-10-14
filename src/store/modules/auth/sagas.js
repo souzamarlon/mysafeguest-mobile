@@ -10,22 +10,20 @@ import { signInSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
   try {
-    const { email } = payload;
+    const { email, password } = payload;
 
-    const response = yield call(api.get, 'guardsauth', { params: { email } });
-
-    const { id, name } = response.data;
-
-    // yield delay(100000);
-
-    // eslint-disable-next-line prefer-object-spread
-    const user = Object.assign({
-      id,
-      name,
+    const response = yield call(api.post, 'sessions', {
       email,
+      password,
     });
 
-    yield put(signInSuccess(user));
+    const { token, user } = response.data;
+
+    console.tron.log(user);
+
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
+    yield put(signInSuccess(token, user));
 
     // history.push('/dashboard');
   } catch (err) {

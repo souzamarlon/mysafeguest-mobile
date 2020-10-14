@@ -6,11 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from './pages/SignIn';
-
 import Dashboard from './pages/Dashboard';
-import Scan from './pages/Dashboard/Scan';
-
-import Profile from './pages/Profile';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -60,6 +56,17 @@ export default function createRouter(isSigned = false) {
           borderTopWidth: 0,
         },
       }}
-    />
+    >
+      <Tabs.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          // tabBarLabel: '',
+          tabBarIcon: ({ color }) => (
+            <Icon name="home" size={30} color={color} />
+          ),
+        }}
+      />
+    </Tabs.Navigator>
   );
 }
