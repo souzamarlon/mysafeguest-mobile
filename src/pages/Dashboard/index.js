@@ -60,7 +60,11 @@ export default function Dashboard({ navigation }) {
           <OwnerName>{name}</OwnerName>
         </AlignTitleAndName>
       </Profile>
-      <ResidentsTitle>RESIDENTS:</ResidentsTitle>
+      <ResidentsTitle>
+        <Icon name="emoji-people" size={10} color="#555" />
+        RESIDENTS
+        <Icon name="emoji-people" size={10} color="#555" />
+      </ResidentsTitle>
       <List
         data={residents}
         refreshing={refreshList}
@@ -73,17 +77,17 @@ export default function Dashboard({ navigation }) {
             }}
           >
             <ResidentName>
-              <Icon name="person" size={20} color="#222" />
+              <Icon name="person" size={20} color="#555" />
               <Name>{data.name}</Name>
             </ResidentName>
             <MoreInfo>
-              <Icon name="email" size={20} color="#222" />
+              <Icon name="email" size={20} color="#555" />
               <Email>{data.email}</Email>
-              <Icon name="phone" size={20} color="#222" />
+              <Icon name="phone" size={20} color="#555" />
               <Email>{data.mobile}</Email>
             </MoreInfo>
             <AddressInfo>
-              <Icon name="house" size={20} color="#222" />
+              <Icon name="house" size={20} color="#555" />
               <Address>{data.street},</Address>
               <Address>{data.number},</Address>
               <Address>{data.city}.</Address>

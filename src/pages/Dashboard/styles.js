@@ -11,11 +11,15 @@ export const Container = styled.View`
 `;
 
 export const Profile = styled.View`
-  height: 55px;
-  background: rgba(255, 255, 255, 0.5);
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
-  border: 1px solid #fff;
+  height: 65px;
+  background: rgba(230, 242, 255, 0.2);
+  /* background: #f0efeb; */
+  /* border-bottom-left-radius: 28px;
+  border-bottom-right-radius: 28px; */
+  border-radius: 28px;
+  margin: 5px;
+
+  border: 3px solid #fff;
   flex-direction: row;
   /* justify-content: space-between; */
 `;
@@ -45,6 +49,7 @@ export const ResidentsTitle = styled.Text`
   align-items: center;
   text-align: center;
   padding-top: 5px;
+  flex-direction: row;
   width: 100%;
   height: 30px;
   border: 1px solid #fff;
