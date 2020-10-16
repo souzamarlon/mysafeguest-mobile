@@ -69,7 +69,11 @@ export default function SignIn() {
               value={password}
               onChangeText={setPassword}
             />
-            <SubmitButton loading={loading} onPress={handleSubmit}>
+            <SubmitButton
+              loading={loading}
+              onPress={handleSubmit}
+              fontSize={19}
+            >
               Log in
             </SubmitButton>
           </Form>
