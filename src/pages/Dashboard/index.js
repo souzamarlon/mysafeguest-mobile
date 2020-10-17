@@ -9,6 +9,8 @@ import {
   AlignTitleAndName,
   WelcomeTitle,
   OwnerName,
+  AddField,
+  AddButton,
   ResidentsTitle,
   List,
   ResidentInfo,
@@ -18,6 +20,9 @@ import {
   Email,
   AddressInfo,
   Address,
+  CancelEdit,
+  Delete,
+  Edit,
   Appointment,
 } from './styles';
 
@@ -60,11 +65,17 @@ export default function Dashboard({ navigation }) {
           <OwnerName>{name}</OwnerName>
         </AlignTitleAndName>
       </Profile>
-      <ResidentsTitle>
-        <Icon name="emoji-people" size={10} color="#555" />
-        RESIDENTS
-        <Icon name="emoji-people" size={10} color="#555" />
-      </ResidentsTitle>
+      <AddField>
+        <ResidentsTitle>
+          <Icon name="emoji-people" size={10} color="#43AA8B" />
+          RESIDENTS
+          <Icon name="emoji-people" size={10} color="#43AA8B" />
+        </ResidentsTitle>
+        <AddButton>
+          <Icon name="add" size={20} color="#eee" />
+        </AddButton>
+      </AddField>
+
       <List
         data={residents}
         refreshing={refreshList}
@@ -77,21 +88,25 @@ export default function Dashboard({ navigation }) {
             }}
           >
             <ResidentName>
-              <Icon name="person" size={20} color="#555" />
+              <Icon name="person" size={20} color="#fff" />
               <Name>{data.name}</Name>
             </ResidentName>
             <MoreInfo>
-              <Icon name="email" size={20} color="#555" />
+              <Icon name="email" size={20} color="#999" />
               <Email>{data.email}</Email>
-              <Icon name="phone" size={20} color="#555" />
+              <Icon name="phone" size={20} color="#999" />
               <Email>{data.mobile}</Email>
             </MoreInfo>
             <AddressInfo>
-              <Icon name="house" size={20} color="#555" />
+              <Icon name="house" size={20} color="#999" />
               <Address>{data.street},</Address>
               <Address>{data.number},</Address>
               <Address>{data.city}.</Address>
             </AddressInfo>
+            <CancelEdit>
+              <Delete>Delete</Delete>
+              <Edit>Edit</Edit>
+            </CancelEdit>
             <Appointment icon="arrow-forward" fontSize={14}>
               OPEN THE APPOINTMENTS
             </Appointment>

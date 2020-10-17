@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 
+import { RectButton } from 'react-native-gesture-handler';
 import Button from '~/components/Button';
 
 export const Container = styled.View`
@@ -24,7 +25,9 @@ export const Profile = styled.View`
   /* justify-content: space-between; */
 `;
 
-export const AlignTitleAndName = styled.View``;
+export const AlignTitleAndName = styled.View`
+  flex-direction: column;
+`;
 
 export const WelcomeTitle = styled.Text`
   color: #888;
@@ -41,18 +44,31 @@ export const OwnerName = styled.Text`
   padding-left: 25px;
 `;
 
-export const ResidentsTitle = styled.Text`
+export const AddField = styled.View`
   background: rgba(555, 555, 555, 0.3);
-  margin-top: 20px;
-  font-size: 14px;
-  font-weight: bold;
+  margin-top: 10px;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   padding-top: 5px;
   flex-direction: row;
-  width: 100%;
-  height: 30px;
+  /* width: 100%; */
+  height: 40px;
   border: 1px solid #fff;
+`;
+
+export const AddButton = styled(RectButton)`
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  align-items: center;
+  background: rgba(144, 190, 109, 1);
+`;
+
+export const ResidentsTitle = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: 20px;
+  color: #43aa8b;
 `;
 
 export const List = styled.FlatList.attrs({
@@ -61,13 +77,14 @@ export const List = styled.FlatList.attrs({
     paddingTop: 10,
     marginLeft: 10,
     marginRight: 10,
+    paddingBottom: 20,
   },
 })``;
 
 export const ResidentInfo = styled.View`
   background: rgba(255, 255, 255, 0.6);
   margin-top: 10px;
-  height: 150px;
+  height: 180px;
   padding: 2px 20px;
   border: 1px solid #fff;
   border-radius: 4px;
@@ -80,13 +97,18 @@ export const ResidentName = styled.View`
   justify-content: center;
   /* width: 120px; */
   margin-top: 5px;
+  background: rgba(254, 95, 85, 0.9);
+  /* border: 1px solid #495867; */
+  /* background: rgba(111, 111, 222, 0.3); */
+  border-radius: 25px;
 `;
 
 export const Name = styled.Text`
-  color: #222;
+  color: #fff;
   font-size: 16px;
   font-weight: bold;
   margin-left: 5px;
+  text-align: center;
 `;
 
 export const MoreInfo = styled.View`
@@ -99,7 +121,7 @@ export const MoreInfo = styled.View`
 `;
 
 export const Email = styled.Text`
-  color: #222;
+  color: #495867;
   font-size: 16px;
 `;
 
@@ -113,14 +135,38 @@ export const AddressInfo = styled.View`
 `;
 
 export const Address = styled.Text`
-  color: #222;
+  color: #495867;
   font-size: 16px;
+`;
+
+export const CancelEdit = styled.View`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 5px;
+`;
+
+export const Delete = styled(Button)`
+  margin-top: 10px;
+  background: rgba(254, 95, 85, 0.9);
+  width: 40%;
+  height: 60%;
+  align-items: center;
+`;
+
+export const Edit = styled(Button)`
+  margin-top: 10px;
+  background: rgba(87, 115, 153, 0.9);
+  width: 40%;
+  height: 60%;
+  align-items: center;
 `;
 
 export const Appointment = styled(Button)`
   margin-top: 16px;
   background: rgba(11, 22, 22, 0.9);
   width: 100%;
-  height: 25%;
+  height: 20%;
   align-items: center;
 `;
