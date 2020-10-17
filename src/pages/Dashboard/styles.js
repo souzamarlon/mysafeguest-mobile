@@ -84,9 +84,9 @@ export const List = styled.FlatList.attrs({
 export const ResidentInfo = styled.View`
   background: rgba(255, 255, 255, 0.6);
   margin-top: 10px;
-  height: 180px;
+  height: 150px;
   padding: 2px 20px;
-  border: 1px solid #fff;
+  border: 1px solid #eee;
   border-radius: 4px;
 `;
 
@@ -97,15 +97,18 @@ export const ResidentName = styled.View`
   justify-content: center;
   /* width: 120px; */
   margin-top: 5px;
-  background: rgba(254, 95, 85, 0.9);
+  /* background: rgba(42, 157, 143, 0.9); */
+  /* background: rgba(6, 214, 160, 0.9); */
+
+  /* background: rgba(254, 95, 85, 0.9); */
   /* border: 1px solid #495867; */
   /* background: rgba(111, 111, 222, 0.3); */
   border-radius: 25px;
 `;
 
 export const Name = styled.Text`
-  color: #fff;
-  font-size: 16px;
+  color: #333;
+  font-size: 22px;
   font-weight: bold;
   margin-left: 5px;
   text-align: center;
@@ -144,29 +147,27 @@ export const CancelEdit = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 5px;
+  margin-top: 25px;
 `;
 
 export const Delete = styled(Button)`
-  margin-top: 10px;
   background: rgba(254, 95, 85, 0.9);
-  width: 40%;
-  height: 60%;
+  width: 30%;
+  height: 25px;
   align-items: center;
 `;
 
 export const Edit = styled(Button)`
-  margin-top: 10px;
   background: rgba(87, 115, 153, 0.9);
-  width: 40%;
-  height: 60%;
+  width: 30%;
+  height: 25px;
   align-items: center;
 `;
 
 export const Appointment = styled(Button)`
-  margin-top: 16px;
-  background: rgba(11, 22, 22, 0.9);
-  width: 100%;
-  height: 20%;
+  background: rgba(6, 214, 160, 0.9);
+  /* background: rgba(11, 22, 22, 0.9); */
+  width: 35%;
+  height: 25px;
   align-items: center;
 `;

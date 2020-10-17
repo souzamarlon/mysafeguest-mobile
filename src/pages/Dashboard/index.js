@@ -27,7 +27,6 @@ import {
 } from './styles';
 
 import api from '~/services/api';
-import Background from '~/components/Background';
 
 export default function Dashboard({ navigation }) {
   const [residents, setResidents] = useState([]);
@@ -68,10 +67,14 @@ export default function Dashboard({ navigation }) {
       <AddField>
         <ResidentsTitle>
           <Icon name="emoji-people" size={10} color="#43AA8B" />
-          RESIDENTS
+          MANAGE YOUR RESIDENTS
           <Icon name="emoji-people" size={10} color="#43AA8B" />
         </ResidentsTitle>
-        <AddButton>
+        <AddButton
+          onPress={() => {
+            navigation.navigate('AddResident');
+          }}
+        >
           <Icon name="add" size={20} color="#eee" />
         </AddButton>
       </AddField>
@@ -88,7 +91,7 @@ export default function Dashboard({ navigation }) {
             }}
           >
             <ResidentName>
-              <Icon name="person" size={20} color="#fff" />
+              {/* <Icon name="person" size={20} color="#fff" /> */}
               <Name>{data.name}</Name>
             </ResidentName>
             <MoreInfo>
@@ -106,10 +109,8 @@ export default function Dashboard({ navigation }) {
             <CancelEdit>
               <Delete>Delete</Delete>
               <Edit>Edit</Edit>
+              <Appointment>Appointments</Appointment>
             </CancelEdit>
-            <Appointment icon="arrow-forward" fontSize={14}>
-              OPEN THE APPOINTMENTS
-            </Appointment>
           </ResidentInfo>
         )}
       />
