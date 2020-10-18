@@ -57,11 +57,11 @@ export const AddField = styled.View`
 `;
 
 export const AddButton = styled(RectButton)`
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
   align-items: center;
-  background: rgba(144, 190, 109, 1);
+  background: rgba(14, 190, 109, 1);
 `;
 
 export const ResidentsTitle = styled.Text`

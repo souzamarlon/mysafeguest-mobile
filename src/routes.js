@@ -36,7 +36,7 @@ function DashboardStack({ navigation }) {
         name="AddResident"
         component={AddResident}
         options={{
-          title: 'Add Residents',
+          title: 'Create Resident credentials',
           headerShown: true,
           headerTransparent: true,
           headerTitleStyle: {

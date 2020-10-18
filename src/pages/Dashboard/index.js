@@ -75,7 +75,7 @@ export default function Dashboard({ navigation }) {
             navigation.navigate('AddResident');
           }}
         >
-          <Icon name="add" size={20} color="#eee" />
+          <Icon name="add" size={24} color="#222" />
         </AddButton>
       </AddField>
 
