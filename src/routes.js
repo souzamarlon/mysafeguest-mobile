@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
+import AddResident from './pages/Dashboard/AddResident';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -17,7 +18,7 @@ function DashboardStack({ navigation }) {
     <Stack.Navigator
       screenOptions={{
         headerTransparent: true,
-        headerTintColor: '#FFF',
+        headerTintColor: '#555',
         headerTitleStyle: {
           fontSize: 18,
           fontWeight: 'bold',
@@ -25,7 +26,42 @@ function DashboardStack({ navigation }) {
         },
         headerLeftContainerStyle: {},
       }}
-    />
+    >
+      <Stack.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{ headerShown: false, headerTransparent: true }}
+      />
+      <Stack.Screen
+        name="AddResident"
+        component={AddResident}
+        options={{
+          title: 'Add Residents',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginRight: 40,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Dashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+    </Stack.Navigator>
   );
 }
 
@@ -58,8 +94,8 @@ export default function createRouter(isSigned = false) {
       }}
     >
       <Tabs.Screen
-        name="Dashboard"
-        component={Dashboard}
+        name="DashboardStack"
+        component={DashboardStack}
         options={{
           // tabBarLabel: '',
           tabBarIcon: ({ color }) => (
