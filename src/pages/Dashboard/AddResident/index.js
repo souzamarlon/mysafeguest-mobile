@@ -1,36 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { Picker } from '@react-native-community/picker';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import {
-  Container,
-  Form,
-  FormInput,
-  PickerFields,
-  SubmitButton,
-} from './styles';
+import React, { useState, useRef } from 'react';
+import { Alert } from 'react-native';
+import { Container, Form, FormInput, SubmitButton } from './styles';
 
 import api from '~/services/api';
 
-export default function AddResident() {
-  const [owner, setOwner] = useState([]);
-  const [resident, setResident] = useState([
-    {
-      owner_id: 1,
-      name: '',
-    },
-  ]);
+export default function AddResident({ route }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobile, setMobile] = useState('');
+  const [street, setStreet] = useState('');
+  const [number, setNumber] = useState();
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [password, setPassword] = useState('');
 
-  useEffect(() => {
-    async function getOwner() {
-      const response = await api.get('users');
+  const { id } = route.params;
 
-      setOwner(response.data);
-    }
-    getOwner();
-  }, []);
+  const emailRef = useRef();
+  const mobileRef = useRef();
+  const streetRef = useRef();
+  const numberRef = useRef();
+  const cityRef = useRef();
+  const stateRef = useRef();
+  const passwordRef = useRef();
 
-  console.tron.log(resident);
+  console.tron.log(id);
+
+  async function handleSubmit() {
+    await api.post('residents', {
+      name,
+      email,
+      mobile,
+      owner_id: id,
+      street,
+      number,
+      city,
+      state,
+      password,
+    });
+
+    Alert.alert('Resident was created successfully.');
+  }
 
   return (
     <Container>
@@ -38,12 +48,12 @@ export default function AddResident() {
         <FormInput
           icon="person-outline"
           autoCorrect={false}
-          autoCapitalize="none"
+          // autoCapitalize
           placeholder="Name"
           returnKeyType="next"
-          // onSubmitEditing={() => emailRef.current.focus()}
-          // value={name}
-          // onChangeText={setName}
+          onSubmitEditing={() => emailRef.current.focus()}
+          value={name}
+          onChangeText={setName}
         />
         <FormInput
           icon="mail-outline"
@@ -51,9 +61,10 @@ export default function AddResident() {
           autoCapitalize="none"
           placeholder="Email"
           returnKeyType="next"
-          // onSubmitEditing={() => emailRef.current.focus()}
-          // value={name}
-          // onChangeText={setName}
+          ref={emailRef}
+          onSubmitEditing={() => mobileRef.current.focus()}
+          value={email}
+          onChangeText={setEmail}
         />
         <FormInput
           icon="phone"
@@ -61,96 +72,63 @@ export default function AddResident() {
           autoCapitalize="none"
           placeholder="Phone"
           returnKeyType="next"
-          // onSubmitEditing={() => emailRef.current.focus()}
-          // value={name}
-          // onChangeText={setName}
+          ref={mobileRef}
+          onSubmitEditing={() => streetRef.current.focus()}
+          value={mobile}
+          onChangeText={setMobile}
         />
 
-        <PickerFields>
-          <Icon name="people-outline" size={20} color="#222" />
-          <Picker
-            selectedValue={resident.owner_id}
-            style={{
-              height: 50,
-              width: 250,
-              color: '#222',
-            }}
-            onValueChange={(itemValue) =>
-              setResident({
-                owner_id: itemValue,
-              })
-            }
-          >
-            {owner.length ? (
-              owner.map((data) => {
-                return (
-                  <Picker.Item
-                    key={data.id}
-                    label={data.name}
-                    value={data.id}
-                  />
-                );
-              })
-            ) : (
-              <Picker.Item label="Not found." />
-            )}
-          </Picker>
-        </PickerFields>
         <FormInput
           icon="add-location"
           autoCorrect={false}
-          autoCapitalize="none"
           placeholder="Street"
           returnKeyType="next"
-          // onSubmitEditing={() => emailRef.current.focus()}
-          // value={name}
-          // onChangeText={setName}
+          onSubmitEditing={() => numberRef.current.focus()}
+          ref={streetRef}
+          value={street}
+          onChangeText={setStreet}
         />
         <FormInput
           icon="add-location"
           autoCorrect={false}
-          autoCapitalize="none"
           placeholder="Number"
           returnKeyType="next"
-          // onSubmitEditing={() => emailRef.current.focus()}
-          // value={name}
-          // onChangeText={setName}
+          onSubmitEditing={() => cityRef.current.focus()}
+          ref={numberRef}
+          value={number}
+          onChangeText={setNumber}
         />
         <FormInput
           icon="location-city"
           autoCorrect={false}
-          autoCapitalize="none"
           placeholder="City"
           returnKeyType="next"
-          // onSubmitEditing={() => emailRef.current.focus()}
-          // value={name}
-          // onChangeText={setName}
+          onSubmitEditing={() => stateRef.current.focus()}
+          ref={cityRef}
+          value={city}
+          onChangeText={setCity}
         />
         <FormInput
           icon="location-city"
           autoCorrect={false}
-          autoCapitalize="none"
           placeholder="State"
           returnKeyType="next"
-          // onSubmitEditing={() => emailRef.current.focus()}
-          // value={name}
-          // onChangeText={setName}
+          onSubmitEditing={() => passwordRef.current.focus()}
+          ref={stateRef}
+          value={state}
+          onChangeText={setState}
         />
         <FormInput
           icon="lock-outline"
           secureTextEntry
           placeholder="**********"
           returnKeyType="send"
-          // ref={passwordRef}
-          // onSubmitEditing={handleSubmit}
-          // value={password}
-          // onChangeText={setPassword}
+          ref={passwordRef}
+          onSubmitEditing={handleSubmit}
+          value={password}
+          onChangeText={setPassword}
         />
-        <SubmitButton
-          // loading={loading}
-          // onPress={handleSubmit}
-          fontSize={19}
-        >
+        <SubmitButton onPress={handleSubmit} fontSize={19}>
           Submit
         </SubmitButton>
       </Form>

@@ -72,7 +72,7 @@ export default function Dashboard({ navigation }) {
         </ResidentsTitle>
         <AddButton
           onPress={() => {
-            navigation.navigate('AddResident');
+            navigation.navigate('AddResident', { id });
           }}
         >
           <Icon name="add" size={24} color="#222" />
