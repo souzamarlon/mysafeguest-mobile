@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Alert } from 'react-native';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -36,10 +37,14 @@ export default function Dashboard({ navigation }) {
 
   useEffect(() => {
     async function getResidents() {
-      const response = await api.get(`/residents/${id}`);
+      try {
+        const response = await api.get(`/residents/${id}`);
 
-      setResidents(response.data);
-      setRefreshList(false);
+        setResidents(response.data);
+        setRefreshList(false);
+      } catch (err) {
+        Alert.alert('Unable to get the residents!');
+      }
     }
 
     getResidents();
@@ -47,6 +52,28 @@ export default function Dashboard({ navigation }) {
 
   async function loadPage() {
     setRefreshList(true);
+  }
+
+  async function handleDelete({ resident_id, resident_name }) {
+    Alert.alert(
+      `You are going to remove the resident ${resident_name}`,
+      `Are you sure to remove ${resident_name}?`,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            await api.delete(`/residents/${resident_id}`);
+            setRefreshList(true);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
   }
 
   return (
@@ -107,7 +134,16 @@ export default function Dashboard({ navigation }) {
               <Address>{data.city}.</Address>
             </AddressInfo>
             <CancelEdit>
-              <Delete>Delete</Delete>
+              <Delete
+                onPress={() =>
+                  handleDelete({
+                    resident_id: data.id,
+                    resident_name: data.name,
+                  })
+                }
+              >
+                Delete
+              </Delete>
               <Edit>Edit</Edit>
               <Appointment>Appointments</Appointment>
             </CancelEdit>
