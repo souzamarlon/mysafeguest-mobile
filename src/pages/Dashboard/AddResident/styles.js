@@ -27,6 +27,18 @@ export const FormInput = styled(Input)`
   border: 1px solid #fff;
 `;
 
+export const PickerFields = styled.View`
+  padding: 0 5px;
+  background: rgba(251, 255, 255, 0.6);
+  border: 1px solid #fff;
+  margin-top: 2px;
+  height: 50px;
+  border-radius: 4px;
+  font-size: 15px;
+  flex-direction: row;
+  align-items: center;
+`;
+
 export const SubmitButton = styled(Button)`
   height: 35px;
   margin-top: 15px;
