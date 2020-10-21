@@ -2,14 +2,17 @@ import React, { useEffect, useState } from 'react';
 
 import { format, parseISO, isBefore } from 'date-fns';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   Container,
   List,
   AppointmentInfo,
   Name,
+  DateField,
   StartDate,
   EndDate,
 } from './styles';
+
 import api from '~/services/api';
 
 export default function Appointment({ route }) {
@@ -35,7 +38,7 @@ export default function Appointment({ route }) {
     }
 
     getAppointments();
-  }, []);
+  }, [refreshList]);
 
   async function loadPage() {
     setRefreshList(true);
@@ -50,9 +53,20 @@ export default function Appointment({ route }) {
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item: data }) => (
           <AppointmentInfo isActiveDate={data.isActiveDate}>
-            <Name>{data.name}</Name>
-            <StartDate>{data.start_date}</StartDate>
-            <EndDate>{data.end_date}</EndDate>
+            <Name>
+              {/* <Icon name="person" size={25} color="#06D6A0" /> */}
+              {data.name}
+            </Name>
+            <DateField>
+              <StartDate>
+                <Icon name="clock-in" size={25} color="#06D6A0" />
+                {data.start_date}
+              </StartDate>
+              <EndDate>
+                <Icon name="clock-out" size={25} color="#EF476F" />
+                {data.end_date}
+              </EndDate>
+            </DateField>
           </AppointmentInfo>
         )}
       />

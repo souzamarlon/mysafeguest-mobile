@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   margin: 0 auto;
   /* background: rgba(11, 222, 0, 0.1); */
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 1);
   flex: 1;
   width: 100%;
 `;
@@ -18,24 +18,57 @@ export const List = styled.FlatList.attrs({
   },
 })``;
 
-export const AppointmentInfo = styled.View`
-  /* background: rgba(255, 255, 255, 0.6); */
-  background-color: ${(props) =>
-    props.isActiveDate ? 'rgba(255, 255, 255, 0.6)' : '#eee'};
+export const AppointmentInfo = styled.View.attrs({})`
+  /* background-color: ${(props) =>
+    props.isActiveDate
+      ? 'rgba(255, 255, 255, 0.1)'
+      : 'rgba(255, 255, 255, 0.6)'}; */
   opacity: ${(props) => (props.isActiveDate ? 1 : 0.4)};
-  margin-top: 10px;
-  height: 150px;
-  padding: 2px 20px;
-  border: 1px solid #eee;
-  border-radius: 4px;
+  margin-top: 5px;
+  height: 70px;
+  padding: 2px 5px;
+  border-radius: 9px;
+  justify-content: center;
+  align-items: center;
 `;
 export const Name = styled.Text`
-  color: #000;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  /* background-color: rgba(255, 255, 255, 0.1); */
+  padding: 5px 10px;
+  border-radius: 2px;
+  height: 30px;
+  width: 100%;
+  background-color: rgba(17, 138, 178, 0.9);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 `;
+
+export const DateField = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  /* margin-top: 1px; */
+  padding-top: 3px;
+  padding-bottom: 5px;
+  width: 100%;
+  background-color: rgba(17, 138, 178, 0.2);
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+`;
+
 export const StartDate = styled.Text`
-  color: #000;
+  color: #555;
+  font-size: 16px;
+  margin-right: 2px;
+  padding: 0 10px;
+  border-radius: 4px;
 `;
 
 export const EndDate = styled.Text`
-  color: #000;
+  color: #555;
+  font-size: 16px;
+  padding: 0 10px;
+  border-radius: 4px;
 `;
