@@ -36,11 +36,11 @@ export const Name = styled.Text`
   font-size: 18px;
   font-weight: bold;
   /* background-color: rgba(255, 255, 255, 0.1); */
-  padding: 5px 10px;
+  padding: 3px 10px;
   border-radius: 2px;
   height: 30px;
   width: 100%;
-  background-color: rgba(17, 138, 178, 0.9);
+  background-color: rgba(6, 214, 160, 0.9);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 `;
@@ -53,9 +53,9 @@ export const DateField = styled.View`
   padding-top: 3px;
   padding-bottom: 5px;
   width: 100%;
-  background-color: rgba(17, 138, 178, 0.2);
-  border-bottom-left-radius: 100px;
-  border-bottom-right-radius: 100px;
+  background-color: rgba(17, 138, 178, 0.1);
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 `;
 
 export const StartDate = styled.Text`
