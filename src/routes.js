@@ -9,6 +9,7 @@ import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import AddResident from './pages/Dashboard/AddResident';
 import EditResident from './pages/Dashboard/EditResident';
+import Appointment from './pages/Dashboard/Appointment';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -62,12 +63,40 @@ function DashboardStack({ navigation }) {
           ),
         }}
       />
-
       <Stack.Screen
         name="EditResident"
         component={EditResident}
         options={{
           title: 'Edit Resident credentials',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginRight: 40,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Dashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Appointment"
+        component={Appointment}
+        options={{
+          title: 'Appointments',
           headerShown: true,
           headerTransparent: true,
           headerTitleStyle: {

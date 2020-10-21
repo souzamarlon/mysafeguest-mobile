@@ -160,7 +160,13 @@ export default function Dashboard({ navigation }) {
               >
                 Edit
               </Edit>
-              <Appointment>Appointments</Appointment>
+              <Appointment
+                onPress={() => {
+                  navigation.navigate('Appointment', { resident_id: data.id });
+                }}
+              >
+                Appointments
+              </Appointment>
             </CancelEdit>
           </ResidentInfo>
         )}
