@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 import { useSelector } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -34,6 +35,14 @@ export default function Dashboard({ navigation }) {
   const [refreshList, setRefreshList] = useState(false);
 
   const { id, name } = useSelector((state) => state.user.profile);
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      setRefreshList(true);
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     async function getResidents() {
@@ -144,7 +153,13 @@ export default function Dashboard({ navigation }) {
               >
                 Delete
               </Delete>
-              <Edit>Edit</Edit>
+              <Edit
+                onPress={() => {
+                  navigation.navigate('EditResident', { data });
+                }}
+              >
+                Edit
+              </Edit>
               <Appointment>Appointments</Appointment>
             </CancelEdit>
           </ResidentInfo>

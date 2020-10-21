@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from './pages/SignIn';
 import Dashboard from './pages/Dashboard';
 import AddResident from './pages/Dashboard/AddResident';
+import EditResident from './pages/Dashboard/EditResident';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -37,6 +38,36 @@ function DashboardStack({ navigation }) {
         component={AddResident}
         options={{
           title: 'Create Resident credentials',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginRight: 40,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Dashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name="EditResident"
+        component={EditResident}
+        options={{
+          title: 'Edit Resident credentials',
           headerShown: true,
           headerTransparent: true,
           headerTitleStyle: {
