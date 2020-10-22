@@ -1,17 +1,21 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
+import BackgroundImage from '~/assets/background.jpg';
+
+export const Container = styled.ImageBackground.attrs({
+  source: BackgroundImage,
+})`
   margin: 0 auto;
   /* background: rgba(11, 222, 0, 0.1); */
-  background: rgba(255, 255, 255, 1);
+  background: rgba(10, 245, 212, 0.2);
   flex: 1;
   width: 100%;
+  padding-top: 50px;
 `;
 
 export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
-    paddingTop: 50,
     marginLeft: 10,
     marginRight: 10,
     paddingBottom: 20,
@@ -40,7 +44,7 @@ export const Name = styled.Text`
   border-radius: 2px;
   height: 30px;
   width: 100%;
-  background-color: rgba(6, 214, 160, 0.9);
+  background-color: rgba(6, 214, 160, 0.7);
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 `;
@@ -53,9 +57,9 @@ export const DateField = styled.View`
   padding-top: 3px;
   padding-bottom: 5px;
   width: 100%;
-  background-color: rgba(17, 138, 178, 0.1);
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 `;
 
 export const StartDate = styled.Text`

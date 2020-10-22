@@ -20,7 +20,7 @@ function DashboardStack({ navigation }) {
     <Stack.Navigator
       screenOptions={{
         headerTransparent: true,
-        headerTintColor: '#555',
+        headerTintColor: '#444',
         headerTitleStyle: {
           fontSize: 18,
           fontWeight: 'bold',
