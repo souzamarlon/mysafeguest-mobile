@@ -15,6 +15,29 @@ Icon.loadFont();
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
+function SignInStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#444',
+        headerTitleStyle: {
+          fontSize: 18,
+          fontWeight: 'bold',
+          textAlign: 'center',
+        },
+        headerLeftContainerStyle: {},
+      }}
+    >
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{ headerShown: false, headerTransparent: true }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function DashboardStack({ navigation }) {
   return (
     <Stack.Navigator
@@ -128,7 +151,7 @@ function DashboardStack({ navigation }) {
 export default function createRouter(isSigned = false) {
   return !isSigned ? (
     <Stack.Navigator headerMode="none">
-      <Stack.Screen name="SignIn" component={SignIn} />
+      <Stack.Screen name="SignInStack" component={SignInStack} />
     </Stack.Navigator>
   ) : (
     <Tabs.Navigator
