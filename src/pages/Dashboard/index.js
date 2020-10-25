@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert } from 'react-native';
+import { Alert, LogBox } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -62,6 +62,8 @@ export default function Dashboard({ navigation }) {
 
     getResidents();
   }, [refreshList, id]);
+
+  // LogBox.ignoreLogs(['Warning:']);
 
   async function loadPage() {
     setRefreshList(true);

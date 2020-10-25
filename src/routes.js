@@ -35,7 +35,10 @@ function SignInStack({ navigation }) {
       <Stack.Screen
         name="SignIn"
         component={SignIn}
-        options={{ headerShown: false, headerTransparent: true }}
+        options={{
+          headerShown: false,
+          headerTransparent: true,
+        }}
       />
       <Stack.Screen
         name="AdminSignIn"
@@ -211,9 +214,13 @@ function DashboardStack({ navigation }) {
 
 export default function createRouter(isSigned = false) {
   return !isSigned ? (
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen name="SignInStack" component={SignInStack} />
-    </Stack.Navigator>
+    <Tabs.Navigator>
+      <Tabs.Screen
+        name="SignInStack"
+        component={SignInStack}
+        options={{ tabBarVisible: false }}
+      />
+    </Tabs.Navigator>
   ) : (
     <Tabs.Navigator
       tabBarOptions={{
