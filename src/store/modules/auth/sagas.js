@@ -10,18 +10,33 @@ import { signInSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
   try {
-    const { email, password } = payload;
+    const { email, password, isAdmin } = payload;
 
-    const response = yield call(api.post, 'sessions', {
-      email,
-      password,
-    });
+    if (isAdmin) {
+      const response = yield call(api.post, 'sessions', {
+        email,
+        password,
+      });
 
-    const { token, user } = response.data;
+      const { token, user } = response.data;
 
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+      api.defaults.headers.Authorization = `Bearer ${token}`;
 
-    yield put(signInSuccess(token, user));
+      yield put(signInSuccess(token, user, isAdmin));
+    }
+
+    if (!isAdmin) {
+      const response = yield call(api.post, 'residentsessions', {
+        email,
+        password,
+      });
+
+      const { token, user } = response.data;
+
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+
+      yield put(signInSuccess(token, user, isAdmin));
+    }
 
     // history.push('/dashboard');
   } catch (err) {

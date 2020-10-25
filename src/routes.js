@@ -6,6 +6,9 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from './pages/SignIn';
+import AdminSignIn from './pages/SignIn/Admin';
+import ResidentSignIn from './pages/SignIn/Resident';
+
 import Dashboard from './pages/Dashboard';
 import AddResident from './pages/Dashboard/AddResident';
 import EditResident from './pages/Dashboard/EditResident';
@@ -33,6 +36,64 @@ function SignInStack({ navigation }) {
         name="SignIn"
         component={SignIn}
         options={{ headerShown: false, headerTransparent: true }}
+      />
+      <Stack.Screen
+        name="AdminSignIn"
+        component={AdminSignIn}
+        options={{
+          title: 'Admin Sign In:',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginRight: 40,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('SignIn');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="ResidentSignIn"
+        component={ResidentSignIn}
+        options={{
+          title: 'Resident Sign In:',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginRight: 40,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('SignIn');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
       />
     </Stack.Navigator>
   );

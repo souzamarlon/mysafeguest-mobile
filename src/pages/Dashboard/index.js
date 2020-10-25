@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
   Container,
   Profile,
   AlignTitleAndName,
+  LogoutButton,
   WelcomeTitle,
   OwnerName,
   AddField,
@@ -30,10 +31,13 @@ import {
 
 import api from '~/services/api';
 
+import { signOut } from '~/store/modules/auth/actions';
+
 export default function Dashboard({ navigation }) {
   const [residents, setResidents] = useState([]);
   const [refreshList, setRefreshList] = useState(false);
 
+  const dispatch = useDispatch();
   const { id, name } = useSelector((state) => state.user.profile);
 
   const isFocused = useIsFocused();
@@ -85,6 +89,12 @@ export default function Dashboard({ navigation }) {
     );
   }
 
+  function handleLogout() {
+    dispatch(signOut());
+  }
+
+  console.tron.log(residents);
+
   return (
     <Container>
       <Profile>
@@ -93,12 +103,19 @@ export default function Dashboard({ navigation }) {
           size={32}
           color="#222"
           style={{ marginTop: 10, marginLeft: 10 }}
-          // onPress={}
         />
         <AlignTitleAndName>
           <WelcomeTitle>Welcome,</WelcomeTitle>
           <OwnerName>{name}</OwnerName>
         </AlignTitleAndName>
+        <LogoutButton>
+          <Icon
+            name="exit-to-app"
+            size={24}
+            color="#E74040"
+            onPress={handleLogout}
+          />
+        </LogoutButton>
       </Profile>
       <AddField>
         <ResidentsTitle>

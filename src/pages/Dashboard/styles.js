@@ -29,6 +29,12 @@ export const AlignTitleAndName = styled.View`
   flex-direction: column;
 `;
 
+export const LogoutButton = styled(RectButton)`
+  background: transparent;
+  align-self: center;
+  margin: 0 auto;
+`;
+
 export const WelcomeTitle = styled.Text`
   color: #888;
   font-size: 16px;

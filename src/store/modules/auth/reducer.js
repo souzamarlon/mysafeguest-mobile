@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   token: null,
   signed: false,
   loading: false,
+  isAdmin: false,
 };
 export default function auth(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
@@ -17,6 +18,7 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.token = action.payload.token;
         draft.signed = true;
         draft.loading = false;
+        draft.isAdmin = action.payload.isAdmin;
         break;
       }
 
@@ -28,6 +30,7 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.token = null;
         draft.signed = false;
         draft.loading = false;
+        draft.isAdmin = false;
         break;
       }
 

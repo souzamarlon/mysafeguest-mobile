@@ -15,7 +15,7 @@ import {
   Resident,
 } from './styles';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
   return (
     <Container>
       <Title>My Safe Guest.</Title>
@@ -31,8 +31,22 @@ export default function SignIn() {
         </WelcomeText>
 
         <SignInButtons>
-          <Admin fontSize={21}>Administration</Admin>
-          <Resident fontSize={21}>Resident</Resident>
+          <Admin
+            fontSize={21}
+            onPress={() => {
+              navigation.navigate('AdminSignIn');
+            }}
+          >
+            Administration
+          </Admin>
+          <Resident
+            fontSize={21}
+            onPress={() => {
+              navigation.navigate('ResidentSignIn');
+            }}
+          >
+            Resident
+          </Resident>
         </SignInButtons>
       </Content>
     </Container>

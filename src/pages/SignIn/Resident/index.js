@@ -20,7 +20,7 @@ import {
   SubmitButton,
 } from './styles';
 
-export default function Owner() {
+export default function Resident() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -31,7 +31,8 @@ export default function Owner() {
   const loading = useSelector((state) => state.auth.loading);
 
   function handleSubmit() {
-    dispatch(signInRequest(email, password));
+    const isAdmin = false;
+    dispatch(signInRequest(email, password, isAdmin));
   }
 
   return (
