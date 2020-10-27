@@ -1,7 +1,10 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -44,28 +47,21 @@ function SignInStack({ navigation }) {
         name="AdminSignIn"
         component={AdminSignIn}
         options={{
-          title: 'Admin Sign In:',
+          headerTitle: '',
           headerShown: true,
           headerTransparent: true,
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: 'bold',
             textAlign: 'center',
-            marginRight: 40,
           },
           headerLeft: () => (
-            <TouchableOpacity
+            <HeaderBackButton
               onPress={() => {
                 navigation.navigate('SignIn');
               }}
-            >
-              <Icon
-                name="arrow-back"
-                size={30}
-                color="#222"
-                style={{ marginLeft: 10 }}
-              />
-            </TouchableOpacity>
+            />
           ),
         }}
       />
@@ -73,28 +69,21 @@ function SignInStack({ navigation }) {
         name="ResidentSignIn"
         component={ResidentSignIn}
         options={{
-          title: 'Resident Sign In:',
+          title: '',
           headerShown: true,
           headerTransparent: true,
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: 'bold',
             textAlign: 'center',
-            marginRight: 40,
           },
           headerLeft: () => (
-            <TouchableOpacity
+            <HeaderBackButton
               onPress={() => {
                 navigation.navigate('SignIn');
               }}
-            >
-              <Icon
-                name="arrow-back"
-                size={30}
-                color="#222"
-                style={{ marginLeft: 10 }}
-              />
-            </TouchableOpacity>
+            />
           ),
         }}
       />
@@ -128,11 +117,11 @@ function DashboardStack({ navigation }) {
           title: 'Create Resident credentials',
           headerShown: true,
           headerTransparent: true,
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: 'bold',
             textAlign: 'center',
-            marginRight: 40,
           },
           headerLeft: () => (
             <TouchableOpacity
@@ -157,11 +146,11 @@ function DashboardStack({ navigation }) {
           title: 'Edit Resident credentials',
           headerShown: true,
           headerTransparent: true,
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: 'bold',
             textAlign: 'center',
-            marginRight: 40,
           },
           headerLeft: () => (
             <TouchableOpacity
@@ -186,11 +175,11 @@ function DashboardStack({ navigation }) {
           title: 'Appointments',
           headerShown: true,
           headerTransparent: true,
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: 'bold',
             textAlign: 'center',
-            marginRight: 40,
           },
           headerLeft: () => (
             <TouchableOpacity

@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-import Background from '~/components/Background';
 import { signInRequest } from '~/store/modules/auth/actions';
 
 import {
@@ -36,50 +35,44 @@ export default function Admin() {
   }
 
   return (
-    <Background>
-      <Container>
-        <Content
-          style={{
-            height: responsiveHeight(85),
-            width: responsiveWidth(86),
-          }}
-        >
-          <Title>Welcome,</Title>
-          <WelcomeText>Login in to My Safe Guest</WelcomeText>
-          <Form>
-            <Email>Email:</Email>
-            <FormInput
-              icon="mail-outline"
-              keyboardType="email-address"
-              autoCorrect={false}
-              autoCapitalize="none"
-              placeholder="exemplo@email.com"
-              returnKeyType="next"
-              onSubmitEditing={() => passwordRef.current.focus()}
-              value={email}
-              onChangeText={setEmail}
-            />
-            <Password>Password:</Password>
-            <FormInput
-              icon="lock-outline"
-              secureTextEntry
-              placeholder="**********"
-              returnKeyType="send"
-              ref={passwordRef}
-              onSubmitEditing={handleSubmit}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <SubmitButton
-              loading={loading}
-              onPress={handleSubmit}
-              fontSize={19}
-            >
-              Log in
-            </SubmitButton>
-          </Form>
-        </Content>
-      </Container>
-    </Background>
+    <Container>
+      <Content
+        style={{
+          height: responsiveHeight(85),
+          width: responsiveWidth(86),
+        }}
+      >
+        <Title>Welcome Admin,</Title>
+        <WelcomeText>Login in to My Safe Guest</WelcomeText>
+        <Form>
+          <Email>Email:</Email>
+          <FormInput
+            icon="mail-outline"
+            keyboardType="email-address"
+            autoCorrect={false}
+            autoCapitalize="none"
+            placeholder="exemplo@email.com"
+            returnKeyType="next"
+            onSubmitEditing={() => passwordRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Password>Password:</Password>
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="**********"
+            returnKeyType="send"
+            ref={passwordRef}
+            onSubmitEditing={handleSubmit}
+            value={password}
+            onChangeText={setPassword}
+          />
+          <SubmitButton loading={loading} onPress={handleSubmit} fontSize={19}>
+            Log in
+          </SubmitButton>
+        </Form>
+      </Content>
+    </Container>
   );
 }

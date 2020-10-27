@@ -26,11 +26,7 @@ export const Content = styled.KeyboardAvoidingView.attrs({
   align-self: center;
   align-items: center;
   justify-content: center;
-  /* padding: 0 20px; */
   border: 0;
-  /* border-radius: 10px; */
-  /* background: rgba(249, 65, 68, 0.4); */
-  /* border: 1px solid #000; */
 `;
 
 export const Title = styled.Text`

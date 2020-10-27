@@ -4,13 +4,19 @@ import { Platform } from 'react-native';
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 
-export const Container = styled.View`
+import BackgroundImage from '~/assets/residentSignIn.jpg';
+
+export const Container = styled.ImageBackground.attrs({
+  source: BackgroundImage,
+  opacity: 0.7,
+})`
   justify-content: center;
   align-self: center;
   margin: auto;
   flex-direction: column;
   display: flex;
   width: 100%;
+  flex: 1;
 `;
 
 export const Content = styled.KeyboardAvoidingView.attrs({
