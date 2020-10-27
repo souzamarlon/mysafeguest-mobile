@@ -10,35 +10,39 @@ import { signInSuccess, signFailure } from './actions';
 
 export function* signIn({ payload }) {
   try {
-    const { email, password, isAdmin } = payload;
+    const { email, password } = payload;
 
-    if (isAdmin) {
-      const response = yield call(api.post, 'sessions', {
-        email,
-        password,
-      });
+    const response = yield call(api.post, 'sessions', {
+      email,
+      password,
+    });
 
-      const { token, user } = response.data;
+    const { token, user } = response.data;
 
-      api.defaults.headers.Authorization = `Bearer ${token}`;
+    api.defaults.headers.Authorization = `Bearer ${token}`;
 
-      yield put(signInSuccess(token, user, isAdmin));
-    }
+    yield put(signInSuccess(token, user));
+  } catch (err) {
+    Alert.alert('Failure, something is wrong!');
 
-    if (!isAdmin) {
-      const response = yield call(api.post, 'residentsessions', {
-        email,
-        password,
-      });
+    yield put(signFailure());
+  }
+}
 
-      const { token, user } = response.data;
+export function* residentSignIn({ payload }) {
+  try {
+    const { email, password } = payload;
 
-      api.defaults.headers.Authorization = `Bearer ${token}`;
+    const response = yield call(api.post, 'residentsessions', {
+      email,
+      password,
+    });
 
-      yield put(signInSuccess(token, user, isAdmin));
-    }
+    const { token, user } = response.data;
 
-    // history.push('/dashboard');
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
+    yield put(signInSuccess(token, user));
   } catch (err) {
     Alert.alert('Failure, something is wrong!');
 
@@ -59,4 +63,5 @@ export function setToken({ payload }) {
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
+  takeLatest('@auth/SIGN_IN_RESIDENT_REQUEST', residentSignIn),
 ]);

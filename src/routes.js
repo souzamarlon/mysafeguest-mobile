@@ -12,10 +12,12 @@ import SignIn from './pages/SignIn';
 import AdminSignIn from './pages/SignIn/Admin';
 import ResidentSignIn from './pages/SignIn/Resident';
 
-import Dashboard from './pages/Dashboard';
-import AddResident from './pages/Dashboard/AddResident';
-import EditResident from './pages/Dashboard/EditResident';
-import Appointment from './pages/Dashboard/Appointment';
+import AdminDashboard from './pages/Dashboard/Administration';
+import AddResident from './pages/Dashboard/Administration/AddResident';
+import EditResident from './pages/Dashboard/Administration/EditResident';
+import Appointment from './pages/Dashboard/Administration/Appointment';
+
+import ResidentDashboard from './pages/Dashboard/Resident';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -91,7 +93,7 @@ function SignInStack({ navigation }) {
   );
 }
 
-function DashboardStack({ navigation }) {
+function AdminDashboardStack({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -107,7 +109,7 @@ function DashboardStack({ navigation }) {
     >
       <Stack.Screen
         name="Dashboard"
-        component={Dashboard}
+        component={AdminDashboard}
         options={{ headerShown: false, headerTransparent: true }}
       />
       <Stack.Screen
@@ -201,7 +203,7 @@ function DashboardStack({ navigation }) {
   );
 }
 
-export default function createRouter(isSigned = false) {
+export default function createRouter(isSigned = false, isAdmin = false) {
   return !isSigned ? (
     <Tabs.Navigator>
       <Tabs.Screen
@@ -234,8 +236,8 @@ export default function createRouter(isSigned = false) {
       }}
     >
       <Tabs.Screen
-        name="DashboardStack"
-        component={DashboardStack}
+        name={isAdmin ? 'AdminDashboardStack' : 'ResidentDashboard'}
+        component={isAdmin ? AdminDashboardStack : ResidentDashboard}
         options={{
           // tabBarLabel: '',
           tabBarIcon: ({ color }) => (

@@ -5,7 +5,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-import { signInRequest } from '~/store/modules/auth/actions';
+import { residentSignInRequest } from '~/store/modules/auth/actions';
 
 import {
   Container,
@@ -30,8 +30,7 @@ export default function Resident() {
   const loading = useSelector((state) => state.auth.loading);
 
   function handleSubmit() {
-    const isAdmin = false;
-    dispatch(signInRequest(email, password, isAdmin));
+    dispatch(residentSignInRequest(email, password));
   }
 
   return (

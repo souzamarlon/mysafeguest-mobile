@@ -14,11 +14,16 @@ export default function auth(state = INITIAL_STATE, action) {
         break;
       }
 
+      case '@auth/SIGN_IN_RESIDENT_REQUEST': {
+        draft.loading = true;
+        break;
+      }
+
       case '@auth/SIGN_IN_SUCCESS': {
         draft.token = action.payload.token;
         draft.signed = true;
         draft.loading = false;
-        draft.isAdmin = action.payload.isAdmin;
+        draft.isAdmin = action.payload.user.isAdmin;
         break;
       }
 

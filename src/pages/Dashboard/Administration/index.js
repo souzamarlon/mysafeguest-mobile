@@ -33,7 +33,7 @@ import api from '~/services/api';
 
 import { signOut } from '~/store/modules/auth/actions';
 
-export default function Dashboard({ navigation }) {
+export default function Administration({ navigation }) {
   const [residents, setResidents] = useState([]);
   const [refreshList, setRefreshList] = useState(false);
 
@@ -100,12 +100,6 @@ export default function Dashboard({ navigation }) {
   return (
     <Container>
       <Profile>
-        <Icon
-          name="home-work"
-          size={32}
-          color="#222"
-          style={{ marginTop: 10, marginLeft: 10 }}
-        />
         <AlignTitleAndName>
           <WelcomeTitle>Welcome,</WelcomeTitle>
           <OwnerName>{name}</OwnerName>
