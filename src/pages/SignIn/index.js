@@ -1,84 +1,54 @@
-import React, { useState, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
+
 import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-import Background from '~/components/Background';
-import { signInRequest } from '~/store/modules/auth/actions';
-
 import {
   Container,
-  Content,
   Title,
+  Content,
   WelcomeText,
-  Form,
-  Email,
-  FormInput,
-  Password,
-  SubmitButton,
+  SignInButtons,
+  Admin,
+  Resident,
 } from './styles';
 
-export default function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const dispatch = useDispatch();
-
-  const passwordRef = useRef();
-
-  const loading = useSelector((state) => state.auth.loading);
-
-  function handleSubmit() {
-    dispatch(signInRequest(email, password));
-  }
-
+export default function SignIn({ navigation }) {
   return (
-    <Background>
-      <Container>
-        <Content
-          style={{
-            height: responsiveHeight(85),
-            width: responsiveWidth(86),
-          }}
-        >
-          <Title>Welcome,</Title>
-          <WelcomeText>Login in to My Safe Guest</WelcomeText>
-          <Form>
-            <Email>Email:</Email>
-            <FormInput
-              icon="mail-outline"
-              keyboardType="email-address"
-              autoCorrect={false}
-              autoCapitalize="none"
-              placeholder="exemplo@email.com"
-              returnKeyType="next"
-              onSubmitEditing={() => passwordRef.current.focus()}
-              value={email}
-              onChangeText={setEmail}
-            />
-            <Password>Password:</Password>
-            <FormInput
-              icon="lock-outline"
-              secureTextEntry
-              placeholder="**********"
-              returnKeyType="send"
-              ref={passwordRef}
-              onSubmitEditing={handleSubmit}
-              value={password}
-              onChangeText={setPassword}
-            />
-            <SubmitButton
-              loading={loading}
-              onPress={handleSubmit}
-              fontSize={19}
-            >
-              Log in
-            </SubmitButton>
-          </Form>
-        </Content>
-      </Container>
-    </Background>
+    <Container>
+      <Title>My Safe Guest.</Title>
+      <Content
+        style={{
+          height: responsiveHeight(30),
+          width: responsiveWidth(100),
+        }}
+      >
+        <WelcomeText>
+          The administration button is to manage residents. The resident button
+          is to schedule visits to your home.
+        </WelcomeText>
+
+        <SignInButtons>
+          <Admin
+            fontSize={21}
+            onPress={() => {
+              navigation.navigate('AdminSignIn');
+            }}
+          >
+            Administration
+          </Admin>
+          <Resident
+            fontSize={21}
+            onPress={() => {
+              navigation.navigate('ResidentSignIn');
+            }}
+          >
+            Resident
+          </Resident>
+        </SignInButtons>
+      </Content>
+    </Container>
   );
 }

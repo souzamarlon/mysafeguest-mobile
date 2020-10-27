@@ -5,6 +5,13 @@ export function signInRequest(email, password) {
   };
 }
 
+export function residentSignInRequest(email, password) {
+  return {
+    type: '@auth/SIGN_IN_RESIDENT_REQUEST',
+    payload: { email, password },
+  };
+}
+
 export function signInSuccess(token, user) {
   return {
     type: '@auth/SIGN_IN_SUCCESS',

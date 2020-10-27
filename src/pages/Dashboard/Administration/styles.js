@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import Button from '~/components/Button';
 
+import adminHeader from '~/assets/adminHeader.jpg';
+
 export const Container = styled.View`
   margin: 0 auto;
   /* background: rgba(11, 222, 0, 0.1); */
@@ -11,37 +13,43 @@ export const Container = styled.View`
   width: 100%;
 `;
 
-export const Profile = styled.View`
-  height: 65px;
-  background: rgba(230, 242, 255, 0.2);
+export const Profile = styled.ImageBackground.attrs({
+  source: adminHeader,
+  opacity: 0.8,
+  borderBottomLeftRadius: 5,
+  borderBottomRightRadius: 5,
+})`
+  height: 70px;
+  background: rgba(0, 40, 40, 1);
   /* background: #f0efeb; */
-  /* border-bottom-left-radius: 28px;
-  border-bottom-right-radius: 28px; */
-  border-radius: 28px;
-  margin: 5px;
-
-  border: 3px solid #fff;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   flex-direction: row;
-  /* justify-content: space-between; */
+  justify-content: space-evenly;
 `;
 
 export const AlignTitleAndName = styled.View`
   flex-direction: column;
+  margin: 0 auto;
+`;
+
+export const LogoutButton = styled(RectButton)`
+  background: transparent;
+  align-self: center;
+  margin: 0 auto;
 `;
 
 export const WelcomeTitle = styled.Text`
-  color: #888;
-  font-size: 16px;
+  color: #eee;
+  font-size: 18px;
   font-weight: bold;
-  padding-top: 5px;
-  padding-left: 20px;
+  padding-top: 10px;
 `;
 
 export const OwnerName = styled.Text`
-  color: #666;
+  color: #eee;
   font-size: 18px;
   font-weight: bold;
-  padding-left: 25px;
 `;
 
 export const AddField = styled.View`
@@ -57,11 +65,11 @@ export const AddField = styled.View`
 `;
 
 export const AddButton = styled(RectButton)`
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
+  width: 25px;
+  height: 25px;
+  border-radius: 100px;
   align-items: center;
-  background: rgba(144, 190, 109, 1);
+  background: rgba(14, 190, 109, 1);
 `;
 
 export const ResidentsTitle = styled.Text`

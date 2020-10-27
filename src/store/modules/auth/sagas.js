@@ -22,8 +22,27 @@ export function* signIn({ payload }) {
     api.defaults.headers.Authorization = `Bearer ${token}`;
 
     yield put(signInSuccess(token, user));
+  } catch (err) {
+    Alert.alert('Failure, something is wrong!');
 
-    // history.push('/dashboard');
+    yield put(signFailure());
+  }
+}
+
+export function* residentSignIn({ payload }) {
+  try {
+    const { email, password } = payload;
+
+    const response = yield call(api.post, 'residentsessions', {
+      email,
+      password,
+    });
+
+    const { token, user } = response.data;
+
+    api.defaults.headers.Authorization = `Bearer ${token}`;
+
+    yield put(signInSuccess(token, user));
   } catch (err) {
     Alert.alert('Failure, something is wrong!');
 
@@ -44,4 +63,5 @@ export function setToken({ payload }) {
 export default all([
   takeLatest('persist/REHYDRATE', setToken),
   takeLatest('@auth/SIGN_IN_REQUEST', signIn),
+  takeLatest('@auth/SIGN_IN_RESIDENT_REQUEST', residentSignIn),
 ]);

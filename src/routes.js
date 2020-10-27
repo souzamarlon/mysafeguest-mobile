@@ -1,24 +1,104 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from './pages/SignIn';
-import Dashboard from './pages/Dashboard';
-import AddResident from './pages/Dashboard/AddResident';
+import AdminSignIn from './pages/SignIn/Admin';
+import ResidentSignIn from './pages/SignIn/Resident';
+
+import AdminDashboard from './pages/Dashboard/Administration';
+import AddResident from './pages/Dashboard/Administration/AddResident';
+import EditResident from './pages/Dashboard/Administration/EditResident';
+import Appointment from './pages/Dashboard/Administration/Appointment';
+
+import ResidentDashboard from './pages/Dashboard/Resident';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
-function DashboardStack({ navigation }) {
+function SignInStack({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
         headerTransparent: true,
-        headerTintColor: '#555',
+        headerTintColor: '#444',
+        headerTitleStyle: {
+          fontSize: 18,
+          fontWeight: 'bold',
+          textAlign: 'center',
+        },
+        headerLeftContainerStyle: {},
+      }}
+    >
+      <Stack.Screen
+        name="SignIn"
+        component={SignIn}
+        options={{
+          headerShown: false,
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="AdminSignIn"
+        component={AdminSignIn}
+        options={{
+          headerTitle: '',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <HeaderBackButton
+              onPress={() => {
+                navigation.navigate('SignIn');
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="ResidentSignIn"
+        component={ResidentSignIn}
+        options={{
+          title: '',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <HeaderBackButton
+              onPress={() => {
+                navigation.navigate('SignIn');
+              }}
+            />
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function AdminDashboardStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#444',
         headerTitleStyle: {
           fontSize: 18,
           fontWeight: 'bold',
@@ -29,21 +109,79 @@ function DashboardStack({ navigation }) {
     >
       <Stack.Screen
         name="Dashboard"
-        component={Dashboard}
+        component={AdminDashboard}
         options={{ headerShown: false, headerTransparent: true }}
       />
       <Stack.Screen
         name="AddResident"
         component={AddResident}
         options={{
-          title: 'Add Residents',
+          title: 'Create Resident credentials',
           headerShown: true,
           headerTransparent: true,
+          headerTitleAlign: 'center',
           headerTitleStyle: {
             fontSize: 18,
             fontWeight: 'bold',
             textAlign: 'center',
-            marginRight: 40,
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Dashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="EditResident"
+        component={EditResident}
+        options={{
+          title: 'Edit Resident credentials',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Dashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Appointment"
+        component={Appointment}
+        options={{
+          title: 'Appointments',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
           },
           headerLeft: () => (
             <TouchableOpacity
@@ -65,11 +203,15 @@ function DashboardStack({ navigation }) {
   );
 }
 
-export default function createRouter(isSigned = false) {
+export default function createRouter(isSigned = false, isAdmin = false) {
   return !isSigned ? (
-    <Stack.Navigator headerMode="none">
-      <Stack.Screen name="SignIn" component={SignIn} />
-    </Stack.Navigator>
+    <Tabs.Navigator>
+      <Tabs.Screen
+        name="SignInStack"
+        component={SignInStack}
+        options={{ tabBarVisible: false }}
+      />
+    </Tabs.Navigator>
   ) : (
     <Tabs.Navigator
       tabBarOptions={{
@@ -94,8 +236,8 @@ export default function createRouter(isSigned = false) {
       }}
     >
       <Tabs.Screen
-        name="DashboardStack"
-        component={DashboardStack}
+        name={isAdmin ? 'AdminDashboardStack' : 'ResidentDashboard'}
+        component={isAdmin ? AdminDashboardStack : ResidentDashboard}
         options={{
           // tabBarLabel: '',
           tabBarIcon: ({ color }) => (

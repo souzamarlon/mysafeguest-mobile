@@ -1,16 +1,20 @@
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 
-import Input from '~/components/Input';
 import Button from '~/components/Button';
 
-export const Container = styled.View`
+import BackgroundImage from '~/assets/signIn.jpg';
+
+export const Container = styled.ImageBackground.attrs({
+  source: BackgroundImage,
+})`
   justify-content: center;
   align-self: center;
   margin: auto;
   flex-direction: column;
   display: flex;
   width: 100%;
+  flex: 1;
 `;
 
 export const Content = styled.KeyboardAvoidingView.attrs({
@@ -19,63 +23,51 @@ export const Content = styled.KeyboardAvoidingView.attrs({
   keyboardVerticalOffset: 20,
 })`
   display: flex;
-  justify-content: center;
   align-self: center;
   align-items: center;
-  padding: 0 20px;
-  width: 80%;
-  height: 400px;
+  justify-content: center;
   border: 0;
-  border-radius: 10px;
 `;
 
 export const Title = styled.Text`
   display: flex;
-  flex-direction: row;
-  text-align: left;
-  color: #222;
+  text-align: center;
+  color: #fff;
   width: 100%;
-  padding-bottom: 5px;
-  font-size: 40px;
+  /* margin-bottom: 25px; */
+  font-size: 50px;
   font-weight: bold;
 `;
 
 export const WelcomeText = styled.Text`
-  color: #222;
-  width: 100%;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: left;
-`;
-
-export const Form = styled.View`
-  align-self: stretch;
-  margin-top: 20px;
-`;
-
-export const Email = styled.Text`
-  color: #222;
+  color: #fff;
   width: 100%;
   font-size: 14px;
   font-weight: bold;
-  text-align: left;
-  margin-bottom: 4px;
+  text-align: center;
+  /* margin-bottom: 15px; */
 `;
 
-export const FormInput = styled(Input)`
-  margin-bottom: 10px;
-  background: rgba(255, 255, 255, 0.8);
-`;
-
-export const Password = styled.Text`
-  color: #222;
+export const SignInButtons = styled.View`
+  justify-content: space-evenly;
+  flex-direction: row;
   width: 100%;
-  font-size: 14px;
-  font-weight: bold;
-  text-align: left;
-  margin-bottom: 4px;
+  /* background: rgba(2, 2, 2, 0.1); */
+  margin-top: 15px;
 `;
 
-export const SubmitButton = styled(Button)`
-  margin-top: 40px;
+export const Admin = styled(Button)`
+  width: 160px;
+  height: 50px;
+  align-items: center;
+  border-radius: 5px;
+  background: rgba(14, 190, 109, 1);
+`;
+
+export const Resident = styled(Button)`
+  width: 160px;
+  height: 50px;
+  border-radius: 5px;
+  align-items: center;
+  background: rgba(0, 187, 249, 1);
 `;

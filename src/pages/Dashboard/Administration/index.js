@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Alert, LogBox } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -7,6 +9,7 @@ import {
   Container,
   Profile,
   AlignTitleAndName,
+  LogoutButton,
   WelcomeTitle,
   OwnerName,
   AddField,
@@ -28,41 +31,87 @@ import {
 
 import api from '~/services/api';
 
-export default function Dashboard({ navigation }) {
+import { signOut } from '~/store/modules/auth/actions';
+
+export default function Administration({ navigation }) {
   const [residents, setResidents] = useState([]);
   const [refreshList, setRefreshList] = useState(false);
 
+  const dispatch = useDispatch();
   const { id, name } = useSelector((state) => state.user.profile);
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      setRefreshList(true);
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     async function getResidents() {
-      const response = await api.get(`/residents/${id}`);
+      try {
+        const response = await api.get(`/residents/${id}`);
 
-      setResidents(response.data);
-      setRefreshList(false);
+        setResidents(response.data);
+        setRefreshList(false);
+      } catch (err) {
+        Alert.alert('Unable to get the residents!');
+      }
     }
 
     getResidents();
   }, [refreshList, id]);
 
+  // LogBox.ignoreLogs(['Warning:']);
+
   async function loadPage() {
     setRefreshList(true);
   }
 
+  async function handleDelete({ resident_id, resident_name }) {
+    Alert.alert(
+      `You are going to remove the resident ${resident_name}`,
+      `Are you sure to remove ${resident_name}?`,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            await api.delete(`/residents/${resident_id}`);
+            setRefreshList(true);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
+  function handleLogout() {
+    dispatch(signOut());
+  }
+
+  console.tron.log(residents);
+
   return (
     <Container>
       <Profile>
-        <Icon
-          name="home-work"
-          size={32}
-          color="#222"
-          style={{ marginTop: 10, marginLeft: 10 }}
-          // onPress={}
-        />
         <AlignTitleAndName>
           <WelcomeTitle>Welcome,</WelcomeTitle>
           <OwnerName>{name}</OwnerName>
         </AlignTitleAndName>
+        <LogoutButton>
+          <Icon
+            name="exit-to-app"
+            size={24}
+            color="#E74040"
+            onPress={handleLogout}
+          />
+        </LogoutButton>
       </Profile>
       <AddField>
         <ResidentsTitle>
@@ -72,10 +121,10 @@ export default function Dashboard({ navigation }) {
         </ResidentsTitle>
         <AddButton
           onPress={() => {
-            navigation.navigate('AddResident');
+            navigation.navigate('AddResident', { id });
           }}
         >
-          <Icon name="add" size={20} color="#eee" />
+          <Icon name="add" size={24} color="#222" />
         </AddButton>
       </AddField>
 
@@ -107,9 +156,30 @@ export default function Dashboard({ navigation }) {
               <Address>{data.city}.</Address>
             </AddressInfo>
             <CancelEdit>
-              <Delete>Delete</Delete>
-              <Edit>Edit</Edit>
-              <Appointment>Appointments</Appointment>
+              <Delete
+                onPress={() =>
+                  handleDelete({
+                    resident_id: data.id,
+                    resident_name: data.name,
+                  })
+                }
+              >
+                Delete
+              </Delete>
+              <Edit
+                onPress={() => {
+                  navigation.navigate('EditResident', { data });
+                }}
+              >
+                Edit
+              </Edit>
+              <Appointment
+                onPress={() => {
+                  navigation.navigate('Appointment', { resident_id: data.id });
+                }}
+              >
+                Appointments
+              </Appointment>
             </CancelEdit>
           </ResidentInfo>
         )}
