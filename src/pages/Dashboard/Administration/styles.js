@@ -98,22 +98,6 @@ export const ResidentInfo = styled.View`
   border-radius: 4px;
 `;
 
-export const ResidentName = styled.View`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  /* width: 120px; */
-  margin-top: 5px;
-  /* background: rgba(42, 157, 143, 0.9); */
-  /* background: rgba(6, 214, 160, 0.9); */
-
-  /* background: rgba(254, 95, 85, 0.9); */
-  /* border: 1px solid #495867; */
-  /* background: rgba(111, 111, 222, 0.3); */
-  border-radius: 25px;
-`;
-
 export const Name = styled.Text`
   color: #333;
   font-size: 22px;

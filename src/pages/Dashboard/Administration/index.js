@@ -17,7 +17,6 @@ import {
   ResidentsTitle,
   List,
   ResidentInfo,
-  ResidentName,
   Name,
   MoreInfo,
   Email,
@@ -139,10 +138,7 @@ export default function Administration({ navigation }) {
               navigation.navigate('Appointments', { data });
             }}
           >
-            <ResidentName>
-              {/* <Icon name="person" size={20} color="#fff" /> */}
-              <Name>{data.name}</Name>
-            </ResidentName>
+            <Name>{data.name}</Name>
             <MoreInfo>
               <Icon name="email" size={20} color="#999" />
               <Email>{data.email}</Email>

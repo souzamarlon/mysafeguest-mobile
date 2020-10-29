@@ -4,8 +4,20 @@ import { Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { format, parseISO, isBefore } from 'date-fns';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import { Container, List, AppointmentInfo, Name } from './styles';
+import {
+  Container,
+  List,
+  AppointmentInfo,
+  Name,
+  DateField,
+  StartDate,
+  EndDate,
+  CancelEdit,
+  Delete,
+  Edit,
+} from './styles';
 
 import api from '~/services/api';
 
@@ -53,6 +65,35 @@ export default function Resident({ navigation }) {
             }}
           >
             <Name>{data.name}</Name>
+            <DateField>
+              <StartDate>
+                <Icon name="clock-in" size={25} color="#06D6A0" />
+                {data.start_date}
+              </StartDate>
+              <EndDate>
+                <Icon name="clock-out" size={25} color="#EF476F" />
+                {data.end_date}
+              </EndDate>
+            </DateField>
+            <CancelEdit>
+              <Delete
+                onPress={() =>
+                  handleDelete({
+                    resident_id: data.id,
+                    resident_name: data.name,
+                  })
+                }
+              >
+                Delete
+              </Delete>
+              <Edit
+                onPress={() => {
+                  navigation.navigate('EditResident', { data });
+                }}
+              >
+                Edit
+              </Edit>
+            </CancelEdit>
           </AppointmentInfo>
         )}
       />

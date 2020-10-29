@@ -35,6 +35,7 @@ export const AppointmentInfo = styled.View.attrs({})`
   justify-content: center;
   align-items: center;
 `;
+
 export const Name = styled.Text`
   color: #fff;
   font-size: 18px;
