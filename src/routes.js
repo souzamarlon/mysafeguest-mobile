@@ -245,6 +245,16 @@ export default function createRouter(isSigned = false, isAdmin = false) {
           ),
         }}
       />
+      <Tabs.Screen
+        name="Add"
+        component={isAdmin ? AdminDashboardStack : ResidentDashboard}
+        options={{
+          // tabBarLabel: '',
+          tabBarIcon: ({ color }) => (
+            <Icon name="add-circle-outline" size={30} color={color} />
+          ),
+        }}
+      />
     </Tabs.Navigator>
   );
 }

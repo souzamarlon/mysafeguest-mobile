@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {
   Container,
+  AppointmentTitle,
   List,
   AppointmentInfo,
   Name,
@@ -53,6 +54,7 @@ export default function Resident({ navigation }) {
 
   return (
     <Container>
+      <AppointmentTitle>My Appointments:</AppointmentTitle>
       <List
         data={appointments}
         // refreshing={refreshList}

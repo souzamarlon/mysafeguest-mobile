@@ -14,6 +14,16 @@ export const Container = styled.ImageBackground.attrs({
   width: 100%;
 `;
 
+export const AppointmentTitle = styled.Text`
+  background: rgba(14, 190, 109, 0.7);
+  margin-top: 20px;
+  height: 30px;
+  text-align: center;
+  font-size: 20px;
+  color: #eee;
+  border-radius: 5px;
+`;
+
 export const List = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
