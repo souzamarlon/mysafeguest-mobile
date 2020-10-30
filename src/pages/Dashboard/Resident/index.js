@@ -50,8 +50,6 @@ export default function Resident({ navigation }) {
     getAppointments();
   }, [id]);
 
-  console.tron.log(appointments);
-
   return (
     <Container>
       <AppointmentTitle>My Appointments:</AppointmentTitle>

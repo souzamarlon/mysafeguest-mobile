@@ -18,6 +18,7 @@ import EditResident from './pages/Dashboard/Administration/EditResident';
 import Appointment from './pages/Dashboard/Administration/Appointment';
 
 import ResidentDashboard from './pages/Dashboard/Resident';
+import New from './pages/Dashboard/Resident/New';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -247,7 +248,7 @@ export default function createRouter(isSigned = false, isAdmin = false) {
       />
       <Tabs.Screen
         name="Add"
-        component={isAdmin ? AdminDashboardStack : ResidentDashboard}
+        component={isAdmin ? AdminDashboardStack : New}
         options={{
           // tabBarLabel: '',
           tabBarIcon: ({ color }) => (
