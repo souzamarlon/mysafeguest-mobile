@@ -1,6 +1,8 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useCallback } from 'react';
 
-import { Alert, DatePickerAndroid } from 'react-native';
+import { Alert, Platform } from 'react-native';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -14,15 +16,18 @@ import {
   Container,
   Form,
   FormInput,
+  Calendar,
   DateButton,
   DateText,
+  Title,
   SubmitButton,
 } from './styles';
 
 export default function New() {
   const [name, setName] = useState('');
-  const [startDate, setStartDate] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState('');
+  const [show, setShow] = useState(false);
 
   const startDateRef = useRef();
   const endDateRef = useRef();
@@ -32,9 +37,19 @@ export default function New() {
   const date = new Date();
 
   const dateFormatted = useMemo(
-    () => format(date, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
+    () => format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
     [date]
   );
+
+  const handleToggleDatePicker = useCallback(() => {
+    setShow((state) => !state);
+  }, []);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === 'ios');
+    setStartDate(currentDate);
+  };
 
   async function handleSubmit() {
     await api.post('appointments', {
@@ -45,16 +60,6 @@ export default function New() {
     });
 
     Alert.alert('Resident was created successfully.');
-  }
-
-  async function handleOpenPicker() {
-    const { action, year, month, day } = await DatePickerAndroid.open({
-      mode: 'spinner',
-      date,
-    });
-    if (action === DatePickerAndroid.dateSetAction) {
-      const selectedDate = new Date(year, month, day);
-    }
   }
 
   return (
@@ -71,12 +76,25 @@ export default function New() {
           onChangeText={setName}
         />
 
-        <DateButton onPress={handleOpenPicker}>
-          <Icon name="event" color="#FFF" size={20} />
-          <DateText>{dateFormatted}</DateText>
-        </DateButton>
+        <Calendar>
+          <Title>Select the date:</Title>
+          <DateButton onPress={handleToggleDatePicker}>
+            <Icon name="event" color="#222" size={20} />
+            <DateText>{dateFormatted}</DateText>
+          </DateButton>
+          {show && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={startDate}
+              mode="date"
+              is24Hour
+              display="calendar"
+              onChange={onChange}
+            />
+          )}
+        </Calendar>
 
-        <FormInput
+        {/* <FormInput
           icon="date-range"
           autoCorrect={false}
           autoCapitalize="none"
@@ -97,7 +115,7 @@ export default function New() {
           ref={endDateRef}
           value={endDate}
           onChangeText={setEndDate}
-        />
+        /> */}
 
         <SubmitButton onPress={handleSubmit} fontSize={19}>
           Submit

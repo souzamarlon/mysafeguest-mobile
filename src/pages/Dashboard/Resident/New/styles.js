@@ -27,20 +27,29 @@ export const FormInput = styled(Input)`
   border: 1px solid #fff;
 `;
 
+export const Calendar = styled.View``;
+
+export const Title = styled.Text`
+  font-size: 14px;
+  color: #222;
+  padding: 0 5px;
+`;
+
 export const DateButton = styled.TouchableOpacity`
-  padding: 0 15px;
   height: 46px;
-  background: rgba(0, 0, 0, 0.1);
+  margin-top: 2px;
+  padding: 0 5px;
+  background: rgba(251, 255, 255, 0.6);
+  border: 1px solid #fff;
   border-radius: 4px;
-  margin: 0 30px;
   flex-direction: row;
   align-items: center;
 `;
 
 export const DateText = styled.Text`
   font-size: 14px;
-  color: #fff;
-  margin-left: 15px;
+  color: #222;
+  padding: 0 5px;
 `;
 
 export const Picker = styled.View`
