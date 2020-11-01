@@ -4,7 +4,7 @@ import { Alert, Platform } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import { format, set } from 'date-fns';
+import { format, set, isAfter } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -37,7 +37,6 @@ export default function New() {
   );
 
   const startDateRef = useRef();
-  const endDateRef = useRef();
 
   const { id } = useSelector((state) => state.user.profile);
 
@@ -51,23 +50,32 @@ export default function New() {
     [endDate]
   );
 
-  const handleToggleDatePicker = useCallback(() => {
-    setShowSelectDate((state) => !state);
-  }, []);
+  const handleToggleDatePicker = (isWhichButton) => {
+    if (isWhichButton === 'button1') {
+      setShowSelectDate(true);
+    }
 
-  const onChangeStartDate = (event, selectedDate) => {
-    // const currentDate = selectedDate || startDate;
-
-    console.tron.log('test1');
-
-    setStartDate(set(selectedDate, { hours: 0, minutes: 0 }));
+    if (isWhichButton === 'button2') {
+      setShowSelectExpirationDate(true);
+    }
   };
 
-  const onChangeEndDate = (event, selectedDate) => {
-    // const currentDate = selectedDate || startDate;
-    console.tron.log('test2');
+  const onChange = (event, selectedDate) => {
+    if (showSelectDate) {
+      const currentDate = selectedDate || startDate;
+      setShowSelectDate(false);
+      setStartDate(set(currentDate, { hours: 0, minutes: 0 }));
 
-    setEndDate(set(selectedDate, { hours: 0, minutes: 0 }));
+      if (isAfter(currentDate, endDate)) {
+        setEndDate(set(currentDate, { hours: 0, minutes: 0 }));
+      }
+    }
+
+    if (showSelectExpirationDate) {
+      const currentDate = selectedDate || endDate;
+      setShowSelectExpirationDate(false);
+      setEndDate(set(currentDate, { hours: 0, minutes: 0 }));
+    }
   };
 
   async function handleSubmit() {
@@ -97,59 +105,29 @@ export default function New() {
 
         <Calendar>
           <Title>Select the date:</Title>
-          <DateButton onPress={handleToggleDatePicker}>
+          <DateButton onPress={() => handleToggleDatePicker('button1')}>
             <Icon name="event" color="#222" size={20} />
-            <DateText>{startDateFormatted}</DateText>
+            <DateText ref={startDateRef}>{startDateFormatted}</DateText>
           </DateButton>
-          {showSelectDate && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={startDate}
-              mode="date"
-              is24Hour
-              display="calendar"
-              onChange={onChangeStartDate}
-            />
-          )}
+
           <Title>Select expiration date:</Title>
-          <DateButton onPress={handleToggleDatePicker}>
+          <DateButton onPress={() => handleToggleDatePicker('button2')}>
             <Icon name="event" color="#222" size={20} />
             <DateText>{endDateFormatted}</DateText>
           </DateButton>
-          {showSelectExpirationDate && (
+
+          {(showSelectDate || showSelectExpirationDate) && (
             <DateTimePicker
-              testID="dateTimePicker2"
-              value={endDate}
+              testID="dateTimePicker"
+              value={showSelectDate ? startDate : endDate}
               mode="date"
-              is24Hour
+              // is24Hour
               display="calendar"
-              onChange={onChangeEndDate}
+              onChange={onChange}
+              minimumDate={showSelectExpirationDate ? startDate : new Date()}
             />
           )}
         </Calendar>
-
-        {/* <FormInput
-          icon="date-range"
-          autoCorrect={false}
-          autoCapitalize="none"
-          placeholder="Start date..."
-          returnKeyType="next"
-          ref={startDateRef}
-          onSubmitEditing={() => endDateRef.current.focus()}
-          value={startDate}
-          onChangeText={setStartDate}
-        />
-
-        <FormInput
-          icon="date-range"
-          autoCorrect={false}
-          autoCapitalize="none"
-          placeholder="End date..."
-          returnKeyType="next"
-          ref={endDateRef}
-          value={endDate}
-          onChangeText={setEndDate}
-        /> */}
 
         <SubmitButton onPress={handleSubmit} fontSize={19}>
           Confirm
