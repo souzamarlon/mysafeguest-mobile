@@ -4,7 +4,7 @@ import { Alert, Platform } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-import { format } from 'date-fns';
+import { format, set } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -25,30 +25,49 @@ import {
 
 export default function New() {
   const [name, setName] = useState('');
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState('');
-  const [show, setShow] = useState(false);
+  const [startDate, setStartDate] = useState(
+    set(new Date(), { hours: 0, minutes: 0 })
+  );
+  const [endDate, setEndDate] = useState(
+    set(new Date(), { hours: 0, minutes: 0 })
+  );
+  const [showSelectDate, setShowSelectDate] = useState(false);
+  const [showSelectExpirationDate, setShowSelectExpirationDate] = useState(
+    false
+  );
 
   const startDateRef = useRef();
   const endDateRef = useRef();
 
   const { id } = useSelector((state) => state.user.profile);
 
-  const date = new Date();
-
-  const dateFormatted = useMemo(
+  const startDateFormatted = useMemo(
     () => format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
-    [date]
+    [startDate]
+  );
+
+  const endDateFormatted = useMemo(
+    () => format(endDate, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
+    [endDate]
   );
 
   const handleToggleDatePicker = useCallback(() => {
-    setShow((state) => !state);
+    setShowSelectDate((state) => !state);
   }, []);
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'ios');
-    setStartDate(currentDate);
+  const onChangeStartDate = (event, selectedDate) => {
+    // const currentDate = selectedDate || startDate;
+
+    console.tron.log('test1');
+
+    setStartDate(set(selectedDate, { hours: 0, minutes: 0 }));
+  };
+
+  const onChangeEndDate = (event, selectedDate) => {
+    // const currentDate = selectedDate || startDate;
+    console.tron.log('test2');
+
+    setEndDate(set(selectedDate, { hours: 0, minutes: 0 }));
   };
 
   async function handleSubmit() {
@@ -59,7 +78,7 @@ export default function New() {
       end_date: endDate,
     });
 
-    Alert.alert('Resident was created successfully.');
+    Alert.alert('Appointment was created successfully.');
   }
 
   return (
@@ -69,7 +88,7 @@ export default function New() {
           icon="person-outline"
           autoCorrect={false}
           // autoCapitalize
-          placeholder="Name"
+          placeholder="Guest name"
           returnKeyType="next"
           onSubmitEditing={() => startDateRef.current.focus()}
           value={name}
@@ -80,16 +99,31 @@ export default function New() {
           <Title>Select the date:</Title>
           <DateButton onPress={handleToggleDatePicker}>
             <Icon name="event" color="#222" size={20} />
-            <DateText>{dateFormatted}</DateText>
+            <DateText>{startDateFormatted}</DateText>
           </DateButton>
-          {show && (
+          {showSelectDate && (
             <DateTimePicker
               testID="dateTimePicker"
               value={startDate}
               mode="date"
               is24Hour
               display="calendar"
-              onChange={onChange}
+              onChange={onChangeStartDate}
+            />
+          )}
+          <Title>Select expiration date:</Title>
+          <DateButton onPress={handleToggleDatePicker}>
+            <Icon name="event" color="#222" size={20} />
+            <DateText>{endDateFormatted}</DateText>
+          </DateButton>
+          {showSelectExpirationDate && (
+            <DateTimePicker
+              testID="dateTimePicker2"
+              value={endDate}
+              mode="date"
+              is24Hour
+              display="calendar"
+              onChange={onChangeEndDate}
             />
           )}
         </Calendar>
@@ -118,7 +152,7 @@ export default function New() {
         /> */}
 
         <SubmitButton onPress={handleSubmit} fontSize={19}>
-          Submit
+          Confirm
         </SubmitButton>
       </Form>
     </Container>

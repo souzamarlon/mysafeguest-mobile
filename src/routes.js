@@ -18,7 +18,7 @@ import EditResident from './pages/Dashboard/Administration/EditResident';
 import Appointment from './pages/Dashboard/Administration/Appointment';
 
 import ResidentDashboard from './pages/Dashboard/Resident';
-import New from './pages/Dashboard/Resident/New';
+import SelectDate from './pages/Dashboard/Resident/New/SelectDate';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -204,6 +204,61 @@ function AdminDashboardStack({ navigation }) {
   );
 }
 
+function NewAppointmentStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#444',
+        headerTitleStyle: {
+          fontSize: 18,
+          fontWeight: 'bold',
+          textAlign: 'center',
+        },
+        headerLeftContainerStyle: {},
+      }}
+    >
+      <Stack.Screen
+        name="SelectDate"
+        component={SelectDate}
+        options={{
+          title: 'New appointment',
+          headerTransparent: true,
+        }}
+      />
+      <Stack.Screen
+        name="AddResident"
+        component={AddResident}
+        options={{
+          title: 'Create Resident credentials',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Dashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function createRouter(isSigned = false, isAdmin = false) {
   return !isSigned ? (
     <Tabs.Navigator>
@@ -248,7 +303,7 @@ export default function createRouter(isSigned = false, isAdmin = false) {
       />
       <Tabs.Screen
         name="Add"
-        component={isAdmin ? AdminDashboardStack : New}
+        component={isAdmin ? AdminDashboardStack : NewAppointmentStack}
         options={{
           // tabBarLabel: '',
           tabBarIcon: ({ color }) => (
