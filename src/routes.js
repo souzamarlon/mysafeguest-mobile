@@ -19,6 +19,7 @@ import Appointment from './pages/Dashboard/Administration/Appointment';
 
 import ResidentDashboard from './pages/Dashboard/Resident';
 import SelectDate from './pages/Dashboard/Resident/New/SelectDate';
+import Confirm from './pages/Dashboard/Resident/New/Confirm';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -227,10 +228,10 @@ function NewAppointmentStack({ navigation }) {
         }}
       />
       <Stack.Screen
-        name="AddResident"
-        component={AddResident}
+        name="Confirm"
+        component={Confirm}
         options={{
-          title: 'Create Resident credentials',
+          title: 'Appointment details',
           headerShown: true,
           headerTransparent: true,
           headerTitleAlign: 'center',
@@ -242,7 +243,7 @@ function NewAppointmentStack({ navigation }) {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('Dashboard');
+                navigation.navigate('SelectDate');
               }}
             >
               <Icon

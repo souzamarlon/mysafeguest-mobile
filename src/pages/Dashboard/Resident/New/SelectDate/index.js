@@ -1,15 +1,16 @@
-import React, { useState, useRef, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 
-import { Alert, Platform } from 'react-native';
+import { Alert } from 'react-native';
 
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useIsFocused } from '@react-navigation/native';
 
 import { format, set, isAfter } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import api from '~/services/api';
 
 import {
@@ -23,7 +24,7 @@ import {
   SubmitButton,
 } from './styles';
 
-export default function New() {
+export default function New({ navigation }) {
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState(
     set(new Date(), { hours: 0, minutes: 0 })
@@ -37,8 +38,13 @@ export default function New() {
   );
 
   const startDateRef = useRef();
+  const isFocused = useIsFocused();
 
   const { id } = useSelector((state) => state.user.profile);
+
+  useEffect(() => {
+    setName('');
+  }, [isFocused]);
 
   const startDateFormatted = useMemo(
     () => format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
@@ -78,8 +84,8 @@ export default function New() {
     }
   };
 
-  async function handleSubmit() {
-    await api.post('appointments', {
+  async function handleConfirm() {
+    const response = await api.post('appointments', {
       name,
       resident_id: id,
       start_date: startDate,
@@ -87,6 +93,10 @@ export default function New() {
     });
 
     Alert.alert('Appointment was created successfully.');
+
+    navigation.navigate('Confirm', {
+      data: response.data,
+    });
   }
 
   return (
@@ -129,7 +139,7 @@ export default function New() {
           )}
         </Calendar>
 
-        <SubmitButton onPress={handleSubmit} fontSize={19}>
+        <SubmitButton onPress={handleConfirm} fontSize={19}>
           Confirm
         </SubmitButton>
       </Form>
