@@ -24,8 +24,6 @@ export default function AddResident({ route }) {
   const stateRef = useRef();
   const passwordRef = useRef();
 
-  console.tron.log(id);
-
   async function handleSubmit() {
     await api.post('residents', {
       name,

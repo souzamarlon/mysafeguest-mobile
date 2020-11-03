@@ -31,7 +31,6 @@ export default function Appointment({ route }) {
         end_date: format(parseISO(item.end_date), "MMMM d',' yyyy"),
         isActiveDate: isBefore(new Date(), parseISO(item.end_date)),
       }));
-      console.tron.log(dataFormat);
 
       setAppointments(dataFormat);
       setRefreshList(false);
