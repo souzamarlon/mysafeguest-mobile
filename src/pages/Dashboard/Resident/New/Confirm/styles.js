@@ -15,13 +15,13 @@ export const Container = styled.ImageBackground.attrs({
   border: 0;
   border-radius: 10px;
   flex: 1;
-  /* justify-content: center; */
+  justify-content: center;
 `;
 
 export const Content = styled.View`
   align-self: stretch;
-  margin-top: 55px;
-  height: 280px;
+  /* margin-top: 55px; */
+  height: 300px;
   background: rgba(255, 255, 255, 0.5);
   align-items: center;
   border-radius: 10px;

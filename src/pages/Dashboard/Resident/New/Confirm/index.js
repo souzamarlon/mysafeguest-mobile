@@ -42,7 +42,7 @@ export default function Confirm({ route }) {
     try {
       const uri = await captureRef(viewRef, {
         format: 'png',
-        quality: 0.8,
+        quality: 0.9,
       });
       // console.log('uri', uri);
       await Share.open({ url: uri });
