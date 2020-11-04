@@ -221,7 +221,7 @@ function NewAppointmentStack({ navigation }) {
     >
       <Stack.Screen
         name="SelectDate"
-        component={SelectDate}
+        component={Confirm}
         options={{
           title: 'New appointment',
           headerTransparent: true,
@@ -229,7 +229,7 @@ function NewAppointmentStack({ navigation }) {
       />
       <Stack.Screen
         name="Confirm"
-        component={Confirm}
+        component={SelectDate}
         options={{
           title: 'Appointment details',
           headerShown: true,
