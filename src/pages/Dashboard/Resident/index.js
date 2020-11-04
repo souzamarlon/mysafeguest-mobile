@@ -24,6 +24,7 @@ import api from '~/services/api';
 
 export default function Resident({ navigation }) {
   const [appointments, setAppointments] = useState([]);
+  const [refreshList, setRefreshList] = useState(false);
 
   const dispatch = useDispatch();
   const { id, name } = useSelector((state) => state.user.profile);
@@ -41,22 +42,48 @@ export default function Resident({ navigation }) {
         }));
 
         setAppointments(dataFormat);
-        // setRefreshList(false);
+        setRefreshList(false);
       } catch (err) {
         Alert.alert('Unable to get the appointments!');
       }
     }
 
     getAppointments();
-  }, [id]);
+  }, [id, refreshList]);
+
+  async function loadPage() {
+    setRefreshList(true);
+  }
+
+  async function handleDelete({ appointment_id, guest_name }) {
+    Alert.alert(
+      `You are going to remove the ${guest_name} appointment`,
+      `Are you sure to remove the ${guest_name} appointment?`,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            await api.delete(`/appointments/${appointment_id}`);
+            setRefreshList(true);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  }
 
   return (
     <Container>
       <AppointmentTitle>My Appointments:</AppointmentTitle>
       <List
         data={appointments}
-        // refreshing={refreshList}
-        // onRefresh={loadPage}
+        refreshing={refreshList}
+        onRefresh={loadPage}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item: data }) => (
           <AppointmentInfo
@@ -79,8 +106,8 @@ export default function Resident({ navigation }) {
               <Delete
                 onPress={() =>
                   handleDelete({
-                    resident_id: data.id,
-                    resident_name: data.name,
+                    appointment_id: data.id,
+                    guest_name: data.name,
                   })
                 }
               >

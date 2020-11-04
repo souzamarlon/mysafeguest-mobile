@@ -94,8 +94,6 @@ export default function Administration({ navigation }) {
     dispatch(signOut());
   }
 
-  console.tron.log(residents);
-
   return (
     <Container>
       <Profile>

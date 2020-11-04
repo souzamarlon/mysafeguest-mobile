@@ -53,7 +53,6 @@ export const Date = styled.View`
 export const DateText = styled.Text`
   color: #555;
   font-size: 18px;
-  margin-right: 2px;
   padding: 0 5px;
   border-radius: 4px;
   align-items: center;
