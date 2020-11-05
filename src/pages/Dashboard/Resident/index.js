@@ -38,6 +38,8 @@ export default function Resident({ navigation }) {
           ...item,
           start_date: format(parseISO(item.start_date), "MMMM d',' yyyy"),
           end_date: format(parseISO(item.end_date), "MMMM d',' yyyy"),
+          start_date_WF: item.start_date,
+          end_date_WF: item.end_date,
           isActiveDate: isBefore(new Date(), parseISO(item.end_date)),
         }));
 
@@ -86,11 +88,7 @@ export default function Resident({ navigation }) {
         onRefresh={loadPage}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item: data }) => (
-          <AppointmentInfo
-            onPress={() => {
-              navigation.navigate('Appointments', { data });
-            }}
-          >
+          <AppointmentInfo isActiveDate={data.isActiveDate}>
             <Name>{data.name}</Name>
             <DateField>
               <StartDate>
@@ -115,7 +113,7 @@ export default function Resident({ navigation }) {
               </Delete>
               <Edit
                 onPress={() => {
-                  navigation.navigate('EditResident', { data });
+                  navigation.navigate('EditAppointment', { data });
                 }}
               >
                 Edit

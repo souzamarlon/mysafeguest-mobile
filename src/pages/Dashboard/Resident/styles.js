@@ -36,6 +36,7 @@ export const List = styled.FlatList.attrs({
 
 export const AppointmentInfo = styled.View`
   background: rgba(255, 255, 255, 0.8);
+  opacity: ${(props) => (props.isActiveDate ? 1 : 0.4)};
   margin-top: 10px;
   height: 120px;
   padding: 2px 20px;
