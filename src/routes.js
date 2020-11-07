@@ -19,6 +19,7 @@ import Appointment from './pages/Dashboard/Administration/Appointment';
 
 import ResidentDashboard from './pages/Dashboard/Resident';
 import EditAppointment from './pages/Dashboard/Resident/EditAppointment';
+import QrCodeView from './components/QrCodeView';
 import SelectDate from './pages/Dashboard/Resident/New/SelectDate';
 import Confirm from './pages/Dashboard/Resident/New/Confirm';
 
@@ -242,6 +243,35 @@ function ResidentDashboardStack({ navigation }) {
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('ResidentDashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="QrCodeView"
+        component={QrCodeView}
+        options={{
+          title: 'Share the QrCode',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('EditAppointment');
               }}
             >
               <Icon

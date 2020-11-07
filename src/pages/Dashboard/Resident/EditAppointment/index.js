@@ -1,14 +1,16 @@
 import React, { useState, useRef, useMemo } from 'react';
 
+import {
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+
 import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Alert } from 'react-native';
 import { format, parseISO, set, isAfter } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
-import { captureRef } from 'react-native-view-shot';
-import Share from 'react-native-share';
 
 import {
   Container,
@@ -24,7 +26,9 @@ import {
 
 import api from '~/services/api';
 
-export default function EditAppointment({ route }) {
+import QrCodeView from '~/components/QrCodeView';
+
+export default function EditAppointment({ route, navigation }) {
   const { data } = route.params;
 
   const [name, setName] = useState(data.name);
@@ -80,20 +84,6 @@ export default function EditAppointment({ route }) {
     }
   };
 
-  const shareImage = async () => {
-    try {
-      const uri = await captureRef(viewRef, {
-        format: 'png',
-        quality: 0.9,
-      });
-      // console.log('uri', uri);
-      await Share.open({ url: uri });
-    } catch (error) {
-      // console.log('error', error);
-      Alert.alert(`${error}`);
-    }
-  };
-
   async function handleUpdate() {
     await api.put(`appointments/${data.id}`, {
       name,
@@ -104,12 +94,27 @@ export default function EditAppointment({ route }) {
     Alert.alert('The appointment has been successfully updated.');
   }
 
+  function shareQrCode() {
+    navigation.navigate('QrCodeView', {
+      name,
+      id: data.id,
+      resident_id: data.resident_id,
+      start_date: startDateFormatted,
+      end_date: endDateFormatted,
+    });
+  }
+
   return (
     <Container>
-      <Form>
-        <Content ref={viewRef}>
+      <Form
+        style={{
+          height: responsiveHeight(80),
+          width: responsiveWidth(90),
+        }}
+      >
+        <Content>
           <QRCode
-            size={128}
+            size={155}
             value={`${data.id}:${name}:${data.resident_id}` || 'hey'}
           />
           <FormInput
@@ -152,7 +157,7 @@ export default function EditAppointment({ route }) {
             Update
           </SubmitButton>
 
-          <SubmitButton onPress={shareImage} fontSize={19}>
+          <SubmitButton onPress={shareQrCode} fontSize={19}>
             Share
           </SubmitButton>
         </AlignButtons>

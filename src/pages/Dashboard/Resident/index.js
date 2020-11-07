@@ -3,6 +3,8 @@ import { Alert } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import { useIsFocused } from '@react-navigation/native';
+
 import { format, parseISO, isBefore } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -28,6 +30,13 @@ export default function Resident({ navigation }) {
 
   const dispatch = useDispatch();
   const { id, name } = useSelector((state) => state.user.profile);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      setRefreshList(true);
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     async function getAppointments() {
