@@ -1,8 +1,8 @@
 import React, { useState, useRef, useMemo } from 'react';
 
 import {
-  responsiveHeight,
   responsiveWidth,
+  responsiveScreenHeight,
 } from 'react-native-responsive-dimensions';
 
 import QRCode from 'react-native-qrcode-svg';
@@ -26,8 +26,6 @@ import {
 
 import api from '~/services/api';
 
-import QrCodeView from '~/components/QrCodeView';
-
 export default function EditAppointment({ route, navigation }) {
   const { data } = route.params;
 
@@ -40,7 +38,6 @@ export default function EditAppointment({ route, navigation }) {
     false
   );
 
-  const viewRef = useRef();
   const startDateRef = useRef();
 
   const startDateFormatted = useMemo(
@@ -108,7 +105,7 @@ export default function EditAppointment({ route, navigation }) {
     <Container>
       <Form
         style={{
-          height: responsiveHeight(80),
+          height: responsiveScreenHeight(74),
           width: responsiveWidth(90),
         }}
       >
@@ -153,11 +150,19 @@ export default function EditAppointment({ route, navigation }) {
         </Content>
 
         <AlignButtons>
-          <SubmitButton onPress={handleUpdate} fontSize={19}>
+          <SubmitButton
+            backgroundColor="rgba(2, 190, 109, 1)"
+            onPress={handleUpdate}
+            fontSize={19}
+          >
             Update
           </SubmitButton>
 
-          <SubmitButton onPress={shareQrCode} fontSize={19}>
+          <SubmitButton
+            backgroundColor="rgba(83, 144, 217, 1)"
+            onPress={shareQrCode}
+            fontSize={19}
+          >
             Share
           </SubmitButton>
         </AlignButtons>

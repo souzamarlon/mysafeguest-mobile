@@ -73,7 +73,7 @@ export const AlignButtons = styled.View`
 export const SubmitButton = styled(Button)`
   height: 35px;
   margin-top: 15px;
-  background: rgba(2, 190, 109, 1);
+  background: ${(props) => props.backgroundColor};
   border-radius: 25px;
   width: 130px;
   margin-right: 10px;

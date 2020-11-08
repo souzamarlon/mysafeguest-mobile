@@ -94,8 +94,12 @@ export default function New({ navigation }) {
 
     Alert.alert('Appointment was created successfully.');
 
-    navigation.navigate('Confirm', {
-      data: response.data,
+    navigation.navigate('QrCodeView', {
+      name,
+      id: response.id,
+      resident_id: id,
+      start_date: startDateFormatted,
+      end_date: endDateFormatted,
     });
   }
 

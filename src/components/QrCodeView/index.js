@@ -4,6 +4,11 @@ import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Alert } from 'react-native';
 
+import {
+  responsiveWidth,
+  responsiveScreenHeight,
+} from 'react-native-responsive-dimensions';
+
 import { captureRef } from 'react-native-view-shot';
 import Share from 'react-native-share';
 
@@ -38,7 +43,12 @@ export default function QrCodeView({ route }) {
 
   return (
     <Container>
-      <Content ref={viewRef}>
+      <Content
+        ref={viewRef}
+        style={{
+          height: responsiveScreenHeight(46),
+        }}
+      >
         <Name>{data.name}</Name>
         <QRCode
           size={150}

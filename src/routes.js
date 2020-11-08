@@ -259,7 +259,7 @@ function ResidentDashboardStack({ navigation }) {
         name="QrCodeView"
         component={QrCodeView}
         options={{
-          title: 'Share the QrCode',
+          title: 'Share the appointment',
           headerShown: true,
           headerTransparent: true,
           headerTitleAlign: 'center',
@@ -311,8 +311,8 @@ function NewAppointmentStack({ navigation }) {
         }}
       />
       <Stack.Screen
-        name="Confirm"
-        component={Confirm}
+        name="QrCodeView"
+        component={QrCodeView}
         options={{
           title: 'Share the appointment',
           headerShown: true,
