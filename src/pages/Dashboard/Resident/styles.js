@@ -1,8 +1,10 @@
 import styled from 'styled-components/native';
 
+import { RectButton } from 'react-native-gesture-handler';
 import Button from '~/components/Button';
 
 import BackgroundImage from '~/assets/residentBackground.jpg';
+import residentHeader from '~/assets/residentHeader.jpg';
 
 export const Container = styled.ImageBackground.attrs({
   source: BackgroundImage,
@@ -12,6 +14,56 @@ export const Container = styled.ImageBackground.attrs({
   /* background: rgba(255, 255, 255, 0.4); */
   flex: 1;
   width: 100%;
+`;
+
+export const Profile = styled.ImageBackground.attrs({
+  source: residentHeader,
+  opacity: 1,
+  // borderBottomLeftRadius: 5,
+  // borderBottomRightRadius: 5,
+})`
+  height: 130px;
+  /* border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; */
+  flex-direction: row;
+  justify-content: space-evenly;
+  border: 1px solid #eee;
+`;
+
+export const AlignTitleAndName = styled.View`
+  flex-direction: column;
+  margin: 0 auto;
+  justify-content: center;
+  width: 75%;
+`;
+
+export const LogoutButton = styled(RectButton)`
+  background: transparent;
+  align-self: center;
+  margin: 0 auto;
+`;
+
+export const ResidentName = styled.Text`
+  color: #fff;
+  opacity: 0.8;
+  font-size: 24px;
+  background: rgba(255, 186, 8, 0.3);
+  border-radius: 5px;
+  padding: 5px;
+  font-weight: bold;
+`;
+
+export const ResidentEmail = styled.Text`
+  color: #111;
+  opacity: 0.8;
+  background: rgba(255, 186, 8, 0.3);
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 16px;
+  margin-top: 2px;
+
+  /* font-weight: bold; */
+  /* text-align: center; */
 `;
 
 export const AppointmentTitle = styled.Text`

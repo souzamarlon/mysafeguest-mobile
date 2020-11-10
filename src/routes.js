@@ -21,7 +21,6 @@ import ResidentDashboard from './pages/Dashboard/Resident';
 import EditAppointment from './pages/Dashboard/Resident/EditAppointment';
 import QrCodeView from './components/QrCodeView';
 import SelectDate from './pages/Dashboard/Resident/New/SelectDate';
-import Confirm from './pages/Dashboard/Resident/New/Confirm';
 
 Icon.loadFont();
 const Stack = createStackNavigator();

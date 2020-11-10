@@ -7,9 +7,15 @@ import { useIsFocused } from '@react-navigation/native';
 
 import { format, parseISO, isBefore } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { signOut } from '~/store/modules/auth/actions';
 
 import {
   Container,
+  Profile,
+  AlignTitleAndName,
+  ResidentName,
+  ResidentEmail,
+  LogoutButton,
   AppointmentTitle,
   List,
   AppointmentInfo,
@@ -29,7 +35,7 @@ export default function Resident({ navigation }) {
   const [refreshList, setRefreshList] = useState(false);
 
   const dispatch = useDispatch();
-  const { id, name } = useSelector((state) => state.user.profile);
+  const { id, name, email } = useSelector((state) => state.user.profile);
   const isFocused = useIsFocused();
 
   useEffect(() => {
@@ -88,8 +94,26 @@ export default function Resident({ navigation }) {
     );
   }
 
+  function handleLogout() {
+    dispatch(signOut());
+  }
+
   return (
     <Container>
+      <Profile>
+        <AlignTitleAndName>
+          <ResidentName>{name}</ResidentName>
+          <ResidentEmail>{email}</ResidentEmail>
+        </AlignTitleAndName>
+        <LogoutButton>
+          <Icon
+            name="exit-to-app"
+            size={24}
+            color="#E74040"
+            onPress={handleLogout}
+          />
+        </LogoutButton>
+      </Profile>
       <AppointmentTitle>My Appointments:</AppointmentTitle>
       <List
         data={appointments}
