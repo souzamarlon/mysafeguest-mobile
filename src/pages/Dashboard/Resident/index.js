@@ -3,11 +3,19 @@ import { Alert } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
 
+import { useIsFocused } from '@react-navigation/native';
+
 import { format, parseISO, isBefore } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { signOut } from '~/store/modules/auth/actions';
 
 import {
   Container,
+  Profile,
+  AlignTitleAndName,
+  ResidentName,
+  ResidentEmail,
+  LogoutButton,
   AppointmentTitle,
   List,
   AppointmentInfo,
@@ -24,9 +32,17 @@ import api from '~/services/api';
 
 export default function Resident({ navigation }) {
   const [appointments, setAppointments] = useState([]);
+  const [refreshList, setRefreshList] = useState(false);
 
   const dispatch = useDispatch();
-  const { id, name } = useSelector((state) => state.user.profile);
+  const { id, name, email } = useSelector((state) => state.user.profile);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      setRefreshList(true);
+    }
+  }, [isFocused]);
 
   useEffect(() => {
     async function getAppointments() {
@@ -37,33 +53,75 @@ export default function Resident({ navigation }) {
           ...item,
           start_date: format(parseISO(item.start_date), "MMMM d',' yyyy"),
           end_date: format(parseISO(item.end_date), "MMMM d',' yyyy"),
+          start_date_WF: item.start_date,
+          end_date_WF: item.end_date,
           isActiveDate: isBefore(new Date(), parseISO(item.end_date)),
         }));
 
         setAppointments(dataFormat);
-        // setRefreshList(false);
+        setRefreshList(false);
       } catch (err) {
         Alert.alert('Unable to get the appointments!');
       }
     }
 
     getAppointments();
-  }, [id]);
+  }, [id, refreshList]);
+
+  async function loadPage() {
+    setRefreshList(true);
+  }
+
+  async function handleDelete({ appointment_id, guest_name }) {
+    Alert.alert(
+      `You are going to remove the ${guest_name} appointment`,
+      `Are you sure to remove the ${guest_name} appointment?`,
+      [
+        {
+          text: 'Cancel',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            await api.delete(`/appointments/${appointment_id}`);
+            setRefreshList(true);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
+  function handleLogout() {
+    dispatch(signOut());
+  }
 
   return (
     <Container>
+      <Profile>
+        <AlignTitleAndName>
+          <ResidentName>{name}</ResidentName>
+          <ResidentEmail>{email}</ResidentEmail>
+        </AlignTitleAndName>
+        <LogoutButton>
+          <Icon
+            name="exit-to-app"
+            size={24}
+            color="#E74040"
+            onPress={handleLogout}
+          />
+        </LogoutButton>
+      </Profile>
       <AppointmentTitle>My Appointments:</AppointmentTitle>
       <List
         data={appointments}
-        // refreshing={refreshList}
-        // onRefresh={loadPage}
+        refreshing={refreshList}
+        onRefresh={loadPage}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item: data }) => (
-          <AppointmentInfo
-            onPress={() => {
-              navigation.navigate('Appointments', { data });
-            }}
-          >
+          <AppointmentInfo isActiveDate={data.isActiveDate}>
             <Name>{data.name}</Name>
             <DateField>
               <StartDate>
@@ -79,8 +137,8 @@ export default function Resident({ navigation }) {
               <Delete
                 onPress={() =>
                   handleDelete({
-                    resident_id: data.id,
-                    resident_name: data.name,
+                    appointment_id: data.id,
+                    guest_name: data.name,
                   })
                 }
               >
@@ -88,7 +146,7 @@ export default function Resident({ navigation }) {
               </Delete>
               <Edit
                 onPress={() => {
-                  navigation.navigate('EditResident', { data });
+                  navigation.navigate('EditAppointment', { data });
                 }}
               >
                 Edit

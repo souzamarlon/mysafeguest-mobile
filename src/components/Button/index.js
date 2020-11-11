@@ -14,7 +14,14 @@ export default function Button({ fontSize, children, loading, icon, ...rest }) {
       ) : (
         <>
           <Text style={{ fontSize }}>{children}</Text>
-          {icon && <Icon name={icon} size={25} color="#fff" />}
+          {icon && (
+            <Icon
+              name={icon}
+              style={{ paddingLeft: 5 }}
+              size={25}
+              color="#fff"
+            />
+          )}
         </>
       )}
     </Container>

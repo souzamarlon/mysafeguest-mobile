@@ -5,6 +5,8 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import {
   Container,
   Title,
@@ -13,6 +15,7 @@ import {
   SignInButtons,
   Admin,
   Resident,
+  GuardButton,
 } from './styles';
 
 export default function SignIn({ navigation }) {
@@ -21,7 +24,7 @@ export default function SignIn({ navigation }) {
       <Title>My Safe Guest.</Title>
       <Content
         style={{
-          height: responsiveHeight(30),
+          height: responsiveHeight(35),
           width: responsiveWidth(100),
         }}
       >
@@ -32,6 +35,7 @@ export default function SignIn({ navigation }) {
 
         <SignInButtons>
           <Admin
+            icon="admin-panel-settings"
             fontSize={21}
             onPress={() => {
               navigation.navigate('AdminSignIn');
@@ -40,6 +44,7 @@ export default function SignIn({ navigation }) {
             Administration
           </Admin>
           <Resident
+            icon="people"
             fontSize={21}
             onPress={() => {
               navigation.navigate('ResidentSignIn');
@@ -47,6 +52,15 @@ export default function SignIn({ navigation }) {
           >
             Resident
           </Resident>
+          <GuardButton
+            icon="qr-code-scanner"
+            fontSize={21}
+            onPress={() => {
+              navigation.navigate('ResidentSignIn');
+            }}
+          >
+            Guard
+          </GuardButton>
         </SignInButtons>
       </Content>
     </Container>

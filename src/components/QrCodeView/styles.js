@@ -1,6 +1,5 @@
 import styled from 'styled-components/native';
 
-import Input from '~/components/Input';
 import Button from '~/components/Button';
 
 import BackgroundImage from '~/assets/residentBackground.jpg';
@@ -16,44 +15,47 @@ export const Container = styled.ImageBackground.attrs({
   border: 0;
   border-radius: 10px;
   flex: 1;
+  justify-content: center;
 `;
 
-export const Form = styled.View`
+export const Content = styled.View`
   align-self: stretch;
-  margin-top: 55px;
+  /* margin-top: 55px; */
+  height: 300px;
+  background: rgba(255, 255, 255, 0.5);
+  align-items: center;
+  border-radius: 10px;
+  padding-top: 20px;
 `;
 
-export const FormInput = styled(Input)`
-  margin-top: 2px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid #fff;
-`;
-
-export const Calendar = styled.View``;
-
-export const Title = styled.Text`
-  font-size: 18px;
-  color: #999;
-  padding: 0 5px;
+export const Info = styled.View`
+  justify-content: center;
+  align-items: center;
   margin-top: 15px;
-  text-align: left;
 `;
 
-export const DateButton = styled.TouchableOpacity`
-  height: 46px;
-  margin-top: 2px;
-  padding: 0 5px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid #fff;
+export const Name = styled.Text`
+  color: #222;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 2px;
+  padding: 0 10px;
   border-radius: 4px;
+  margin-bottom: 10px;
+`;
+
+export const Date = styled.View`
   flex-direction: row;
   align-items: center;
+  margin-top: 5px;
 `;
 
 export const DateText = styled.Text`
-  font-size: 14px;
-  color: #222;
+  color: #555;
+  font-size: 18px;
   padding: 0 5px;
+  border-radius: 4px;
+  align-items: center;
 `;
 
 export const SubmitButton = styled(Button)`

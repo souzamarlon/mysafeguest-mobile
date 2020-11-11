@@ -18,8 +18,9 @@ import EditResident from './pages/Dashboard/Administration/EditResident';
 import Appointment from './pages/Dashboard/Administration/Appointment';
 
 import ResidentDashboard from './pages/Dashboard/Resident';
+import EditAppointment from './pages/Dashboard/Resident/EditAppointment';
+import QrCodeView from './components/QrCodeView';
 import SelectDate from './pages/Dashboard/Resident/New/SelectDate';
-import Confirm from './pages/Dashboard/Resident/New/Confirm';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -205,6 +206,87 @@ function AdminDashboardStack({ navigation }) {
   );
 }
 
+function ResidentDashboardStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#444',
+        headerTitleStyle: {
+          fontSize: 18,
+          fontWeight: 'bold',
+          textAlign: 'center',
+        },
+        headerLeftContainerStyle: {},
+      }}
+    >
+      <Stack.Screen
+        name="ResidentDashboard"
+        component={ResidentDashboard}
+        options={{ headerShown: false, headerTransparent: true }}
+      />
+      <Stack.Screen
+        name="EditAppointment"
+        component={EditAppointment}
+        options={{
+          title: 'Edit the appointment',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('ResidentDashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="QrCodeView"
+        component={QrCodeView}
+        options={{
+          title: 'Share the appointment',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('EditAppointment');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function NewAppointmentStack({ navigation }) {
   return (
     <Stack.Navigator
@@ -228,10 +310,10 @@ function NewAppointmentStack({ navigation }) {
         }}
       />
       <Stack.Screen
-        name="Confirm"
-        component={Confirm}
+        name="QrCodeView"
+        component={QrCodeView}
         options={{
-          title: 'Appointment details',
+          title: 'Share the appointment',
           headerShown: true,
           headerTransparent: true,
           headerTitleAlign: 'center',
@@ -293,8 +375,8 @@ export default function createRouter(isSigned = false, isAdmin = false) {
       }}
     >
       <Tabs.Screen
-        name={isAdmin ? 'AdminDashboardStack' : 'ResidentDashboard'}
-        component={isAdmin ? AdminDashboardStack : ResidentDashboard}
+        name={isAdmin ? 'AdminDashboardStack' : 'ResidentDashboardStack'}
+        component={isAdmin ? AdminDashboardStack : ResidentDashboardStack}
         options={{
           // tabBarLabel: '',
           tabBarIcon: ({ color }) => (

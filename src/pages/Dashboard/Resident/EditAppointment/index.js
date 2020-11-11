@@ -1,53 +1,50 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo } from 'react';
 
-import { Alert } from 'react-native';
+import {
+  responsiveWidth,
+  responsiveScreenHeight,
+} from 'react-native-responsive-dimensions';
 
-import DateTimePicker from '@react-native-community/datetimepicker';
-import { useIsFocused } from '@react-navigation/native';
-
-import { format, set, isAfter } from 'date-fns';
-import pt from 'date-fns/locale/pt';
-
+import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import { useSelector } from 'react-redux';
-import api from '~/services/api';
+import { Alert } from 'react-native';
+import { format, parseISO, set, isAfter } from 'date-fns';
+import pt from 'date-fns/locale/pt';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 import {
   Container,
   Form,
   FormInput,
-  Calendar,
+  Content,
+  Title,
   DateButton,
   DateText,
-  Title,
+  AlignButtons,
   SubmitButton,
 } from './styles';
 
-export default function New({ navigation }) {
-  const [name, setName] = useState('');
-  const [startDate, setStartDate] = useState(
-    set(new Date(), { hours: 0, minutes: 0 })
-  );
-  const [endDate, setEndDate] = useState(
-    set(new Date(), { hours: 0, minutes: 0 })
-  );
+import api from '~/services/api';
+
+export default function EditAppointment({ route, navigation }) {
+  const { data } = route.params;
+
+  const [name, setName] = useState(data.name);
+  const [startDate, setStartDate] = useState(parseISO(data.start_date_WF));
+  const [endDate, setEndDate] = useState(parseISO(data.end_date_WF));
+
   const [showSelectDate, setShowSelectDate] = useState(false);
   const [showSelectExpirationDate, setShowSelectExpirationDate] = useState(
     false
   );
 
   const startDateRef = useRef();
-  const isFocused = useIsFocused();
-
-  const { id } = useSelector((state) => state.user.profile);
-
-  useEffect(() => {
-    setName('');
-  }, [isFocused]);
 
   const startDateFormatted = useMemo(
-    () => format(startDate, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
+    () =>
+      format(startDate, "dd 'de' MMMM 'de' yyyy", {
+        locale: pt,
+      }),
     [startDate]
   );
 
@@ -84,20 +81,21 @@ export default function New({ navigation }) {
     }
   };
 
-  async function handleConfirm() {
-    const response = await api.post('appointments', {
+  async function handleUpdate() {
+    await api.put(`appointments/${data.id}`, {
       name,
-      resident_id: id,
       start_date: startDate,
       end_date: endDate,
     });
 
-    Alert.alert('Appointment was created successfully.');
+    Alert.alert('The appointment has been successfully updated.');
+  }
 
+  function shareQrCode() {
     navigation.navigate('QrCodeView', {
       name,
-      id: response.id,
-      resident_id: id,
+      id: data.id,
+      resident_id: data.resident_id,
       start_date: startDateFormatted,
       end_date: endDateFormatted,
     });
@@ -105,19 +103,27 @@ export default function New({ navigation }) {
 
   return (
     <Container>
-      <Form>
-        <FormInput
-          icon="person-outline"
-          autoCorrect={false}
-          // autoCapitalize
-          placeholder="Guest name"
-          returnKeyType="next"
-          onSubmitEditing={() => startDateRef.current.focus()}
-          value={name}
-          onChangeText={setName}
-        />
-
-        <Calendar>
+      <Form
+        style={{
+          height: responsiveScreenHeight(74),
+          width: responsiveWidth(90),
+        }}
+      >
+        <Content>
+          <QRCode
+            size={155}
+            value={`${data.id}:${name}:${data.resident_id}` || 'hey'}
+          />
+          <FormInput
+            icon="person-outline"
+            autoCorrect={false}
+            // autoCapitalize
+            placeholder="Guest name"
+            returnKeyType="next"
+            onSubmitEditing={() => startDateRef.current.focus()}
+            value={name}
+            onChangeText={setName}
+          />
           <Title>Select the date:</Title>
           <DateButton onPress={() => handleToggleDatePicker('button1')}>
             <Icon name="event" color="#222" size={20} />
@@ -141,11 +147,25 @@ export default function New({ navigation }) {
               minimumDate={showSelectExpirationDate ? startDate : new Date()}
             />
           )}
-        </Calendar>
+        </Content>
 
-        <SubmitButton onPress={handleConfirm} fontSize={19}>
-          Confirm
-        </SubmitButton>
+        <AlignButtons>
+          <SubmitButton
+            backgroundColor="rgba(2, 190, 109, 1)"
+            onPress={handleUpdate}
+            fontSize={19}
+          >
+            Update
+          </SubmitButton>
+
+          <SubmitButton
+            backgroundColor="rgba(83, 144, 217, 1)"
+            onPress={shareQrCode}
+            fontSize={19}
+          >
+            Share
+          </SubmitButton>
+        </AlignButtons>
       </Form>
     </Container>
   );
