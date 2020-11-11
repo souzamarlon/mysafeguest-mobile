@@ -49,25 +49,36 @@ export const WelcomeText = styled.Text`
 `;
 
 export const SignInButtons = styled.View`
-  justify-content: space-evenly;
-  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
-  /* background: rgba(2, 2, 2, 0.1); */
+  /* background: rgba(2, 2, 2, 0.4); */
   margin-top: 15px;
 `;
 
 export const Admin = styled(Button)`
-  width: 160px;
+  width: 190px;
   height: 50px;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 8px;
   background: rgba(14, 190, 109, 1);
 `;
 
 export const Resident = styled(Button)`
-  width: 160px;
+  width: 190px;
   height: 50px;
-  border-radius: 5px;
+  border-radius: 8px;
   align-items: center;
   background: rgba(0, 187, 249, 1);
+  margin-top: 10px;
+`;
+
+export const GuardButton = styled(Button)`
+  width: 190px;
+  height: 50px;
+  border-radius: 8px;
+  align-items: center;
+  background: rgba(230, 57, 70, 1);
+  margin-top: 10px;
 `;
