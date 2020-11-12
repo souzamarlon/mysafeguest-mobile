@@ -13,6 +13,7 @@ import AdminSignIn from './pages/SignIn/Admin';
 import ResidentSignIn from './pages/SignIn/Resident';
 
 import GuardCheckIn from './pages/GuardCheckIn';
+import AppointmentInfo from './pages/GuardCheckIn/AppointmentInfo';
 
 import AdminDashboard from './pages/Dashboard/Administration';
 import AddResident from './pages/Dashboard/Administration/AddResident';
@@ -112,6 +113,28 @@ function SignInStack({ navigation }) {
               tintColor="#fff"
               onPress={() => {
                 navigation.navigate('SignIn');
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="AppointmentInfo"
+        component={AppointmentInfo}
+        options={{
+          title: '',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <HeaderBackButton
+              onPress={() => {
+                navigation.navigate('GuardCheckIn');
               }}
             />
           ),

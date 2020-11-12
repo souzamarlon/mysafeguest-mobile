@@ -19,12 +19,9 @@ export default function Camera({ onChange }) {
         const dataSplit = barcode.data.split(':');
 
         return setQrCodeData({
-          spot_id: parseInt(dataSplit[0], 10),
-          spot_name: dataSplit[1],
-          place_id: parseInt(dataSplit[2], 10),
-          radius: parseInt(dataSplit[3], 10),
-          latitude: parseFloat(dataSplit[4]),
-          longitude: parseFloat(dataSplit[5]),
+          id: parseInt(dataSplit[0], 10),
+          name: dataSplit[1],
+          resident_id: parseInt(dataSplit[2], 10),
         });
       }
       return false;

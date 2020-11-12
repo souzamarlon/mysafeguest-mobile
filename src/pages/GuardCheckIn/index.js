@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View } from 'react-native';
 
 import Camera from '~/components/Camera';
 
 import { Container } from './styles';
 
-const GuardCheckIn = () => {
+export default function GuardCheckIn({ navigation }) {
   const [qrCodeData, setQrCodeData] = useState(false);
+
+  const showAppointment = (data) => {
+    navigation.navigate('AppointmentInfo', {
+      data,
+    });
+  };
 
   return (
     <Container>
-      <Camera onChange={setQrCodeData} />
+      <Camera onChange={showAppointment} />
     </Container>
   );
-};
-
-export default GuardCheckIn;
+}
