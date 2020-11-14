@@ -30,55 +30,69 @@ export const Content = styled.View`
 
 export const Title = styled.View`
   background: ${(props) => props.backgroundColor};
-  border-radius: 25px;
-  margin-top: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+  width: 100%;
+  margin-bottom: 10px;
 `;
 export const TitleText = styled.Text`
-  color: #444;
+  color: #fff;
   font-size: 24px;
   font-weight: bold;
-  margin-right: 2px;
-  padding: 0 10px;
   border-radius: 4px;
+  text-align: center;
 `;
 
 export const Name = styled.Text`
   color: #222;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
-  margin-top: 10px;
-  padding: 0 10px;
+  text-align: center;
+  padding: 0 5px;
   border-radius: 4px;
-  /* margin-bottom: 10px; */
+  background: rgba(255, 255, 255, 0.3);
+  width: 100%;
+  padding-left: 10px;
 `;
 
 export const Date = styled.View`
   flex-direction: row;
   align-items: center;
   margin-top: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  width: 100%;
+  padding-left: 10px;
 `;
 
 export const DateText = styled.Text`
   color: #555;
-  font-size: 22px;
+  font-size: 20px;
   padding: 0 5px;
   border-radius: 4px;
   align-items: center;
 `;
 
-export const ResidentName = styled.Text`
+export const ResidentView = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 2px;
+  background: rgba(255, 255, 255, 0.3);
+  width: 100%;
+  padding-left: 10px;
+`;
+
+export const ResidentText = styled.Text`
   color: #222;
-  font-size: 22px;
-  font-weight: bold;
-  margin-right: 2px;
-  padding: 0 10px;
+  font-size: 20px;
+  padding: 0 5px;
   border-radius: 4px;
   /* margin-bottom: 10px; */
+  text-align: center;
 `;
 
 export const BackButton = styled(Button)`
-  height: 45px;
-  margin-top: 25px;
+  height: 50px;
+  margin-top: 10px;
   background: rgba(222, 25, 109, 1);
   margin-bottom: 5px;
   border-radius: 25px;

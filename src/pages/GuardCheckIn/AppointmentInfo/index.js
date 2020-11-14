@@ -3,23 +3,24 @@ import { responsiveScreenHeight } from 'react-native-responsive-dimensions';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { format, parseISO, isAfter } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import {
   Container,
   Content,
   Title,
   TitleText,
-  ResidentName,
   Name,
   Date,
+  ResidentView,
+  ResidentText,
   DateText,
   BackButton,
 } from './styles';
 
 import api from '~/services/api';
 
-export default function AppointmentInfo({ route }) {
+export default function AppointmentInfo({ route, navigation }) {
   const [appointment, setAppointment] = useState({});
   const [startDateFormatted, setStartDateFormatted] = useState([]);
   const [endDateFormatted, setEndDateFormatted] = useState([]);
@@ -28,26 +29,28 @@ export default function AppointmentInfo({ route }) {
 
   useEffect(() => {
     async function getAppointment() {
-      const response = await api.get(`guardcheckin/${data.id}`);
+      try {
+        const response = await api.get(`guardcheckin/${data.id}`);
 
-      setStartDateFormatted(
-        format(parseISO(response.data.start_date), "dd 'de' MMMM 'de' yyyy", {
-          locale: pt,
-        })
-      );
+        setStartDateFormatted(
+          format(parseISO(response.data.start_date), "dd 'de' MMMM 'de' yyyy", {
+            locale: pt,
+          })
+        );
 
-      setEndDateFormatted(
-        format(parseISO(response.data.end_date), "dd 'de' MMMM 'de' yyyy", {
-          locale: pt,
-        })
-      );
+        setEndDateFormatted(
+          format(parseISO(response.data.end_date), "dd 'de' MMMM 'de' yyyy", {
+            locale: pt,
+          })
+        );
 
-      setAppointment(response.data);
+        setAppointment(response.data);
+      } catch (err) {
+        // console.log()
+      }
     }
     getAppointment();
   }, []);
-
-  console.tron.log(appointment);
 
   return (
     <Container>
@@ -56,57 +59,62 @@ export default function AppointmentInfo({ route }) {
           height: responsiveScreenHeight(65),
         }}
       >
-        <Title backgroundColor="rgba(233, 196, 106, 0.8)">
+        <Title backgroundColor="rgba(239, 71, 111, 0.7)">
           <TitleText>Guest Information:</TitleText>
         </Title>
         <Name>{data.name}</Name>
         <Date>
-          <Icon name="date-range" size={25} color="#06D6A0" />
+          <Icon name="date-range" size={20} color="#06D6A0" />
           <DateText>{startDateFormatted}</DateText>
         </Date>
         <Date>
-          <Icon name="date-range" size={25} color="#EF476F" />
+          <Icon name="date-range" size={20} color="#EF476F" />
           <DateText>{endDateFormatted}</DateText>
         </Date>
-        <Title backgroundColor="rgba(231, 111, 81, 0.8)">
+        <Title backgroundColor="rgba(6, 214, 160, 0.7)">
           <TitleText>Resident Information:</TitleText>
         </Title>
-        <Date>
-          <Icon name="house-siding" size={25} color="#555" />
-          <ResidentName>
+        <ResidentView style={{ justifyContent: 'center' }}>
+          <Icon name="house-siding" size={22} color="#48cae4" />
+          <ResidentText>
             {Object.keys(appointment).length >= 1
               ? appointment.Resident.name
               : '0'}
-          </ResidentName>
-        </Date>
-        <Date>
-          <Icon name="mobile-friendly" size={25} color="#555" />
-          <ResidentName>
+          </ResidentText>
+        </ResidentView>
+        <ResidentView>
+          <Icon name="mobile-friendly" size={20} color="#e07a5f" />
+          <ResidentText>
             {Object.keys(appointment).length >= 1
               ? appointment.Resident.mobile
               : '0'}
-          </ResidentName>
-        </Date>
-        <Date>
-          <Icon name="location-on" size={25} color="#555" />
-          <ResidentName>
+          </ResidentText>
+        </ResidentView>
+        <ResidentView>
+          <Icon name="location-on" size={20} color="#ffba08" />
+          <ResidentText>
             {Object.keys(appointment).length >= 1
               ? appointment.Resident.street
               : '0'}
-          </ResidentName>
-          <ResidentName>
+            ,
+          </ResidentText>
+          <ResidentText>
             {Object.keys(appointment).length >= 1
               ? appointment.Resident.number
               : '0'}
-          </ResidentName>
-          <ResidentName>
+            ,
+          </ResidentText>
+          <ResidentText>
             {Object.keys(appointment).length >= 1
               ? appointment.Resident.city
               : '0'}
-          </ResidentName>
-        </Date>
+            .
+          </ResidentText>
+        </ResidentView>
       </Content>
-      <BackButton fontSize={19}>Come back</BackButton>
+      <BackButton fontSize={19} onPress={() => navigation.goBack()}>
+        Come back
+      </BackButton>
     </Container>
   );
 }
