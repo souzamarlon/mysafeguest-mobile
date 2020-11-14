@@ -113,7 +113,7 @@ export default function AppointmentInfo({ route, navigation }) {
         </ResidentView>
       </Content>
       <BackButton fontSize={19} onPress={() => navigation.goBack()}>
-        Come back
+        GO BACK
       </BackButton>
     </Container>
   );

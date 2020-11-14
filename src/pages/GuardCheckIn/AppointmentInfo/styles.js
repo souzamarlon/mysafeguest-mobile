@@ -91,9 +91,8 @@ export const ResidentText = styled.Text`
 `;
 
 export const BackButton = styled(Button)`
-  height: 50px;
+  height: 40px;
   margin-top: 10px;
   background: rgba(222, 25, 109, 1);
-  margin-bottom: 5px;
   border-radius: 25px;
 `;
