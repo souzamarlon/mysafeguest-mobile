@@ -3,6 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { ActivityIndicator, Text } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useIsFocused } from '@react-navigation/native';
 
 import { Container, Info, ScanIcon } from './styles';
 
@@ -11,18 +12,27 @@ export default function Camera({ onChange }) {
   const [qrCodeData, setQrCodeData] = useState(false);
 
   const cameraRef = useRef(null);
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      setQrCodeData(false);
+      setLoading(false);
+    }
+  }, [isFocused]);
 
   function barcodeRecognized({ barcodes }) {
     barcodes.forEach((barcode) => {
       if (barcode.type.toString() === 'QR_CODE') {
         setLoading(true);
         const dataSplit = barcode.data.split(':');
-
-        return setQrCodeData({
-          id: parseInt(dataSplit[0], 10),
-          name: dataSplit[1],
-          resident_id: parseInt(dataSplit[2], 10),
-        });
+        if (!qrCodeData) {
+          return setQrCodeData({
+            id: parseInt(dataSplit[0], 10),
+            name: dataSplit[1],
+            resident_id: parseInt(dataSplit[2], 10),
+          });
+        }
       }
       return false;
     });
