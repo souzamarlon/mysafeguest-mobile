@@ -1,10 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { Alert } from 'react-native';
+import { useSelector } from 'react-redux';
 import { Container, Form, FormInput, SubmitButton } from './styles';
 
 import api from '~/services/api';
 
-export default function AddResident({ route }) {
+export default function AddResident() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
@@ -14,7 +15,7 @@ export default function AddResident({ route }) {
   const [state, setState] = useState('');
   const [password, setPassword] = useState('');
 
-  const { id } = route.params;
+  const { id } = useSelector((selectUser) => selectUser.user.profile);
 
   const emailRef = useRef();
   const mobileRef = useRef();

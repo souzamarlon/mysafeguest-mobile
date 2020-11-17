@@ -15,22 +15,25 @@ export const Container = styled.View`
 
 export const Profile = styled.ImageBackground.attrs({
   source: adminHeader,
-  opacity: 0.8,
-  borderBottomLeftRadius: 5,
-  borderBottomRightRadius: 5,
+  opacity: 1,
+  // borderBottomLeftRadius: 5,
+  // borderBottomRightRadius: 5,
 })`
-  height: 70px;
-  background: rgba(0, 40, 40, 1);
+  height: 130px;
+  /* background: rgba(0, 40, 40, 1); */
   /* background: #f0efeb; */
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  /* border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px; */
   flex-direction: row;
   justify-content: space-evenly;
+  /* border: 1px solid #eee; */
 `;
 
 export const AlignTitleAndName = styled.View`
   flex-direction: column;
   margin: 0 auto;
+  justify-content: center;
+  width: 75%;
 `;
 
 export const LogoutButton = styled(RectButton)`
@@ -40,16 +43,22 @@ export const LogoutButton = styled(RectButton)`
 `;
 
 export const WelcomeTitle = styled.Text`
-  color: #eee;
-  font-size: 18px;
+  color: #fff;
+  opacity: 0.8;
+  font-size: 22px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 5px;
   font-weight: bold;
-  padding-top: 10px;
 `;
 
 export const OwnerName = styled.Text`
-  color: #eee;
-  font-size: 18px;
-  font-weight: bold;
+  color: #fff;
+  opacity: 0.8;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 5px;
+  font-size: 22px;
+  margin-top: 5px;
 `;
 
 export const AddField = styled.View`
@@ -62,14 +71,6 @@ export const AddField = styled.View`
   /* width: 100%; */
   height: 40px;
   border: 1px solid #fff;
-`;
-
-export const AddButton = styled(RectButton)`
-  width: 25px;
-  height: 25px;
-  border-radius: 100px;
-  align-items: center;
-  background: rgba(14, 190, 109, 1);
 `;
 
 export const ResidentsTitle = styled.Text`

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { format, parseISO, isBefore } from 'date-fns';
+import { format, parseISO, isBefore, isToday } from 'date-fns';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
@@ -8,6 +8,7 @@ import {
   List,
   AppointmentInfo,
   Name,
+  DateTitle,
   DateField,
   StartDate,
   EndDate,
@@ -29,7 +30,9 @@ export default function Appointment({ route }) {
         ...item,
         start_date: format(parseISO(item.start_date), "MMMM d',' yyyy"),
         end_date: format(parseISO(item.end_date), "MMMM d',' yyyy"),
-        isActiveDate: isBefore(new Date(), parseISO(item.end_date)),
+        isActiveDate:
+          isBefore(new Date(), parseISO(item.end_date)) ||
+          isToday(parseISO(item.end_date)),
       }));
 
       setAppointments(dataFormat);
@@ -56,6 +59,7 @@ export default function Appointment({ route }) {
               {/* <Icon name="person" size={25} color="#06D6A0" /> */}
               {data.name}
             </Name>
+            <DateTitle>Schedule:</DateTitle>
             <DateField>
               <StartDate>
                 <Icon name="clock-in" size={25} color="#06D6A0" />

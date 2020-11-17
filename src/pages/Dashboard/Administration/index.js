@@ -116,13 +116,6 @@ export default function Administration({ navigation }) {
           MANAGE YOUR RESIDENTS
           <Icon name="emoji-people" size={10} color="#43AA8B" />
         </ResidentsTitle>
-        <AddButton
-          onPress={() => {
-            navigation.navigate('AddResident', { id });
-          }}
-        >
-          <Icon name="add" size={24} color="#222" />
-        </AddButton>
       </AddField>
 
       <List
