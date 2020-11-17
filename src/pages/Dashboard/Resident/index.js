@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useIsFocused } from '@react-navigation/native';
 
-import { format, parseISO, isBefore } from 'date-fns';
+import { format, parseISO, isBefore, isToday } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { signOut } from '~/store/modules/auth/actions';
 
@@ -55,7 +55,9 @@ export default function Resident({ navigation }) {
           end_date: format(parseISO(item.end_date), "MMMM d',' yyyy"),
           start_date_WF: item.start_date,
           end_date_WF: item.end_date,
-          isActiveDate: isBefore(new Date(), parseISO(item.end_date)),
+          isActiveDate:
+            isBefore(new Date(), parseISO(item.end_date)) ||
+            isToday(parseISO(item.end_date)),
         }));
 
         setAppointments(dataFormat);
