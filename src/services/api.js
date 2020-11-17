@@ -25,6 +25,11 @@ api.registerInterceptWithStore = (store) => {
         const { error } = err.response.data;
         Alert.alert(`Failure, something is wrong!, ${error}`);
       }
+      if (err.response.status === 404 || err.response.status === 403) {
+        const { error } = err.response.data;
+
+        Alert.alert(`${error}`);
+      }
     }
   );
 };

@@ -56,7 +56,7 @@ export default function SignIn({ navigation }) {
             icon="qr-code-scanner"
             fontSize={21}
             onPress={() => {
-              navigation.navigate('ResidentSignIn');
+              navigation.navigate('GuardCheckIn');
             }}
           >
             Guard

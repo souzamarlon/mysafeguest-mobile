@@ -12,6 +12,9 @@ import SignIn from './pages/SignIn';
 import AdminSignIn from './pages/SignIn/Admin';
 import ResidentSignIn from './pages/SignIn/Resident';
 
+import GuardCheckIn from './pages/GuardCheckIn';
+import AppointmentInfo from './pages/GuardCheckIn/AppointmentInfo';
+
 import AdminDashboard from './pages/Dashboard/Administration';
 import AddResident from './pages/Dashboard/Administration/AddResident';
 import EditResident from './pages/Dashboard/Administration/EditResident';
@@ -31,7 +34,7 @@ function SignInStack({ navigation }) {
     <Stack.Navigator
       screenOptions={{
         headerTransparent: true,
-        headerTintColor: '#444',
+        headerTintColor: '#fff',
         headerTitleStyle: {
           fontSize: 18,
           fontWeight: 'bold',
@@ -87,6 +90,51 @@ function SignInStack({ navigation }) {
             <HeaderBackButton
               onPress={() => {
                 navigation.navigate('SignIn');
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="GuardCheckIn"
+        component={GuardCheckIn}
+        options={{
+          title: '',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <HeaderBackButton
+              tintColor="#fff"
+              onPress={() => {
+                navigation.navigate('SignIn');
+              }}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="AppointmentInfo"
+        component={AppointmentInfo}
+        options={{
+          title: '',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <HeaderBackButton
+              onPress={() => {
+                navigation.navigate('GuardCheckIn');
               }}
             />
           ),

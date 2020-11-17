@@ -58,7 +58,7 @@ export const SignInButtons = styled.View`
 `;
 
 export const Admin = styled(Button)`
-  width: 190px;
+  width: 210px;
   height: 50px;
   align-items: center;
   border-radius: 8px;
@@ -66,7 +66,7 @@ export const Admin = styled(Button)`
 `;
 
 export const Resident = styled(Button)`
-  width: 190px;
+  width: 210px;
   height: 50px;
   border-radius: 8px;
   align-items: center;
@@ -75,7 +75,7 @@ export const Resident = styled(Button)`
 `;
 
 export const GuardButton = styled(Button)`
-  width: 190px;
+  width: 210px;
   height: 50px;
   border-radius: 8px;
   align-items: center;
