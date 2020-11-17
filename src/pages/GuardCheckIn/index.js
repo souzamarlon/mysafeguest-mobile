@@ -6,15 +6,12 @@ import { Container } from './styles';
 
 export default function GuardCheckIn({ navigation }) {
   function navigateTo(data) {
-    console.tron.log('read 2', data);
-
     navigation.navigate('AppointmentInfo', {
       data,
     });
   }
-  const showAppointment = (data) => {
-    console.tron.log('!read', data);
 
+  const showAppointment = (data) => {
     navigateTo(data);
   };
 
