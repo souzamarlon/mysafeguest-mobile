@@ -96,7 +96,7 @@ export default function New({ navigation }) {
 
     navigation.navigate('QrCodeView', {
       name,
-      id: response.id,
+      id: response.data.id,
       resident_id: id,
       start_date: startDateFormatted,
       end_date: endDateFormatted,
