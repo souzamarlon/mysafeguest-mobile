@@ -11,6 +11,8 @@ export const Container = styled.ImageBackground.attrs({
   flex: 1;
   width: 100%;
   padding-top: 50px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const List = styled.FlatList.attrs({
