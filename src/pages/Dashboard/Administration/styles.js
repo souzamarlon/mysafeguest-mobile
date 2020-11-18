@@ -30,10 +30,16 @@ export const Profile = styled.ImageBackground.attrs({
 `;
 
 export const AlignTitleAndName = styled.View`
-  flex-direction: column;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  margin: 20px auto;
   justify-content: center;
+  align-items: center;
   width: 75%;
+  height: 90px;
+  padding: 5px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.1);
 `;
 
 export const LogoutButton = styled(RectButton)`
@@ -44,29 +50,18 @@ export const LogoutButton = styled(RectButton)`
 
 export const WelcomeTitle = styled.Text`
   color: #fff;
-  opacity: 0.8;
-  font-size: 22px;
-  background: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  font-size: 25px;
   border-radius: 4px;
-  padding: 5px;
+  /* padding: 5px; */
   font-weight: bold;
 `;
 
-export const OwnerName = styled.Text`
-  color: #fff;
-  opacity: 0.8;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 5px;
-  font-size: 22px;
-  margin-top: 5px;
-`;
-
-export const AddField = styled.View`
+export const ResidentView = styled.View`
   background: rgba(555, 555, 555, 0.3);
   margin-top: 10px;
   align-items: center;
   justify-content: center;
-  padding-top: 5px;
   flex-direction: row;
   /* width: 100%; */
   height: 40px;
@@ -76,7 +71,6 @@ export const AddField = styled.View`
 export const ResidentsTitle = styled.Text`
   font-size: 16px;
   font-weight: bold;
-  margin-right: 20px;
   color: #43aa8b;
 `;
 

@@ -11,9 +11,7 @@ import {
   AlignTitleAndName,
   LogoutButton,
   WelcomeTitle,
-  OwnerName,
-  AddField,
-  AddButton,
+  ResidentView,
   ResidentsTitle,
   List,
   ResidentInfo,
@@ -98,8 +96,7 @@ export default function Administration({ navigation }) {
     <Container>
       <Profile>
         <AlignTitleAndName>
-          <WelcomeTitle>Welcome,</WelcomeTitle>
-          <OwnerName>{name}</OwnerName>
+          <WelcomeTitle>Welcome, &shy;{name}</WelcomeTitle>
         </AlignTitleAndName>
         <LogoutButton>
           <Icon
@@ -110,13 +107,13 @@ export default function Administration({ navigation }) {
           />
         </LogoutButton>
       </Profile>
-      <AddField>
+      <ResidentView>
         <ResidentsTitle>
           <Icon name="emoji-people" size={10} color="#43AA8B" />
           MANAGE YOUR RESIDENTS
           <Icon name="emoji-people" size={10} color="#43AA8B" />
         </ResidentsTitle>
-      </AddField>
+      </ResidentView>
 
       <List
         data={residents}
