@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
 import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { useIsFocused } from '@react-navigation/native';
 
@@ -160,3 +161,9 @@ export default function Resident({ navigation }) {
     </Container>
   );
 }
+
+Resident.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};

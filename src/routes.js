@@ -23,7 +23,7 @@ import Appointment from './pages/Dashboard/Administration/Appointment';
 import ResidentDashboard from './pages/Dashboard/Resident';
 import EditAppointment from './pages/Dashboard/Resident/EditAppointment';
 import QrCodeView from './components/QrCodeView';
-import SelectDate from './pages/Dashboard/Resident/New/SelectDate';
+import NewResident from './pages/Dashboard/Resident/New';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -369,8 +369,8 @@ function NewAppointmentStack({ navigation }) {
       }}
     >
       <Stack.Screen
-        name="SelectDate"
-        component={SelectDate}
+        name="NewResident"
+        component={NewResident}
         options={{
           title: 'New appointment',
           headerTransparent: true,
@@ -392,7 +392,7 @@ function NewAppointmentStack({ navigation }) {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('SelectDate');
+                navigation.navigate('NewResident');
               }}
             >
               <Icon

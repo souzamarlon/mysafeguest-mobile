@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Alert, LogBox } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
+import PropTypes from 'prop-types';
+
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -171,3 +173,9 @@ export default function Administration({ navigation }) {
     </Container>
   );
 }
+
+Administration.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};
