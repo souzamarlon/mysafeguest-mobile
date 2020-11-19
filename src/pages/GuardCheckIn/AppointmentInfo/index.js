@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { format, parseISO } from 'date-fns';
 
+import PropTypes from 'prop-types';
+
 import pt from 'date-fns/locale/pt';
 import Error from '~/components/Error';
 
@@ -126,3 +128,17 @@ export default function AppointmentInfo({ route, navigation }) {
     </Container>
   );
 }
+
+AppointmentInfo.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      data: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};

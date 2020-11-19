@@ -78,8 +78,8 @@ QrCodeView.propTypes = {
       id: PropTypes.number,
       resident_id: PropTypes.number,
       name: PropTypes.string,
-      start_date: PropTypes.instanceOf(Date),
-      end_date: PropTypes.instanceOf(Date),
+      start_date: PropTypes.string,
+      end_date: PropTypes.string,
     }),
   }).isRequired,
 };
