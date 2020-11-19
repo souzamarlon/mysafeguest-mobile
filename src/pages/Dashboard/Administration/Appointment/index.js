@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import { format, parseISO, isBefore, isToday } from 'date-fns';
 
@@ -85,3 +86,11 @@ export default function Appointment({ route }) {
     </Container>
   );
 }
+
+Appointment.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      resident_id: PropTypes.number,
+    }),
+  }).isRequired,
+};
