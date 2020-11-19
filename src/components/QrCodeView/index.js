@@ -4,6 +4,8 @@ import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Alert } from 'react-native';
 
+import PropTypes from 'prop-types';
+
 import { responsiveScreenHeight } from 'react-native-responsive-dimensions';
 
 import { captureRef } from 'react-native-view-shot';
@@ -69,3 +71,15 @@ export default function QrCodeView({ route }) {
     </Container>
   );
 }
+
+QrCodeView.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number,
+      resident_id: PropTypes.number,
+      name: PropTypes.string,
+      start_date: PropTypes.instanceOf(Date),
+      end_date: PropTypes.instanceOf(Date),
+    }),
+  }).isRequired,
+};

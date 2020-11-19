@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Alert } from 'react-native';
+import PropTypes from 'prop-types';
 import { Container, Form, FormInput, SubmitButton } from './styles';
 
 import api from '~/services/api';
@@ -131,3 +132,20 @@ export default function EditResident({ route }) {
     </Container>
   );
 }
+
+EditResident.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      data: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        email: PropTypes.string,
+        mobile: PropTypes.string,
+        street: PropTypes.string,
+        number: PropTypes.number,
+        city: PropTypes.string,
+        state: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};
