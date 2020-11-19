@@ -15,7 +15,7 @@ api.registerInterceptWithStore = (store) => {
     async (err) => {
       if (err.response.status === 401) {
         const { error } = err.response.data;
-        Alert.alert(`Authentication failure!, ${error}`);
+        Alert.alert(`Authentication failure!`, `${error}`);
 
         await store.dispatch(signOut());
 
@@ -23,12 +23,12 @@ api.registerInterceptWithStore = (store) => {
       }
       if (err.response.status === 400) {
         const { error } = err.response.data;
-        Alert.alert(`Failure, something is wrong!, ${error}`);
+        Alert.alert(`Failure!`, `${error}`);
       }
       if (err.response.status === 404 || err.response.status === 403) {
         const { error } = err.response.data;
 
-        Alert.alert(`${error}`);
+        Alert.alert(`Failure!`, `${error}`);
       }
     }
   );

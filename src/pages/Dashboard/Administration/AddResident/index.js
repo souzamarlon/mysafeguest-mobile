@@ -26,19 +26,25 @@ export default function AddResident() {
   const passwordRef = useRef();
 
   async function handleSubmit() {
-    await api.post('residents', {
-      name,
-      email,
-      mobile,
-      owner_id: id,
-      street,
-      number,
-      city,
-      state,
-      password,
-    });
+    try {
+      const response = await api.post('residents', {
+        name,
+        email,
+        mobile,
+        owner_id: id,
+        street,
+        number,
+        city,
+        state,
+        password,
+      });
 
-    Alert.alert('Resident was created successfully.');
+      if (response.data) {
+        Alert.alert('Resident was created successfully.');
+      }
+    } catch (err) {
+      // Alert.alert('The resident could not be created.');
+    }
   }
 
   return (
