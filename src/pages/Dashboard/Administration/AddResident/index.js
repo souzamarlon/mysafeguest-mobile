@@ -1,7 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
-import { Container, Form, FormInput, SubmitButton } from './styles';
+import {
+  Container,
+  Form,
+  FormInput,
+  AddressField,
+  SubmitButton,
+} from './styles';
 
 import api from '~/services/api';
 
@@ -13,6 +19,7 @@ export default function AddResident() {
   const [number, setNumber] = useState();
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+  const [postal_code, setPostal_code] = useState('');
   const [password, setPassword] = useState('');
 
   const { id } = useSelector((selectUser) => selectUser.user.profile);
@@ -23,6 +30,7 @@ export default function AddResident() {
   const numberRef = useRef();
   const cityRef = useRef();
   const stateRef = useRef();
+  const postalCodeRef = useRef();
   const passwordRef = useRef();
 
   async function handleSubmit() {
@@ -36,6 +44,7 @@ export default function AddResident() {
         number,
         city,
         state,
+        postal_code,
         password,
       });
 
@@ -83,45 +92,64 @@ export default function AddResident() {
           onChangeText={setMobile}
         />
 
-        <FormInput
-          icon="add-location"
-          autoCorrect={false}
-          placeholder="Street"
-          returnKeyType="next"
-          onSubmitEditing={() => numberRef.current.focus()}
-          ref={streetRef}
-          value={street}
-          onChangeText={setStreet}
-        />
-        <FormInput
-          icon="add-location"
-          autoCorrect={false}
-          placeholder="Number"
-          returnKeyType="next"
-          onSubmitEditing={() => cityRef.current.focus()}
-          ref={numberRef}
-          value={number}
-          onChangeText={setNumber}
-        />
+        <AddressField>
+          <FormInput
+            icon="add-location"
+            autoCorrect={false}
+            placeholder="Street"
+            returnKeyType="next"
+            onSubmitEditing={() => numberRef.current.focus()}
+            ref={streetRef}
+            value={street}
+            onChangeText={setStreet}
+            style={{ width: '50%', marginRight: 2 }}
+          />
+          <FormInput
+            // icon="add-location"
+            autoCorrect={false}
+            placeholder="Number"
+            returnKeyType="next"
+            onSubmitEditing={() => cityRef.current.focus()}
+            ref={numberRef}
+            value={number}
+            onChangeText={setNumber}
+            style={{ width: '50%' }}
+          />
+        </AddressField>
+
+        <AddressField>
+          <FormInput
+            icon="location-city"
+            autoCorrect={false}
+            placeholder="City"
+            returnKeyType="next"
+            onSubmitEditing={() => stateRef.current.focus()}
+            ref={cityRef}
+            value={city}
+            onChangeText={setCity}
+            style={{ width: '50%', marginRight: 2 }}
+          />
+          <FormInput
+            // icon="location-city"
+            autoCorrect={false}
+            placeholder="State"
+            returnKeyType="next"
+            onSubmitEditing={() => postalCodeRef.current.focus()}
+            ref={stateRef}
+            value={state}
+            onChangeText={setState}
+            style={{ width: '50%' }}
+          />
+        </AddressField>
         <FormInput
           icon="location-city"
           autoCorrect={false}
-          placeholder="City"
-          returnKeyType="next"
-          onSubmitEditing={() => stateRef.current.focus()}
-          ref={cityRef}
-          value={city}
-          onChangeText={setCity}
-        />
-        <FormInput
-          icon="location-city"
-          autoCorrect={false}
-          placeholder="State"
+          placeholder="Postal code"
           returnKeyType="next"
           onSubmitEditing={() => passwordRef.current.focus()}
-          ref={stateRef}
-          value={state}
-          onChangeText={setState}
+          ref={postalCodeRef}
+          value={postal_code}
+          onChangeText={setPostal_code}
         />
         <FormInput
           icon="lock-outline"

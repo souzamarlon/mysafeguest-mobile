@@ -137,9 +137,10 @@ export default function Administration({ navigation }) {
             </MoreInfo>
             <AddressInfo>
               <Icon name="house" size={20} color="#999" />
-              <Address>{data.street},</Address>
-              <Address>{data.number},</Address>
-              <Address>{data.city}.</Address>
+              <Address>{data.street}, </Address>
+              <Address>{data.number}, </Address>
+              <Address>{data.city}, </Address>
+              <Address>{data.postal_code}.</Address>
             </AddressInfo>
             <CancelEdit>
               <Delete
