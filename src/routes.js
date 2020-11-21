@@ -23,7 +23,7 @@ import Appointment from './pages/Dashboard/Administration/Appointment';
 import ResidentDashboard from './pages/Dashboard/Resident';
 import EditAppointment from './pages/Dashboard/Resident/EditAppointment';
 import QrCodeView from './components/QrCodeView';
-import SelectDate from './pages/Dashboard/Resident/New/SelectDate';
+import NewResident from './pages/Dashboard/Resident/New';
 
 Icon.loadFont();
 const Stack = createStackNavigator();
@@ -163,35 +163,7 @@ function AdminDashboardStack({ navigation }) {
         component={AdminDashboard}
         options={{ headerShown: false, headerTransparent: true }}
       />
-      <Stack.Screen
-        name="AddResident"
-        component={AddResident}
-        options={{
-          title: 'Create Resident credentials',
-          headerShown: true,
-          headerTransparent: true,
-          headerTitleAlign: 'center',
-          headerTitleStyle: {
-            fontSize: 18,
-            fontWeight: 'bold',
-            textAlign: 'center',
-          },
-          headerLeft: () => (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('Dashboard');
-              }}
-            >
-              <Icon
-                name="arrow-back"
-                size={30}
-                color="#222"
-                style={{ marginLeft: 10 }}
-              />
-            </TouchableOpacity>
-          ),
-        }}
-      />
+
       <Stack.Screen
         name="EditResident"
         component={EditResident}
@@ -335,6 +307,53 @@ function ResidentDashboardStack({ navigation }) {
   );
 }
 
+function NewResidentStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#444',
+        headerTitleStyle: {
+          fontSize: 18,
+          fontWeight: 'bold',
+          textAlign: 'center',
+        },
+        headerLeftContainerStyle: {},
+      }}
+    >
+      <Stack.Screen
+        name="AddResident"
+        component={AddResident}
+        options={{
+          title: 'Create Resident credentials',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Dashboard');
+              }}
+            >
+              <Icon
+                name="arrow-back"
+                size={30}
+                color="#222"
+                style={{ marginLeft: 10 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function NewAppointmentStack({ navigation }) {
   return (
     <Stack.Navigator
@@ -350,8 +369,8 @@ function NewAppointmentStack({ navigation }) {
       }}
     >
       <Stack.Screen
-        name="SelectDate"
-        component={SelectDate}
+        name="NewResident"
+        component={NewResident}
         options={{
           title: 'New appointment',
           headerTransparent: true,
@@ -373,7 +392,7 @@ function NewAppointmentStack({ navigation }) {
           headerLeft: () => (
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate('SelectDate');
+                navigation.navigate('NewResident');
               }}
             >
               <Icon
@@ -434,7 +453,7 @@ export default function createRouter(isSigned = false, isAdmin = false) {
       />
       <Tabs.Screen
         name="Add"
-        component={isAdmin ? AdminDashboardStack : NewAppointmentStack}
+        component={isAdmin ? NewResidentStack : NewAppointmentStack}
         options={{
           // tabBarLabel: '',
           tabBarIcon: ({ color }) => (

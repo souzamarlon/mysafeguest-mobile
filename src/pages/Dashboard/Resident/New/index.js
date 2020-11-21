@@ -2,6 +2,8 @@ import React, { useEffect, useState, useRef, useMemo } from 'react';
 
 import { Alert } from 'react-native';
 
+import PropTypes from 'prop-types';
+
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useIsFocused } from '@react-navigation/native';
 
@@ -96,7 +98,7 @@ export default function New({ navigation }) {
 
     navigation.navigate('QrCodeView', {
       name,
-      id: response.id,
+      id: response.data.id,
       resident_id: id,
       start_date: startDateFormatted,
       end_date: endDateFormatted,
@@ -150,3 +152,9 @@ export default function New({ navigation }) {
     </Container>
   );
 }
+
+New.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};

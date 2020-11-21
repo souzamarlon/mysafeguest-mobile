@@ -5,7 +5,7 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import PropTypes from 'prop-types';
 
 import {
   Container,
@@ -66,3 +66,9 @@ export default function SignIn({ navigation }) {
     </Container>
   );
 }
+
+SignIn.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};

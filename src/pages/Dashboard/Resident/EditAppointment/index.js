@@ -5,6 +5,8 @@ import {
   responsiveScreenHeight,
 } from 'react-native-responsive-dimensions';
 
+import PropTypes from 'prop-types';
+
 import QRCode from 'react-native-qrcode-svg';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Alert } from 'react-native';
@@ -170,3 +172,20 @@ export default function EditAppointment({ route, navigation }) {
     </Container>
   );
 }
+
+EditAppointment.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      data: PropTypes.shape({
+        id: PropTypes.number,
+        resident_id: PropTypes.number,
+        name: PropTypes.string,
+        start_date_WF: PropTypes.string,
+        end_date_WF: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};

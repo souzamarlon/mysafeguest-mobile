@@ -1,6 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { Alert } from 'react-native';
-import { Container, Form, FormInput, SubmitButton } from './styles';
+import PropTypes from 'prop-types';
+import {
+  Container,
+  Form,
+  FormInput,
+  AddressField,
+  SubmitButton,
+} from './styles';
 
 import api from '~/services/api';
 
@@ -14,6 +21,7 @@ export default function EditResident({ route }) {
   const [number, setNumber] = useState(data.number.toString());
   const [city, setCity] = useState(data.city);
   const [state, setState] = useState(data.state);
+  const [postal_code, setPostal_code] = useState(data.postal_code);
   // const [password, setPassword] = useState('');
 
   const emailRef = useRef();
@@ -22,20 +30,28 @@ export default function EditResident({ route }) {
   const numberRef = useRef();
   const cityRef = useRef();
   const stateRef = useRef();
-  const passwordRef = useRef();
+  const postalCodeRef = useRef();
+  // const passwordRef = useRef();
 
   async function handleUpdate() {
-    await api.put(`residents/${data.id}`, {
-      name,
-      email,
-      mobile,
-      street,
-      number,
-      city,
-      state,
-    });
+    try {
+      const response = await api.put(`residents/${data.id}`, {
+        name,
+        email,
+        mobile,
+        street,
+        number,
+        city,
+        state,
+        postal_code,
+      });
 
-    Alert.alert('The resident has been updated successfully.');
+      if (response.data) {
+        Alert.alert('The resident has been updated successfully.');
+      }
+    } catch (err) {
+      // Alert.alert('The resident could not be created.');
+    }
   }
 
   return (
@@ -74,45 +90,63 @@ export default function EditResident({ route }) {
           onChangeText={setMobile}
         />
 
+        <AddressField>
+          <FormInput
+            icon="add-location"
+            autoCorrect={false}
+            placeholder="Street"
+            returnKeyType="next"
+            onSubmitEditing={() => numberRef.current.focus()}
+            ref={streetRef}
+            value={street}
+            onChangeText={setStreet}
+            style={{ width: '50%', marginRight: 2 }}
+          />
+          <FormInput
+            icon="add-location"
+            autoCorrect={false}
+            placeholder="Number"
+            returnKeyType="next"
+            onSubmitEditing={() => cityRef.current.focus()}
+            ref={numberRef}
+            value={number}
+            onChangeText={setNumber}
+            style={{ width: '50%' }}
+          />
+        </AddressField>
+        <AddressField>
+          <FormInput
+            icon="location-city"
+            autoCorrect={false}
+            placeholder="City"
+            returnKeyType="next"
+            onSubmitEditing={() => stateRef.current.focus()}
+            ref={cityRef}
+            value={city}
+            onChangeText={setCity}
+            style={{ width: '50%', marginRight: 2 }}
+          />
+          <FormInput
+            icon="location-city"
+            autoCorrect={false}
+            placeholder="State"
+            returnKeyType="next"
+            onSubmitEditing={() => postalCodeRef.current.focus()}
+            ref={stateRef}
+            value={state}
+            onChangeText={setState}
+            style={{ width: '50%' }}
+          />
+        </AddressField>
         <FormInput
-          icon="add-location"
+          icon="local-post-office"
           autoCorrect={false}
-          placeholder="Street"
+          placeholder="Postal code"
           returnKeyType="next"
-          onSubmitEditing={() => numberRef.current.focus()}
-          ref={streetRef}
-          value={street}
-          onChangeText={setStreet}
-        />
-        <FormInput
-          icon="add-location"
-          autoCorrect={false}
-          placeholder="Number"
-          returnKeyType="next"
-          onSubmitEditing={() => cityRef.current.focus()}
-          ref={numberRef}
-          value={number}
-          onChangeText={setNumber}
-        />
-        <FormInput
-          icon="location-city"
-          autoCorrect={false}
-          placeholder="City"
-          returnKeyType="next"
-          onSubmitEditing={() => stateRef.current.focus()}
-          ref={cityRef}
-          value={city}
-          onChangeText={setCity}
-        />
-        <FormInput
-          icon="location-city"
-          autoCorrect={false}
-          placeholder="State"
-          returnKeyType="next"
-          onSubmitEditing={() => passwordRef.current.focus()}
-          ref={stateRef}
-          value={state}
-          onChangeText={setState}
+          // onSubmitEditing={() => passwordRef.current.focus()}
+          ref={postalCodeRef}
+          value={postal_code}
+          onChangeText={setPostal_code}
         />
         {/* <FormInput
           icon="lock-outline"
@@ -131,3 +165,21 @@ export default function EditResident({ route }) {
     </Container>
   );
 }
+
+EditResident.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      data: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        email: PropTypes.string,
+        mobile: PropTypes.string,
+        street: PropTypes.string,
+        number: PropTypes.number,
+        city: PropTypes.string,
+        state: PropTypes.string,
+        postal_code: PropTypes.string,
+      }),
+    }),
+  }).isRequired,
+};

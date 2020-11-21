@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
+import PropTypes from 'prop-types';
 import Camera from '~/components/Camera';
 
 import { Container } from './styles';
@@ -21,3 +22,9 @@ export default function GuardCheckIn({ navigation }) {
     </Container>
   );
 }
+
+GuardCheckIn.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};

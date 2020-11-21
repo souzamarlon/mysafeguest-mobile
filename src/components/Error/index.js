@@ -9,7 +9,7 @@ export default function Error() {
       <Content>
         <Icon name="alert" size={100} color="#F1FAEE" />
       </Content>
-      <Message>Not found!</Message>
+      <Message>Sorry, it is empty!</Message>
     </Container>
   );
 }

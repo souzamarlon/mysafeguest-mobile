@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
-import { format, parseISO, isBefore } from 'date-fns';
+import { format, parseISO, isBefore, isToday } from 'date-fns';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import Error from '~/components/Error';
+
 import {
   Container,
   List,
   AppointmentInfo,
   Name,
+  DateTitle,
   DateField,
   StartDate,
   EndDate,
@@ -29,7 +34,9 @@ export default function Appointment({ route }) {
         ...item,
         start_date: format(parseISO(item.start_date), "MMMM d',' yyyy"),
         end_date: format(parseISO(item.end_date), "MMMM d',' yyyy"),
-        isActiveDate: isBefore(new Date(), parseISO(item.end_date)),
+        isActiveDate:
+          isBefore(new Date(), parseISO(item.end_date)) ||
+          isToday(parseISO(item.end_date)),
       }));
 
       setAppointments(dataFormat);
@@ -43,32 +50,47 @@ export default function Appointment({ route }) {
     setRefreshList(true);
   }
 
+  console.tron.log(!!appointments.length);
+
   return (
     <Container>
-      <List
-        data={appointments}
-        refreshing={refreshList}
-        onRefresh={loadPage}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item: data }) => (
-          <AppointmentInfo isActiveDate={data.isActiveDate}>
-            <Name>
-              {/* <Icon name="person" size={25} color="#06D6A0" /> */}
-              {data.name}
-            </Name>
-            <DateField>
-              <StartDate>
-                <Icon name="clock-in" size={25} color="#06D6A0" />
-                {data.start_date}
-              </StartDate>
-              <EndDate>
-                <Icon name="clock-out" size={25} color="#EF476F" />
-                {data.end_date}
-              </EndDate>
-            </DateField>
-          </AppointmentInfo>
-        )}
-      />
+      {appointments.length ? (
+        <List
+          data={appointments}
+          refreshing={refreshList}
+          onRefresh={loadPage}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item: data }) => (
+            <AppointmentInfo isActiveDate={data.isActiveDate}>
+              <Name>
+                {/* <Icon name="person" size={25} color="#06D6A0" /> */}
+                {data.name}
+              </Name>
+              <DateTitle>Schedule:</DateTitle>
+              <DateField>
+                <StartDate>
+                  <Icon name="clock-in" size={25} color="#06D6A0" />
+                  {data.start_date}
+                </StartDate>
+                <EndDate>
+                  <Icon name="clock-out" size={25} color="#EF476F" />
+                  {data.end_date}
+                </EndDate>
+              </DateField>
+            </AppointmentInfo>
+          )}
+        />
+      ) : (
+        <Error />
+      )}
     </Container>
   );
 }
+
+Appointment.propTypes = {
+  route: PropTypes.shape({
+    params: PropTypes.shape({
+      resident_id: PropTypes.number,
+    }),
+  }).isRequired,
+};

@@ -52,7 +52,8 @@ export const Name = styled.Text`
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.3);
   width: 100%;
-  padding-left: 10px;
+  padding: 0 10px 0 10px;
+  overflow: hidden;
 `;
 
 export const Date = styled.View`
@@ -61,7 +62,8 @@ export const Date = styled.View`
   margin-top: 5px;
   background: rgba(255, 255, 255, 0.3);
   width: 100%;
-  padding-left: 10px;
+  padding: 0 10px 0 10px;
+  overflow: hidden;
 `;
 
 export const DateText = styled.Text`
@@ -78,7 +80,8 @@ export const ResidentView = styled.View`
   margin-top: 2px;
   background: rgba(255, 255, 255, 0.3);
   width: 100%;
-  padding-left: 10px;
+  padding: 0 20px 0 10px;
+  overflow: hidden;
 `;
 
 export const ResidentText = styled.Text`

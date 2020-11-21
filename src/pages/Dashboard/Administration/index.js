@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Alert, LogBox } from 'react-native';
 import { useIsFocused } from '@react-navigation/native';
 
+import PropTypes from 'prop-types';
+
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -11,9 +13,7 @@ import {
   AlignTitleAndName,
   LogoutButton,
   WelcomeTitle,
-  OwnerName,
-  AddField,
-  AddButton,
+  ResidentView,
   ResidentsTitle,
   List,
   ResidentInfo,
@@ -98,8 +98,7 @@ export default function Administration({ navigation }) {
     <Container>
       <Profile>
         <AlignTitleAndName>
-          <WelcomeTitle>Welcome,</WelcomeTitle>
-          <OwnerName>{name}</OwnerName>
+          <WelcomeTitle>Welcome, &shy;{name}</WelcomeTitle>
         </AlignTitleAndName>
         <LogoutButton>
           <Icon
@@ -110,20 +109,13 @@ export default function Administration({ navigation }) {
           />
         </LogoutButton>
       </Profile>
-      <AddField>
+      <ResidentView>
         <ResidentsTitle>
           <Icon name="emoji-people" size={10} color="#43AA8B" />
           MANAGE YOUR RESIDENTS
           <Icon name="emoji-people" size={10} color="#43AA8B" />
         </ResidentsTitle>
-        <AddButton
-          onPress={() => {
-            navigation.navigate('AddResident', { id });
-          }}
-        >
-          <Icon name="add" size={24} color="#222" />
-        </AddButton>
-      </AddField>
+      </ResidentView>
 
       <List
         data={residents}
@@ -145,9 +137,10 @@ export default function Administration({ navigation }) {
             </MoreInfo>
             <AddressInfo>
               <Icon name="house" size={20} color="#999" />
-              <Address>{data.street},</Address>
-              <Address>{data.number},</Address>
-              <Address>{data.city}.</Address>
+              <Address>{data.street}, </Address>
+              <Address>{data.number}, </Address>
+              <Address>{data.city}, </Address>
+              <Address>{data.postal_code}.</Address>
             </AddressInfo>
             <CancelEdit>
               <Delete
@@ -181,3 +174,9 @@ export default function Administration({ navigation }) {
     </Container>
   );
 }
+
+Administration.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func,
+  }).isRequired,
+};

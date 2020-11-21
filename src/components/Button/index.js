@@ -32,9 +32,11 @@ Button.propTypes = {
   children: PropTypes.string.isRequired,
   loading: PropTypes.bool,
   icon: PropTypes.string,
+  fontSize: PropTypes.number,
 };
 
 Button.defaultProps = {
   loading: false,
   icon: null,
+  fontSize: null,
 };
