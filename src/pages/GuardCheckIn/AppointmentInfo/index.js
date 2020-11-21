@@ -117,6 +117,15 @@ export default function AppointmentInfo({ route, navigation }) {
               .
             </ResidentText>
           </ResidentView>
+
+          <ResidentView>
+            <Icon name="local-post-office" size={22} color="#4a4e69" />
+            <ResidentText>
+              {Object.keys(appointment).length >= 1
+                ? appointment.Resident.postal_code
+                : '0'}
+            </ResidentText>
+          </ResidentView>
         </Content>
       ) : (
         <Error />
