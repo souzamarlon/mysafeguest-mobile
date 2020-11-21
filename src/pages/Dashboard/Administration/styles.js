@@ -16,14 +16,8 @@ export const Container = styled.View`
 export const Profile = styled.ImageBackground.attrs({
   source: adminHeader,
   opacity: 1,
-  // borderBottomLeftRadius: 5,
-  // borderBottomRightRadius: 5,
 })`
   height: 130px;
-  /* background: rgba(0, 40, 40, 1); */
-  /* background: #f0efeb; */
-  /* border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px; */
   flex-direction: row;
   justify-content: space-evenly;
   /* border: 1px solid #eee; */
@@ -87,7 +81,7 @@ export const List = styled.FlatList.attrs({
 export const ResidentInfo = styled.View`
   background: rgba(255, 255, 255, 0.6);
   margin-top: 10px;
-  height: 150px;
+  height: 190px;
   padding: 2px 20px;
   border: 1px solid #eee;
   border-radius: 4px;
@@ -99,34 +93,44 @@ export const Name = styled.Text`
   font-weight: bold;
   margin-left: 5px;
   text-align: center;
+  padding: 0 10px 0 10px;
+  overflow: hidden;
 `;
 
 export const MoreInfo = styled.View`
-  align-items: center;
+  /* align-items: center; */
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 300px;
+  width: 100%;
   margin-top: 5px;
+  flex-direction: row;
+  padding-right: 20px;
+`;
+export const ContactView = styled.View`
+  flex-direction: row;
+  flex-shrink: 1;
+  overflow: visible;
+  margin-right: 10px;
 `;
 
-export const Email = styled.Text`
+export const Contact = styled.Text`
   color: #495867;
   font-size: 16px;
+  padding: 0 10px 0 3px;
 `;
 
 export const AddressInfo = styled.View`
-  align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  width: 200px;
+  width: 300px;
   margin-top: 5px;
 `;
 
 export const Address = styled.Text`
   color: #495867;
   font-size: 16px;
+  padding: 0 5px 0 5px;
+  flex-shrink: 1;
+  overflow: visible;
 `;
 
 export const CancelEdit = styled.View`
@@ -134,7 +138,7 @@ export const CancelEdit = styled.View`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 25px;
+  margin-top: 15px;
 `;
 
 export const Delete = styled(Button)`

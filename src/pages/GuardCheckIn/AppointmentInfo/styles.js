@@ -35,6 +35,7 @@ export const Title = styled.View`
   width: 100%;
   margin-bottom: 10px;
 `;
+
 export const TitleText = styled.Text`
   color: #fff;
   font-size: 24px;

@@ -19,7 +19,8 @@ import {
   ResidentInfo,
   Name,
   MoreInfo,
-  Email,
+  ContactView,
+  Contact,
   AddressInfo,
   Address,
   CancelEdit,
@@ -130,16 +131,25 @@ export default function Administration({ navigation }) {
           >
             <Name>{data.name}</Name>
             <MoreInfo>
-              <Icon name="email" size={20} color="#999" />
-              <Email>{data.email}</Email>
-              <Icon name="phone" size={20} color="#999" />
-              <Email>{data.mobile}</Email>
+              <ContactView>
+                <Icon name="email" size={20} color="#444" />
+                <Contact>{data.email}</Contact>
+              </ContactView>
+              <ContactView>
+                <Icon name="phone" size={20} color="#444" />
+                <Contact>{data.mobile}</Contact>
+              </ContactView>
             </MoreInfo>
+
             <AddressInfo>
-              <Icon name="house" size={20} color="#999" />
-              <Address>{data.street}, </Address>
-              <Address>{data.number}, </Address>
-              <Address>{data.city}, </Address>
+              <Icon name="location-on" size={20} color="#444" />
+              <Address>{data.street},</Address>
+              <Address>{data.number}.</Address>
+            </AddressInfo>
+            <AddressInfo>
+              <Icon name="location-city" size={20} color="#444" />
+              <Address>{data.city},</Address>
+              <Address>{data.state},</Address>
               <Address>{data.postal_code}.</Address>
             </AddressInfo>
             <CancelEdit>
