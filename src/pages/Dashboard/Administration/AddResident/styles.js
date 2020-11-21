@@ -34,8 +34,9 @@ export const AddressField = styled.View`
 `;
 
 export const SubmitButton = styled(Button)`
-  height: 35px;
+  height: 40px;
   margin-top: 15px;
   background: rgba(144, 190, 109, 1);
   margin-bottom: 5px;
+  border-radius: 25px;
 `;

@@ -142,7 +142,7 @@ export default function AddResident() {
           />
         </AddressField>
         <FormInput
-          icon="location-city"
+          icon="local-post-office"
           autoCorrect={false}
           placeholder="Postal code"
           returnKeyType="next"
