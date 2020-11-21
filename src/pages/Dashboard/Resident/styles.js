@@ -119,8 +119,9 @@ export const StartDate = styled.Text`
   color: #555;
   font-size: 16px;
   margin-right: 2px;
-  padding: 0 10px;
+  margin: 0 10px;
   border-radius: 4px;
+  text-align: center;
 `;
 
 export const EndDate = styled.Text`

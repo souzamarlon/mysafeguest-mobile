@@ -69,11 +69,11 @@ export default function Appointment({ route }) {
               <DateTitle>Schedule:</DateTitle>
               <DateField>
                 <StartDate>
-                  <Icon name="clock-in" size={25} color="#06D6A0" />
+                  <Icon name="calendar-range" size={20} color="#06D6A0" />
                   {data.start_date}
                 </StartDate>
                 <EndDate>
-                  <Icon name="clock-out" size={25} color="#EF476F" />
+                  <Icon name="calendar" size={20} color="#EF476F" />
                   {data.end_date}
                 </EndDate>
               </DateField>

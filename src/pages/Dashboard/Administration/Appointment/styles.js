@@ -77,6 +77,7 @@ export const StartDate = styled.Text`
   margin-right: 2px;
   padding: 0 10px;
   border-radius: 4px;
+  align-items: center;
 `;
 
 export const EndDate = styled.Text`
