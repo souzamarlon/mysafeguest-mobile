@@ -10,6 +10,7 @@ import { responsiveScreenHeight } from 'react-native-responsive-dimensions';
 
 import { captureRef } from 'react-native-view-shot';
 import Share from 'react-native-share';
+import Background from '~/components/Background';
 
 import {
   Container,
@@ -41,34 +42,36 @@ export default function QrCodeView({ route }) {
   };
 
   return (
-    <Container>
-      <Content
-        ref={viewRef}
-        style={{
-          height: responsiveScreenHeight(46),
-        }}
-      >
-        <Name>{data.name}</Name>
-        <QRCode
-          size={150}
-          value={`${data.id}:${data.name}:${data.resident_id}` || 'hey'}
-        />
-        <Info>
-          <Date>
-            <Icon name="date-range" size={25} color="#06D6A0" />
-            <DateText>{data.start_date}</DateText>
-          </Date>
-          <Date>
-            <Icon name="date-range" size={25} color="#EF476F" />
-            <DateText>{data.end_date}</DateText>
-          </Date>
-        </Info>
-      </Content>
+    <Background backgroundName="ResidentImage">
+      <Container>
+        <Content
+          ref={viewRef}
+          style={{
+            height: responsiveScreenHeight(46),
+          }}
+        >
+          <Name>{data.name}</Name>
+          <QRCode
+            size={150}
+            value={`${data.id}:${data.name}:${data.resident_id}` || 'hey'}
+          />
+          <Info>
+            <Date>
+              <Icon name="date-range" size={25} color="#06D6A0" />
+              <DateText>{data.start_date}</DateText>
+            </Date>
+            <Date>
+              <Icon name="date-range" size={25} color="#EF476F" />
+              <DateText>{data.end_date}</DateText>
+            </Date>
+          </Info>
+        </Content>
 
-      <SubmitButton onPress={shareImage} fontSize={19}>
-        Share
-      </SubmitButton>
-    </Container>
+        <SubmitButton onPress={shareImage} fontSize={19}>
+          Share
+        </SubmitButton>
+      </Container>
+    </Background>
   );
 }
 

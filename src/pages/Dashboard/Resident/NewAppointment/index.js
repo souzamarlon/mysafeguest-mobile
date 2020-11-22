@@ -11,8 +11,9 @@ import { format, set, isAfter } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
 import { useSelector } from 'react-redux';
+import Background from '~/components/Background';
+
 import api from '~/services/api';
 
 import {
@@ -106,51 +107,53 @@ export default function NewAppointment({ navigation }) {
   }
 
   return (
-    <Container>
-      <Form>
-        <FormInput
-          icon="person-outline"
-          autoCorrect={false}
-          maxLength={30}
-          // autoCapitalize
-          placeholder="Guest name"
-          returnKeyType="next"
-          onSubmitEditing={() => startDateRef.current.focus()}
-          value={name}
-          onChangeText={setName}
-        />
+    <Background backgroundName="ResidentImage">
+      <Container>
+        <Form>
+          <FormInput
+            icon="person-outline"
+            autoCorrect={false}
+            maxLength={30}
+            // autoCapitalize
+            placeholder="Guest name"
+            returnKeyType="next"
+            onSubmitEditing={() => startDateRef.current.focus()}
+            value={name}
+            onChangeText={setName}
+          />
 
-        <Calendar>
-          <Title>Select the date:</Title>
-          <DateButton onPress={() => handleToggleDatePicker('button1')}>
-            <Icon name="event" color="#222" size={20} />
-            <DateText ref={startDateRef}>{startDateFormatted}</DateText>
-          </DateButton>
+          <Calendar>
+            <Title>Select the date:</Title>
+            <DateButton onPress={() => handleToggleDatePicker('button1')}>
+              <Icon name="event" color="#222" size={20} />
+              <DateText ref={startDateRef}>{startDateFormatted}</DateText>
+            </DateButton>
 
-          <Title>Select expiration date:</Title>
-          <DateButton onPress={() => handleToggleDatePicker('button2')}>
-            <Icon name="event" color="#222" size={20} />
-            <DateText>{endDateFormatted}</DateText>
-          </DateButton>
+            <Title>Select expiration date:</Title>
+            <DateButton onPress={() => handleToggleDatePicker('button2')}>
+              <Icon name="event" color="#222" size={20} />
+              <DateText>{endDateFormatted}</DateText>
+            </DateButton>
 
-          {(showSelectDate || showSelectExpirationDate) && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={showSelectDate ? startDate : endDate}
-              mode="date"
-              // is24Hour
-              display="calendar"
-              onChange={onChange}
-              minimumDate={showSelectExpirationDate ? startDate : new Date()}
-            />
-          )}
-        </Calendar>
+            {(showSelectDate || showSelectExpirationDate) && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={showSelectDate ? startDate : endDate}
+                mode="date"
+                // is24Hour
+                display="calendar"
+                onChange={onChange}
+                minimumDate={showSelectExpirationDate ? startDate : new Date()}
+              />
+            )}
+          </Calendar>
 
-        <SubmitButton onPress={handleConfirm} fontSize={19}>
-          Confirm
-        </SubmitButton>
-      </Form>
-    </Container>
+          <SubmitButton onPress={handleConfirm} fontSize={19}>
+            Confirm
+          </SubmitButton>
+        </Form>
+      </Container>
+    </Background>
   );
 }
 

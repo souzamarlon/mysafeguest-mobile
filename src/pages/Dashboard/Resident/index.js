@@ -10,6 +10,8 @@ import { format, parseISO, isBefore, isToday } from 'date-fns';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { signOut } from '~/store/modules/auth/actions';
 
+import Background from '~/components/Background';
+
 import {
   Container,
   Profile,
@@ -102,63 +104,65 @@ export default function Resident({ navigation }) {
   }
 
   return (
-    <Container>
-      <Profile>
-        <AlignTitleAndName>
-          <ResidentName>{name}</ResidentName>
-          <ResidentEmail>{email}</ResidentEmail>
-        </AlignTitleAndName>
-        <LogoutButton>
-          <Icon
-            name="exit-to-app"
-            size={24}
-            color="#E74040"
-            onPress={handleLogout}
-          />
-        </LogoutButton>
-      </Profile>
-      <AppointmentTitle>My Appointments:</AppointmentTitle>
-      <List
-        data={appointments}
-        refreshing={refreshList}
-        onRefresh={loadPage}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item: data }) => (
-          <AppointmentInfo isActiveDate={data.isActiveDate}>
-            <Name numberOfLines={1}>{data.name}</Name>
-            <DateField>
-              <StartDate>
-                <Icon name="calendar-range" size={20} color="#06D6A0" />
-                {data.start_date}
-              </StartDate>
-              <EndDate>
-                <Icon name="calendar" size={20} color="#EF476F" />
-                {data.end_date}
-              </EndDate>
-            </DateField>
-            <CancelEdit>
-              <Delete
-                onPress={() =>
-                  handleDelete({
-                    appointment_id: data.id,
-                    guest_name: data.name,
-                  })
-                }
-              >
-                Delete
-              </Delete>
-              <Edit
-                onPress={() => {
-                  navigation.navigate('EditAppointment', { data });
-                }}
-              >
-                Edit
-              </Edit>
-            </CancelEdit>
-          </AppointmentInfo>
-        )}
-      />
-    </Container>
+    <Background backgroundName="ResidentImage">
+      <Container>
+        <Profile>
+          <AlignTitleAndName>
+            <ResidentName>{name}</ResidentName>
+            <ResidentEmail>{email}</ResidentEmail>
+          </AlignTitleAndName>
+          <LogoutButton>
+            <Icon
+              name="exit-to-app"
+              size={24}
+              color="#E74040"
+              onPress={handleLogout}
+            />
+          </LogoutButton>
+        </Profile>
+        <AppointmentTitle>My Appointments:</AppointmentTitle>
+        <List
+          data={appointments}
+          refreshing={refreshList}
+          onRefresh={loadPage}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item: data }) => (
+            <AppointmentInfo isActiveDate={data.isActiveDate}>
+              <Name numberOfLines={1}>{data.name}</Name>
+              <DateField>
+                <StartDate>
+                  <Icon name="calendar-range" size={20} color="#06D6A0" />
+                  {data.start_date}
+                </StartDate>
+                <EndDate>
+                  <Icon name="calendar" size={20} color="#EF476F" />
+                  {data.end_date}
+                </EndDate>
+              </DateField>
+              <CancelEdit>
+                <Delete
+                  onPress={() =>
+                    handleDelete({
+                      appointment_id: data.id,
+                      guest_name: data.name,
+                    })
+                  }
+                >
+                  Delete
+                </Delete>
+                <Edit
+                  onPress={() => {
+                    navigation.navigate('EditAppointment', { data });
+                  }}
+                >
+                  Edit
+                </Edit>
+              </CancelEdit>
+            </AppointmentInfo>
+          )}
+        />
+      </Container>
+    </Background>
   );
 }
 

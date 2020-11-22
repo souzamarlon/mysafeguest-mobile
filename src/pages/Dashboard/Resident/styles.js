@@ -3,12 +3,9 @@ import styled from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 import Button from '~/components/Button';
 
-import BackgroundImage from '~/assets/residentBackground.jpg';
 import residentHeader from '~/assets/residentHeader.jpg';
 
-export const Container = styled.ImageBackground.attrs({
-  source: BackgroundImage,
-})`
+export const Container = styled.View`
   margin: 0 auto;
   /* background: rgba(11, 222, 0, 0.1); */
   /* background: rgba(255, 255, 255, 0.4); */

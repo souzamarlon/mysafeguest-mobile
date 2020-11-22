@@ -14,6 +14,8 @@ import { format, parseISO, set, isAfter } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
+import Background from '~/components/Background';
+
 import {
   Container,
   Form,
@@ -104,73 +106,75 @@ export default function EditAppointment({ route, navigation }) {
   }
 
   return (
-    <Container>
-      <Form
-        style={{
-          height: responsiveScreenHeight(74),
-          width: responsiveWidth(90),
-        }}
-      >
-        <Content>
-          <QRCode
-            size={155}
-            value={`${data.id}:${name}:${data.resident_id}` || 'hey'}
-          />
-          <FormInput
-            icon="person-outline"
-            autoCorrect={false}
-            maxLength={30}
-            // autoCapitalize
-            placeholder="Guest name"
-            returnKeyType="next"
-            onSubmitEditing={() => startDateRef.current.focus()}
-            value={name}
-            onChangeText={setName}
-          />
-          <Title>Select the date:</Title>
-          <DateButton onPress={() => handleToggleDatePicker('button1')}>
-            <Icon name="event" color="#222" size={20} />
-            <DateText ref={startDateRef}>{startDateFormatted}</DateText>
-          </DateButton>
-
-          <Title>Select expiration date:</Title>
-          <DateButton onPress={() => handleToggleDatePicker('button2')}>
-            <Icon name="event" color="#222" size={20} />
-            <DateText>{endDateFormatted}</DateText>
-          </DateButton>
-
-          {(showSelectDate || showSelectExpirationDate) && (
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={showSelectDate ? startDate : endDate}
-              mode="date"
-              // is24Hour
-              display="calendar"
-              onChange={onChange}
-              minimumDate={showSelectExpirationDate ? startDate : new Date()}
+    <Background backgroundName="ResidentImage">
+      <Container>
+        <Form
+          style={{
+            height: responsiveScreenHeight(74),
+            width: responsiveWidth(90),
+          }}
+        >
+          <Content>
+            <QRCode
+              size={155}
+              value={`${data.id}:${name}:${data.resident_id}` || 'hey'}
             />
-          )}
-        </Content>
+            <FormInput
+              icon="person-outline"
+              autoCorrect={false}
+              maxLength={30}
+              // autoCapitalize
+              placeholder="Guest name"
+              returnKeyType="next"
+              onSubmitEditing={() => startDateRef.current.focus()}
+              value={name}
+              onChangeText={setName}
+            />
+            <Title>Select the date:</Title>
+            <DateButton onPress={() => handleToggleDatePicker('button1')}>
+              <Icon name="event" color="#222" size={20} />
+              <DateText ref={startDateRef}>{startDateFormatted}</DateText>
+            </DateButton>
 
-        <AlignButtons>
-          <SubmitButton
-            backgroundColor="rgba(2, 190, 109, 1)"
-            onPress={handleUpdate}
-            fontSize={19}
-          >
-            Update
-          </SubmitButton>
+            <Title>Select expiration date:</Title>
+            <DateButton onPress={() => handleToggleDatePicker('button2')}>
+              <Icon name="event" color="#222" size={20} />
+              <DateText>{endDateFormatted}</DateText>
+            </DateButton>
 
-          <SubmitButton
-            backgroundColor="rgba(83, 144, 217, 1)"
-            onPress={shareQrCode}
-            fontSize={19}
-          >
-            Share
-          </SubmitButton>
-        </AlignButtons>
-      </Form>
-    </Container>
+            {(showSelectDate || showSelectExpirationDate) && (
+              <DateTimePicker
+                testID="dateTimePicker"
+                value={showSelectDate ? startDate : endDate}
+                mode="date"
+                // is24Hour
+                display="calendar"
+                onChange={onChange}
+                minimumDate={showSelectExpirationDate ? startDate : new Date()}
+              />
+            )}
+          </Content>
+
+          <AlignButtons>
+            <SubmitButton
+              backgroundColor="rgba(2, 190, 109, 1)"
+              onPress={handleUpdate}
+              fontSize={19}
+            >
+              Update
+            </SubmitButton>
+
+            <SubmitButton
+              backgroundColor="rgba(83, 144, 217, 1)"
+              onPress={shareQrCode}
+              fontSize={19}
+            >
+              Share
+            </SubmitButton>
+          </AlignButtons>
+        </Form>
+      </Container>
+    </Background>
   );
 }
 

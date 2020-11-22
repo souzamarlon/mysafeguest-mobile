@@ -7,6 +7,8 @@ import {
 
 import PropTypes from 'prop-types';
 
+import Background from '~/components/Background';
+
 import {
   Container,
   Title,
@@ -20,50 +22,52 @@ import {
 
 export default function SignIn({ navigation }) {
   return (
-    <Container>
-      <Title>My Safe Guest.</Title>
-      <Content
-        style={{
-          height: responsiveHeight(35),
-          width: responsiveWidth(100),
-        }}
-      >
-        <WelcomeText>
-          The administration button is to manage residents. The resident button
-          is to schedule visits to your home.
-        </WelcomeText>
+    <Background backgroundName="SignInDashboardImage">
+      <Container>
+        <Title>My Safe Guest.</Title>
+        <Content
+          style={{
+            height: responsiveHeight(35),
+            width: responsiveWidth(100),
+          }}
+        >
+          <WelcomeText>
+            The administration button is to manage residents. The resident
+            button is to schedule visits to your home.
+          </WelcomeText>
 
-        <SignInButtons>
-          <Admin
-            icon="admin-panel-settings"
-            fontSize={21}
-            onPress={() => {
-              navigation.navigate('AdminSignIn');
-            }}
-          >
-            Administration
-          </Admin>
-          <Resident
-            icon="people"
-            fontSize={21}
-            onPress={() => {
-              navigation.navigate('ResidentSignIn');
-            }}
-          >
-            Resident
-          </Resident>
-          <GuardButton
-            icon="qr-code-scanner"
-            fontSize={21}
-            onPress={() => {
-              navigation.navigate('GuardCheckIn');
-            }}
-          >
-            Guard
-          </GuardButton>
-        </SignInButtons>
-      </Content>
-    </Container>
+          <SignInButtons>
+            <Admin
+              icon="admin-panel-settings"
+              fontSize={21}
+              onPress={() => {
+                navigation.navigate('AdminSignIn');
+              }}
+            >
+              Administration
+            </Admin>
+            <Resident
+              icon="people"
+              fontSize={21}
+              onPress={() => {
+                navigation.navigate('ResidentSignIn');
+              }}
+            >
+              Resident
+            </Resident>
+            <GuardButton
+              icon="qr-code-scanner"
+              fontSize={21}
+              onPress={() => {
+                navigation.navigate('GuardCheckIn');
+              }}
+            >
+              Guard
+            </GuardButton>
+          </SignInButtons>
+        </Content>
+      </Container>
+    </Background>
   );
 }
 

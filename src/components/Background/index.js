@@ -1,9 +1,24 @@
 import styled from 'styled-components/native';
 
-import ResidentImage from '~/assets/residentSignIn.jpg';
+import SignInDashboardImage from '~/assets/signInDashboard.jpg';
+import AdminSignInImage from '~/assets/adminSignIn.jpg';
+import ResidentSignIn from '~/assets/residentSignIn.jpg';
 
-export default styled.View`
-  background: rgba(255, 162, 0, 0.4);
-  /* background: rgba(254, 200, 154, 0.9); */
+import ResidentImage from '~/assets/residentBackground.jpg';
+import AppointmentImage from '~/assets/appointmentBackground.jpg';
+import GuardImage from '~/assets/guardBackground.jpg';
+
+const defaultImage = {
+  SignInDashboardImage,
+  AdminSignInImage,
+  ResidentSignIn,
+  ResidentImage,
+  AppointmentImage,
+  GuardImage,
+};
+
+export default styled.ImageBackground.attrs((props) => ({
+  source: defaultImage[props.backgroundName],
+}))`
   flex: 1;
 `;

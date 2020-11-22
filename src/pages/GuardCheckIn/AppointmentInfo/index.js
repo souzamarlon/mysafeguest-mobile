@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 import pt from 'date-fns/locale/pt';
 import Error from '~/components/Error';
+import Background from '~/components/Background';
 
 import {
   Container,
@@ -58,83 +59,85 @@ export default function AppointmentInfo({ route, navigation }) {
   }, []);
 
   return (
-    <Container>
-      {Object.keys(appointment).length >= 1 ? (
-        <Content
-          style={{
-            height: responsiveScreenHeight(65),
-          }}
-        >
-          <Title backgroundColor="rgba(239, 71, 111, 0.7)">
-            <TitleText>Guest Information:</TitleText>
-          </Title>
-          <Name>{data.name}</Name>
-          <Date>
-            <Icon name="date-range" size={20} color="#06D6A0" />
-            <DateText>{startDateFormatted}</DateText>
-          </Date>
-          <Date>
-            <Icon name="date-range" size={20} color="#EF476F" />
-            <DateText>{endDateFormatted}</DateText>
-          </Date>
-          <Title backgroundColor="rgba(6, 214, 160, 0.7)">
-            <TitleText>Resident Information:</TitleText>
-          </Title>
-          <ResidentView style={{ justifyContent: 'center' }}>
-            <Icon name="house-siding" size={22} color="#48cae4" />
-            <ResidentText>
-              {Object.keys(appointment).length >= 1
-                ? appointment.Resident.name
-                : '0'}
-            </ResidentText>
-          </ResidentView>
-          <ResidentView>
-            <Icon name="mobile-friendly" size={20} color="#e07a5f" />
-            <ResidentText>
-              {Object.keys(appointment).length >= 1
-                ? appointment.Resident.mobile
-                : '0'}
-            </ResidentText>
-          </ResidentView>
-          <ResidentView>
-            <Icon name="location-on" size={20} color="#ffba08" />
-            <ResidentText>
-              {Object.keys(appointment).length >= 1
-                ? appointment.Resident.street
-                : '0'}
-              ,
-            </ResidentText>
-            <ResidentText>
-              {Object.keys(appointment).length >= 1
-                ? appointment.Resident.number
-                : '0'}
-              ,
-            </ResidentText>
-            <ResidentText>
-              {Object.keys(appointment).length >= 1
-                ? appointment.Resident.city
-                : '0'}
-              .
-            </ResidentText>
-          </ResidentView>
+    <Background backgroundName="GuardImage">
+      <Container>
+        {Object.keys(appointment).length >= 1 ? (
+          <Content
+            style={{
+              height: responsiveScreenHeight(65),
+            }}
+          >
+            <Title backgroundColor="rgba(239, 71, 111, 0.7)">
+              <TitleText>Guest Information:</TitleText>
+            </Title>
+            <Name>{data.name}</Name>
+            <Date>
+              <Icon name="date-range" size={20} color="#06D6A0" />
+              <DateText>{startDateFormatted}</DateText>
+            </Date>
+            <Date>
+              <Icon name="date-range" size={20} color="#EF476F" />
+              <DateText>{endDateFormatted}</DateText>
+            </Date>
+            <Title backgroundColor="rgba(6, 214, 160, 0.7)">
+              <TitleText>Resident Information:</TitleText>
+            </Title>
+            <ResidentView style={{ justifyContent: 'center' }}>
+              <Icon name="house-siding" size={22} color="#48cae4" />
+              <ResidentText>
+                {Object.keys(appointment).length >= 1
+                  ? appointment.Resident.name
+                  : '0'}
+              </ResidentText>
+            </ResidentView>
+            <ResidentView>
+              <Icon name="mobile-friendly" size={20} color="#e07a5f" />
+              <ResidentText>
+                {Object.keys(appointment).length >= 1
+                  ? appointment.Resident.mobile
+                  : '0'}
+              </ResidentText>
+            </ResidentView>
+            <ResidentView>
+              <Icon name="location-on" size={20} color="#ffba08" />
+              <ResidentText>
+                {Object.keys(appointment).length >= 1
+                  ? appointment.Resident.street
+                  : '0'}
+                ,
+              </ResidentText>
+              <ResidentText>
+                {Object.keys(appointment).length >= 1
+                  ? appointment.Resident.number
+                  : '0'}
+                ,
+              </ResidentText>
+              <ResidentText>
+                {Object.keys(appointment).length >= 1
+                  ? appointment.Resident.city
+                  : '0'}
+                .
+              </ResidentText>
+            </ResidentView>
 
-          <ResidentView>
-            <Icon name="local-post-office" size={22} color="#4a4e69" />
-            <ResidentText>
-              {Object.keys(appointment).length >= 1
-                ? appointment.Resident.postal_code
-                : '0'}
-            </ResidentText>
-          </ResidentView>
-        </Content>
-      ) : (
-        <Error />
-      )}
+            <ResidentView>
+              <Icon name="local-post-office" size={22} color="#4a4e69" />
+              <ResidentText>
+                {Object.keys(appointment).length >= 1
+                  ? appointment.Resident.postal_code
+                  : '0'}
+              </ResidentText>
+            </ResidentView>
+          </Content>
+        ) : (
+          <Error />
+        )}
 
-      <BackButton fontSize={19} onPress={() => navigation.goBack()}>
-        GO BACK
-      </BackButton>
-    </Container>
+        <BackButton fontSize={19} onPress={() => navigation.goBack()}>
+          GO BACK
+        </BackButton>
+      </Container>
+    </Background>
   );
 }
 

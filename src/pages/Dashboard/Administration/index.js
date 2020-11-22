@@ -174,7 +174,9 @@ export default function Administration({ navigation }) {
               </Edit>
               <Appointment
                 onPress={() => {
-                  navigation.navigate('Appointment', { resident_id: data.id });
+                  navigation.navigate('Appointment', {
+                    resident_id: data.id,
+                  });
                 }}
               >
                 Appointments
