@@ -4,11 +4,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Container, TInput } from './styles';
 
-function Input({ style, icon, ...rest }, ref) {
+function Input({ keyboardType, style, icon, ...rest }, ref) {
   return (
     <Container style={style}>
       {icon && <Icon name={icon} size={20} color="#222" />}
-      <TInput {...rest} ref={ref} />
+      <TInput keyboardType={keyboardType || 'default'} {...rest} ref={ref} />
     </Container>
   );
 }

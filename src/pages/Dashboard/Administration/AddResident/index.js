@@ -63,6 +63,7 @@ export default function AddResident() {
           icon="person-outline"
           autoCorrect={false}
           // autoCapitalize
+          maxLength={30}
           placeholder="Name"
           returnKeyType="next"
           onSubmitEditing={() => emailRef.current.focus()}
@@ -73,6 +74,8 @@ export default function AddResident() {
           icon="mail-outline"
           autoCorrect={false}
           autoCapitalize="none"
+          keyboardType="email-address"
+          maxLength={50}
           placeholder="Email"
           returnKeyType="next"
           ref={emailRef}
@@ -84,6 +87,8 @@ export default function AddResident() {
           icon="phone"
           autoCorrect={false}
           autoCapitalize="none"
+          maxLength={15}
+          keyboardType="phone-pad"
           placeholder="Phone"
           returnKeyType="next"
           ref={mobileRef}
@@ -97,6 +102,7 @@ export default function AddResident() {
             icon="add-location"
             autoCorrect={false}
             placeholder="Street"
+            maxLength={15}
             returnKeyType="next"
             onSubmitEditing={() => numberRef.current.focus()}
             ref={streetRef}
@@ -107,7 +113,9 @@ export default function AddResident() {
           <FormInput
             // icon="add-location"
             autoCorrect={false}
+            keyboardType="numeric"
             placeholder="Number"
+            maxLength={8}
             returnKeyType="next"
             onSubmitEditing={() => cityRef.current.focus()}
             ref={numberRef}
@@ -122,6 +130,7 @@ export default function AddResident() {
             icon="location-city"
             autoCorrect={false}
             placeholder="City"
+            maxLength={10}
             returnKeyType="next"
             onSubmitEditing={() => stateRef.current.focus()}
             ref={cityRef}
@@ -133,6 +142,7 @@ export default function AddResident() {
             // icon="location-city"
             autoCorrect={false}
             placeholder="State"
+            maxLength={10}
             returnKeyType="next"
             onSubmitEditing={() => postalCodeRef.current.focus()}
             ref={stateRef}
@@ -145,6 +155,7 @@ export default function AddResident() {
           icon="local-post-office"
           autoCorrect={false}
           placeholder="Postal code"
+          maxLength={15}
           returnKeyType="next"
           onSubmitEditing={() => passwordRef.current.focus()}
           ref={postalCodeRef}

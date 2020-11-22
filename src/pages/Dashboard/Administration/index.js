@@ -129,15 +129,17 @@ export default function Administration({ navigation }) {
               navigation.navigate('Appointments', { data });
             }}
           >
-            <Name>{data.name}</Name>
+            <Name numberOfLines={1}>{data.name}</Name>
             <MoreInfo>
               <ContactView>
                 <Icon name="email" size={20} color="#444" />
-                <Contact>{data.email}</Contact>
+                <Contact dataDetectorType="email" numberOfLines={2}>
+                  {data.email}
+                </Contact>
               </ContactView>
               <ContactView>
                 <Icon name="phone" size={20} color="#444" />
-                <Contact>{data.mobile}</Contact>
+                <Contact dataDetectorType="phoneNumber">{data.mobile}</Contact>
               </ContactView>
             </MoreInfo>
 
@@ -148,9 +150,9 @@ export default function Administration({ navigation }) {
             </AddressInfo>
             <AddressInfo>
               <Icon name="location-city" size={20} color="#444" />
-              <Address>{data.city},</Address>
-              <Address>{data.state},</Address>
-              <Address>{data.postal_code}.</Address>
+              <Address numberOfLines={1}>{data.city},</Address>
+              <Address numberOfLines={1}>{data.state},</Address>
+              <Address numberOfLines={1}>{data.postal_code}.</Address>
             </AddressInfo>
             <CancelEdit>
               <Delete

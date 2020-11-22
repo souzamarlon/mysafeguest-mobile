@@ -26,7 +26,7 @@ import {
   SubmitButton,
 } from './styles';
 
-export default function New({ navigation }) {
+export default function NewAppointment({ navigation }) {
   const [name, setName] = useState('');
   const [startDate, setStartDate] = useState(
     set(new Date(), { hours: 0, minutes: 0 })
@@ -87,22 +87,23 @@ export default function New({ navigation }) {
   };
 
   async function handleConfirm() {
-    const response = await api.post('appointments', {
-      name,
-      resident_id: id,
-      start_date: startDate,
-      end_date: endDate,
-    });
+    console.tron.log(startDate);
+    // const response = await api.post('appointments', {
+    //   name,
+    //   resident_id: id,
+    //   start_date: startDate,
+    //   end_date: endDate,
+    // });
 
-    Alert.alert('Appointment was created successfully.');
+    // Alert.alert('Appointment was created successfully.');
 
-    navigation.navigate('QrCodeView', {
-      name,
-      id: response.data.id,
-      resident_id: id,
-      start_date: startDateFormatted,
-      end_date: endDateFormatted,
-    });
+    // navigation.navigate('QrCodeView', {
+    //   name,
+    //   id: response.data.id,
+    //   resident_id: id,
+    //   start_date: startDateFormatted,
+    //   end_date: endDateFormatted,
+    // });
   }
 
   return (
@@ -111,6 +112,7 @@ export default function New({ navigation }) {
         <FormInput
           icon="person-outline"
           autoCorrect={false}
+          maxLength={30}
           // autoCapitalize
           placeholder="Guest name"
           returnKeyType="next"
@@ -153,7 +155,7 @@ export default function New({ navigation }) {
   );
 }
 
-New.propTypes = {
+NewAppointment.propTypes = {
   navigation: PropTypes.shape({
     navigate: PropTypes.func,
   }).isRequired,

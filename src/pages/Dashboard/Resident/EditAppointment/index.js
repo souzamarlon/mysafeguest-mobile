@@ -119,6 +119,7 @@ export default function EditAppointment({ route, navigation }) {
           <FormInput
             icon="person-outline"
             autoCorrect={false}
+            maxLength={30}
             // autoCapitalize
             placeholder="Guest name"
             returnKeyType="next"

@@ -125,7 +125,7 @@ export default function Resident({ navigation }) {
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item: data }) => (
           <AppointmentInfo isActiveDate={data.isActiveDate}>
-            <Name>{data.name}</Name>
+            <Name numberOfLines={1}>{data.name}</Name>
             <DateField>
               <StartDate>
                 <Icon name="calendar-range" size={20} color="#06D6A0" />

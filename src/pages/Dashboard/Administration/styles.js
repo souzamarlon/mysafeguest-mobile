@@ -91,10 +91,11 @@ export const Name = styled.Text`
   color: #333;
   font-size: 22px;
   font-weight: bold;
-  margin-left: 5px;
   text-align: center;
-  padding: 0 10px 0 10px;
-  overflow: hidden;
+  margin: 5px 0 2px 0;
+  /* padding: 0 10px 0 10px; */
+  /* overflow: hidden; */
+  flex-direction: row;
 `;
 
 export const MoreInfo = styled.View`
