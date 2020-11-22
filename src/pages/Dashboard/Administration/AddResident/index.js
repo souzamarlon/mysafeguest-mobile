@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   Container,
   Form,
+  FieldTitle,
   FormInput,
   AddressField,
   SubmitButton,
@@ -59,20 +60,25 @@ export default function AddResident() {
   return (
     <Container>
       <Form>
+        <FieldTitle>Name</FieldTitle>
         <FormInput
           icon="person-outline"
           autoCorrect={false}
           // autoCapitalize
+          maxLength={30}
           placeholder="Name"
           returnKeyType="next"
           onSubmitEditing={() => emailRef.current.focus()}
           value={name}
           onChangeText={setName}
         />
+        <FieldTitle>Email</FieldTitle>
         <FormInput
           icon="mail-outline"
           autoCorrect={false}
           autoCapitalize="none"
+          keyboardType="email-address"
+          maxLength={50}
           placeholder="Email"
           returnKeyType="next"
           ref={emailRef}
@@ -80,23 +86,27 @@ export default function AddResident() {
           value={email}
           onChangeText={setEmail}
         />
+        <FieldTitle>Mobile Number</FieldTitle>
         <FormInput
           icon="phone"
           autoCorrect={false}
           autoCapitalize="none"
-          placeholder="Phone"
+          maxLength={15}
+          keyboardType="phone-pad"
+          placeholder="Mobile Number"
           returnKeyType="next"
           ref={mobileRef}
           onSubmitEditing={() => streetRef.current.focus()}
           value={mobile}
           onChangeText={setMobile}
         />
-
+        <FieldTitle>Address</FieldTitle>
         <AddressField>
           <FormInput
             icon="add-location"
             autoCorrect={false}
             placeholder="Street"
+            maxLength={15}
             returnKeyType="next"
             onSubmitEditing={() => numberRef.current.focus()}
             ref={streetRef}
@@ -107,7 +117,9 @@ export default function AddResident() {
           <FormInput
             // icon="add-location"
             autoCorrect={false}
+            keyboardType="numeric"
             placeholder="Number"
+            maxLength={8}
             returnKeyType="next"
             onSubmitEditing={() => cityRef.current.focus()}
             ref={numberRef}
@@ -122,6 +134,7 @@ export default function AddResident() {
             icon="location-city"
             autoCorrect={false}
             placeholder="City"
+            maxLength={10}
             returnKeyType="next"
             onSubmitEditing={() => stateRef.current.focus()}
             ref={cityRef}
@@ -133,6 +146,7 @@ export default function AddResident() {
             // icon="location-city"
             autoCorrect={false}
             placeholder="State"
+            maxLength={10}
             returnKeyType="next"
             onSubmitEditing={() => postalCodeRef.current.focus()}
             ref={stateRef}
@@ -145,12 +159,14 @@ export default function AddResident() {
           icon="local-post-office"
           autoCorrect={false}
           placeholder="Postal code"
+          maxLength={15}
           returnKeyType="next"
           onSubmitEditing={() => passwordRef.current.focus()}
           ref={postalCodeRef}
           value={postal_code}
           onChangeText={setPostal_code}
         />
+        <FieldTitle>Password</FieldTitle>
         <FormInput
           icon="lock-outline"
           secureTextEntry

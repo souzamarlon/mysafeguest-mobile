@@ -7,6 +7,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import Error from '~/components/Error';
 
+import Background from '~/components/Background';
+
 import {
   Container,
   List,
@@ -53,37 +55,39 @@ export default function Appointment({ route }) {
   console.tron.log(!!appointments.length);
 
   return (
-    <Container>
-      {appointments.length ? (
-        <List
-          data={appointments}
-          refreshing={refreshList}
-          onRefresh={loadPage}
-          keyExtractor={(item) => String(item.id)}
-          renderItem={({ item: data }) => (
-            <AppointmentInfo isActiveDate={data.isActiveDate}>
-              <Name>
-                {/* <Icon name="person" size={25} color="#06D6A0" /> */}
-                {data.name}
-              </Name>
-              <DateTitle>Schedule:</DateTitle>
-              <DateField>
-                <StartDate>
-                  <Icon name="clock-in" size={25} color="#06D6A0" />
-                  {data.start_date}
-                </StartDate>
-                <EndDate>
-                  <Icon name="clock-out" size={25} color="#EF476F" />
-                  {data.end_date}
-                </EndDate>
-              </DateField>
-            </AppointmentInfo>
-          )}
-        />
-      ) : (
-        <Error />
-      )}
-    </Container>
+    <Background backgroundName="AppointmentImage">
+      <Container>
+        {appointments.length ? (
+          <List
+            data={appointments}
+            refreshing={refreshList}
+            onRefresh={loadPage}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={({ item: data }) => (
+              <AppointmentInfo isActiveDate={data.isActiveDate}>
+                <Name>
+                  {/* <Icon name="person" size={25} color="#06D6A0" /> */}
+                  {data.name}
+                </Name>
+                <DateTitle>Schedule:</DateTitle>
+                <DateField>
+                  <StartDate>
+                    <Icon name="calendar-range" size={20} color="#06D6A0" />
+                    {data.start_date}
+                  </StartDate>
+                  <EndDate>
+                    <Icon name="calendar" size={20} color="#EF476F" />
+                    {data.end_date}
+                  </EndDate>
+                </DateField>
+              </AppointmentInfo>
+            )}
+          />
+        ) : (
+          <Error />
+        )}
+      </Container>
+    </Background>
   );
 }
 

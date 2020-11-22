@@ -5,11 +5,7 @@ import Input from '~/components/Input';
 
 import Button from '~/components/Button';
 
-import BackgroundImage from '~/assets/residentBackground.jpg';
-
-export const Container = styled.ImageBackground.attrs({
-  source: BackgroundImage,
-})`
+export const Container = styled.View`
   display: flex;
   width: 100%;
   border: 0;

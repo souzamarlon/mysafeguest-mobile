@@ -19,7 +19,8 @@ import {
   ResidentInfo,
   Name,
   MoreInfo,
-  Email,
+  ContactView,
+  Contact,
   AddressInfo,
   Address,
   CancelEdit,
@@ -128,19 +129,30 @@ export default function Administration({ navigation }) {
               navigation.navigate('Appointments', { data });
             }}
           >
-            <Name>{data.name}</Name>
+            <Name numberOfLines={1}>{data.name}</Name>
             <MoreInfo>
-              <Icon name="email" size={20} color="#999" />
-              <Email>{data.email}</Email>
-              <Icon name="phone" size={20} color="#999" />
-              <Email>{data.mobile}</Email>
+              <ContactView>
+                <Icon name="email" size={20} color="#444" />
+                <Contact dataDetectorType="email" numberOfLines={2}>
+                  {data.email}
+                </Contact>
+              </ContactView>
+              <ContactView>
+                <Icon name="phone" size={20} color="#444" />
+                <Contact dataDetectorType="phoneNumber">{data.mobile}</Contact>
+              </ContactView>
             </MoreInfo>
+
             <AddressInfo>
-              <Icon name="house" size={20} color="#999" />
-              <Address>{data.street}, </Address>
-              <Address>{data.number}, </Address>
-              <Address>{data.city}, </Address>
-              <Address>{data.postal_code}.</Address>
+              <Icon name="location-on" size={20} color="#444" />
+              <Address>{data.street},</Address>
+              <Address>{data.number}.</Address>
+            </AddressInfo>
+            <AddressInfo>
+              <Icon name="location-city" size={20} color="#444" />
+              <Address numberOfLines={1}>{data.city},</Address>
+              <Address numberOfLines={1}>{data.state},</Address>
+              <Address numberOfLines={1}>{data.postal_code}.</Address>
             </AddressInfo>
             <CancelEdit>
               <Delete
@@ -162,7 +174,9 @@ export default function Administration({ navigation }) {
               </Edit>
               <Appointment
                 onPress={() => {
-                  navigation.navigate('Appointment', { resident_id: data.id });
+                  navigation.navigate('Appointment', {
+                    resident_id: data.id,
+                  });
                 }}
               >
                 Appointments

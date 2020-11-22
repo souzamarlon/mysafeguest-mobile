@@ -1,12 +1,8 @@
 import styled from 'styled-components/native';
 
-import BackgroundImage from '~/assets/guardBackground.jpg';
-
 import Button from '~/components/Button';
 
-export const Container = styled.ImageBackground.attrs({
-  source: BackgroundImage,
-})`
+export const Container = styled.View`
   display: flex;
   align-self: center;
   padding: 0 30px;
@@ -35,6 +31,7 @@ export const Title = styled.View`
   width: 100%;
   margin-bottom: 10px;
 `;
+
 export const TitleText = styled.Text`
   color: #fff;
   font-size: 24px;

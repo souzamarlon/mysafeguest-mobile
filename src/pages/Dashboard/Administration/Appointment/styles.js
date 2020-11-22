@@ -1,10 +1,6 @@
 import styled from 'styled-components/native';
 
-import BackgroundImage from '~/assets/background.jpg';
-
-export const Container = styled.ImageBackground.attrs({
-  source: BackgroundImage,
-})`
+export const Container = styled.View`
   margin: 0 auto;
   /* background: rgba(11, 222, 0, 0.1); */
   /* background: rgba(10, 245, 212, 0.2); */
@@ -77,6 +73,7 @@ export const StartDate = styled.Text`
   margin-right: 2px;
   padding: 0 10px;
   border-radius: 4px;
+  align-items: center;
 `;
 
 export const EndDate = styled.Text`

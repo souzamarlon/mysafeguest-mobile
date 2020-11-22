@@ -4,11 +4,7 @@ import { Platform } from 'react-native';
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 
-import BackgroundImage from '~/assets/adminSignIn.jpg';
-
-export const Container = styled.ImageBackground.attrs({
-  source: BackgroundImage,
-})`
+export const Container = styled.View`
   justify-content: center;
   align-self: center;
   margin: auto;
