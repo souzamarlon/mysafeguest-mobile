@@ -20,6 +20,12 @@ export const Form = styled.View`
   margin-top: 5px;
 `;
 
+export const FieldTitle = styled.Text`
+  font-size: 16px;
+  margin: 5px 0 5px 5px;
+  color: #999;
+`;
+
 export const FormInput = styled(Input)`
   margin-top: 2px;
   background: rgba(251, 255, 255, 0.6);

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {
   Container,
   Form,
+  FieldTitle,
   FormInput,
   AddressField,
   SubmitButton,
@@ -57,6 +58,7 @@ export default function EditResident({ route }) {
   return (
     <Container>
       <Form>
+        <FieldTitle>Name</FieldTitle>
         <FormInput
           icon="person-outline"
           autoCorrect={false}
@@ -68,6 +70,7 @@ export default function EditResident({ route }) {
           value={name}
           onChangeText={setName}
         />
+        <FieldTitle>Email</FieldTitle>
         <FormInput
           icon="mail-outline"
           autoCorrect={false}
@@ -81,20 +84,21 @@ export default function EditResident({ route }) {
           value={email}
           onChangeText={setEmail}
         />
+        <FieldTitle>Mobile Number</FieldTitle>
         <FormInput
           icon="phone"
           autoCorrect={false}
           autoCapitalize="none"
           maxLength={15}
           keyboardType="phone-pad"
-          placeholder="Phone"
+          placeholder="Mobile Number"
           returnKeyType="next"
           ref={mobileRef}
           onSubmitEditing={() => streetRef.current.focus()}
           value={mobile}
           onChangeText={setMobile}
         />
-
+        <FieldTitle>Address</FieldTitle>
         <AddressField>
           <FormInput
             icon="add-location"
@@ -109,7 +113,7 @@ export default function EditResident({ route }) {
             style={{ width: '50%', marginRight: 2 }}
           />
           <FormInput
-            icon="add-location"
+            // icon="add-location"
             autoCorrect={false}
             keyboardType="numeric"
             placeholder="Number"
@@ -136,7 +140,7 @@ export default function EditResident({ route }) {
             style={{ width: '50%', marginRight: 2 }}
           />
           <FormInput
-            icon="location-city"
+            // icon="location-city"
             autoCorrect={false}
             maxLength={10}
             placeholder="State"

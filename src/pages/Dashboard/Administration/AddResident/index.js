@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   Container,
   Form,
+  FieldTitle,
   FormInput,
   AddressField,
   SubmitButton,
@@ -59,6 +60,7 @@ export default function AddResident() {
   return (
     <Container>
       <Form>
+        <FieldTitle>Name</FieldTitle>
         <FormInput
           icon="person-outline"
           autoCorrect={false}
@@ -70,6 +72,7 @@ export default function AddResident() {
           value={name}
           onChangeText={setName}
         />
+        <FieldTitle>Email</FieldTitle>
         <FormInput
           icon="mail-outline"
           autoCorrect={false}
@@ -83,20 +86,21 @@ export default function AddResident() {
           value={email}
           onChangeText={setEmail}
         />
+        <FieldTitle>Mobile Number</FieldTitle>
         <FormInput
           icon="phone"
           autoCorrect={false}
           autoCapitalize="none"
           maxLength={15}
           keyboardType="phone-pad"
-          placeholder="Phone"
+          placeholder="Mobile Number"
           returnKeyType="next"
           ref={mobileRef}
           onSubmitEditing={() => streetRef.current.focus()}
           value={mobile}
           onChangeText={setMobile}
         />
-
+        <FieldTitle>Address</FieldTitle>
         <AddressField>
           <FormInput
             icon="add-location"
@@ -162,6 +166,7 @@ export default function AddResident() {
           value={postal_code}
           onChangeText={setPostal_code}
         />
+        <FieldTitle>Password</FieldTitle>
         <FormInput
           icon="lock-outline"
           secureTextEntry
