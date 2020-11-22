@@ -87,23 +87,22 @@ export default function NewAppointment({ navigation }) {
   };
 
   async function handleConfirm() {
-    console.tron.log(startDate);
-    // const response = await api.post('appointments', {
-    //   name,
-    //   resident_id: id,
-    //   start_date: startDate,
-    //   end_date: endDate,
-    // });
+    const response = await api.post('appointments', {
+      name,
+      resident_id: id,
+      start_date: startDate,
+      end_date: endDate,
+    });
 
-    // Alert.alert('Appointment was created successfully.');
+    Alert.alert('Appointment was created successfully.');
 
-    // navigation.navigate('QrCodeView', {
-    //   name,
-    //   id: response.data.id,
-    //   resident_id: id,
-    //   start_date: startDateFormatted,
-    //   end_date: endDateFormatted,
-    // });
+    navigation.navigate('QrCodeView', {
+      name,
+      id: response.data.id,
+      resident_id: id,
+      start_date: startDateFormatted,
+      end_date: endDateFormatted,
+    });
   }
 
   return (
