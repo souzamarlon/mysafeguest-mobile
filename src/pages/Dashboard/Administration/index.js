@@ -145,14 +145,14 @@ export default function Administration({ navigation }) {
 
             <AddressInfo>
               <Icon name="location-on" size={20} color="#444" />
-              <Address>{data.street},</Address>
+              <Address>{data.Address.street},</Address>
               <Address>{data.number}.</Address>
             </AddressInfo>
             <AddressInfo>
               <Icon name="location-city" size={20} color="#444" />
-              <Address numberOfLines={1}>{data.city},</Address>
-              <Address numberOfLines={1}>{data.state},</Address>
-              <Address numberOfLines={1}>{data.postal_code}.</Address>
+              <Address numberOfLines={1}>{data.Address.city},</Address>
+              <Address numberOfLines={1}>{data.Address.state},</Address>
+              <Address numberOfLines={1}>{data.Address.postal_code}.</Address>
             </AddressInfo>
             <CancelEdit>
               <Delete
