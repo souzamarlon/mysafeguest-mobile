@@ -30,13 +30,23 @@ export const FieldTitle = styled.Text`
 export const FormInput = styled(Input)`
   margin-top: 2px;
   background: rgba(251, 255, 255, 0.6);
-  border: 1px solid #fff;
 `;
 
 export const AddressField = styled.View`
   flex-direction: row;
   display: flex;
   justify-content: space-between;
+`;
+
+export const SelectLayout = styled.View`
+  background-color: rgba(251, 255, 255, 0.6);
+  height: 46px;
+  border-radius: 4px;
+  font-size: 11px;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #fff;
+  width: 100%;
 `;
 
 export const SubmitButton = styled(Button)`

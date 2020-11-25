@@ -1,12 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Alert } from 'react-native';
 import PropTypes from 'prop-types';
+import { Picker } from '@react-native-picker/picker';
+
 import {
   Container,
   Form,
   FieldTitle,
   FormInput,
   AddressField,
+  SelectLayout,
   SubmitButton,
 } from './styles';
 
@@ -18,21 +21,26 @@ export default function EditResident({ route }) {
   const [name, setName] = useState(data.name);
   const [email, setEmail] = useState(data.email);
   const [mobile, setMobile] = useState(data.mobile);
-  const [street, setStreet] = useState(data.street);
   const [number, setNumber] = useState(data.number.toString());
-  const [city, setCity] = useState(data.city);
-  const [state, setState] = useState(data.state);
-  const [postal_code, setPostal_code] = useState(data.postal_code);
+  const [address, setAddress] = useState([]);
+  const [address_id, setAddress_id] = useState(data.address_id);
   // const [password, setPassword] = useState('');
 
   const emailRef = useRef();
   const mobileRef = useRef();
   const streetRef = useRef();
   const numberRef = useRef();
-  const cityRef = useRef();
-  const stateRef = useRef();
-  const postalCodeRef = useRef();
   // const passwordRef = useRef();
+
+  useEffect(() => {
+    async function getAddresses() {
+      const response = await api.get(`addresses/${data.owner_id}`);
+
+      setAddress(response.data);
+    }
+
+    getAddresses();
+  }, []);
 
   async function handleUpdate() {
     try {
@@ -40,11 +48,8 @@ export default function EditResident({ route }) {
         name,
         email,
         mobile,
-        street,
         number,
-        city,
-        state,
-        postal_code,
+        address_id,
       });
 
       if (response.data) {
@@ -100,68 +105,40 @@ export default function EditResident({ route }) {
         />
         <FieldTitle>Address</FieldTitle>
         <AddressField>
-          <FormInput
-            icon="add-location"
-            autoCorrect={false}
-            placeholder="Street"
-            maxLength={15}
-            returnKeyType="next"
-            onSubmitEditing={() => numberRef.current.focus()}
-            ref={streetRef}
-            value={street}
-            onChangeText={setStreet}
-            style={{ width: '50%', marginRight: 2 }}
-          />
-          <FormInput
-            // icon="add-location"
-            autoCorrect={false}
-            keyboardType="numeric"
-            placeholder="Number"
-            maxLength={8}
-            returnKeyType="next"
-            onSubmitEditing={() => cityRef.current.focus()}
-            ref={numberRef}
-            value={number}
-            onChangeText={setNumber}
-            style={{ width: '50%' }}
-          />
+          <SelectLayout>
+            <Picker
+              selectedValue={address_id}
+              style={{ height: 50, width: 250, color: '#222' }}
+              onValueChange={(itemValue) => setAddress_id(itemValue)}
+            >
+              {address.length ? (
+                address.map((item) => {
+                  return (
+                    <Picker.Item
+                      key={item.id}
+                      label={`${item.street}, ${item.city}, ${item.state}, ${item.postal_code}`}
+                      value={item.id}
+                    />
+                  );
+                })
+              ) : (
+                <Picker.Item label="Not found." />
+              )}
+            </Picker>
+          </SelectLayout>
         </AddressField>
-        <AddressField>
-          <FormInput
-            icon="location-city"
-            autoCorrect={false}
-            placeholder="City"
-            maxLength={10}
-            returnKeyType="next"
-            onSubmitEditing={() => stateRef.current.focus()}
-            ref={cityRef}
-            value={city}
-            onChangeText={setCity}
-            style={{ width: '50%', marginRight: 2 }}
-          />
-          <FormInput
-            // icon="location-city"
-            autoCorrect={false}
-            maxLength={10}
-            placeholder="State"
-            returnKeyType="next"
-            onSubmitEditing={() => postalCodeRef.current.focus()}
-            ref={stateRef}
-            value={state}
-            onChangeText={setState}
-            style={{ width: '50%' }}
-          />
-        </AddressField>
+        <FieldTitle>House Number</FieldTitle>
         <FormInput
-          icon="local-post-office"
+          // icon="add-location"
           autoCorrect={false}
-          maxLength={15}
-          placeholder="Postal code"
-          returnKeyType="next"
-          // onSubmitEditing={() => passwordRef.current.focus()}
-          ref={postalCodeRef}
-          value={postal_code}
-          onChangeText={setPostal_code}
+          keyboardType="numeric"
+          placeholder="Number"
+          maxLength={8}
+          returnKeyType="send"
+          onSubmitEditing={handleUpdate}
+          ref={numberRef}
+          value={number}
+          onChangeText={setNumber}
         />
         {/* <FormInput
           icon="lock-outline"
@@ -189,11 +166,9 @@ EditResident.propTypes = {
         name: PropTypes.string,
         email: PropTypes.string,
         mobile: PropTypes.string,
-        street: PropTypes.string,
         number: PropTypes.number,
-        city: PropTypes.string,
-        state: PropTypes.string,
-        postal_code: PropTypes.string,
+        owner_id: PropTypes.number,
+        address_id: PropTypes.number,
       }),
     }),
   }).isRequired,
