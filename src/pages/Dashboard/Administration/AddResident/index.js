@@ -9,7 +9,6 @@ import {
   Form,
   FieldTitle,
   FormInput,
-  AddressField,
   SelectLayout,
   SubmitButton,
 } from './styles';
@@ -116,31 +115,30 @@ export default function AddResident() {
           value={mobile}
           onChangeText={setMobile}
         />
-        <FieldTitle>Address</FieldTitle>
 
-        <AddressField>
-          <SelectLayout>
-            <Picker
-              selectedValue={address_id}
-              style={{ height: 50, width: 250, color: '#222' }}
-              onValueChange={(itemValue) => setAddress_id(itemValue)}
-            >
-              {address.length ? (
-                address.map((data) => {
-                  return (
-                    <Picker.Item
-                      key={data.id}
-                      label={`${data.street}, ${data.city}, ${data.state}, ${data.postal_code}`}
-                      value={data.id}
-                    />
-                  );
-                })
-              ) : (
-                <Picker.Item label="Not found." />
-              )}
-            </Picker>
-          </SelectLayout>
-        </AddressField>
+        <FieldTitle>Address</FieldTitle>
+        <SelectLayout>
+          <Picker
+            selectedValue={address_id}
+            style={{ height: 50, width: 250, color: '#222' }}
+            onValueChange={(itemValue) => setAddress_id(itemValue)}
+          >
+            {address.length ? (
+              address.map((data) => {
+                return (
+                  <Picker.Item
+                    key={data.id}
+                    label={`${data.street}, ${data.city}, ${data.state}, ${data.postal_code}`}
+                    value={data.id}
+                  />
+                );
+              })
+            ) : (
+              <Picker.Item label="Not found." />
+            )}
+          </Picker>
+        </SelectLayout>
+
         <FieldTitle>House Number</FieldTitle>
         <FormInput
           // icon="add-location"

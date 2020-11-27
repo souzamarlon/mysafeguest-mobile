@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 
@@ -9,10 +10,28 @@ export const Container = styled.ScrollView.attrs({
   padding: 0 30px;
   width: 100%;
   flex: 1;
-  margin-top: 80px;
+  margin-top: 70px;
   /* margin-bottom: 20px; */
   border: 0;
   border-radius: 10px;
+`;
+
+export const OwnerView = styled.View`
+  background: rgba(251, 255, 255, 0.6);
+  height: 46px;
+  border-radius: 4px;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #fff;
+  width: 100%;
+  margin-top: 2px;
+  opacity: 0.4;
+`;
+
+export const OwnerInfo = styled.Text`
+  font-size: 15px;
+  color: #222;
+  padding: 0 5px;
 `;
 
 export const Form = styled.View`
@@ -29,24 +48,18 @@ export const FieldTitle = styled.Text`
 export const FormInput = styled(Input)`
   margin-top: 2px;
   background: rgba(251, 255, 255, 0.6);
-  border: 1px solid #fff;
 `;
 
-export const SelectLayout = styled.View`
-  background-color: rgba(251, 255, 255, 0.6);
-  height: 46px;
-  border-radius: 4px;
-  font-size: 11px;
+export const AddressField = styled.View`
   flex-direction: row;
-  align-items: center;
-  border: 1px solid #fff;
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const SubmitButton = styled(Button)`
   height: 40px;
   margin-top: 15px;
-  background: rgba(144, 190, 109, 1);
+  background: rgba(162, 210, 255, 1);
   border-radius: 25px;
   margin-bottom: 5px;
 `;

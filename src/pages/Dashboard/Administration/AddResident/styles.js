@@ -32,12 +32,6 @@ export const FormInput = styled(Input)`
   background: rgba(251, 255, 255, 0.6);
 `;
 
-export const AddressField = styled.View`
-  flex-direction: row;
-  display: flex;
-  justify-content: space-between;
-`;
-
 export const SelectLayout = styled.View`
   background-color: rgba(251, 255, 255, 0.6);
   height: 46px;

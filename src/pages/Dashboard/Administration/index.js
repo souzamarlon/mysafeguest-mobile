@@ -56,7 +56,7 @@ export default function Administration({ navigation }) {
         setResidents(response.data);
         setRefreshList(false);
       } catch (err) {
-        Alert.alert('Unable to get the residents!');
+        Alert.alert('Failure!', 'Unable to get the residents!');
       }
     }
 

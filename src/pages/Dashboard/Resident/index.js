@@ -66,7 +66,7 @@ export default function Resident({ navigation }) {
         setAppointments(dataFormat);
         setRefreshList(false);
       } catch (err) {
-        Alert.alert('Unable to get the appointments!');
+        Alert.alert('Failure!', 'Unable to get the appointments!');
       }
     }
 
