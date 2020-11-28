@@ -14,6 +14,7 @@ import {
 } from './styles';
 
 import api from '~/services/api';
+import Background from '~/components/Background';
 
 export default function AddResident() {
   const [name, setName] = useState('');
@@ -73,101 +74,103 @@ export default function AddResident() {
   }
 
   return (
-    <Container>
-      <Form>
-        <FieldTitle>Name</FieldTitle>
-        <FormInput
-          icon="person-outline"
-          autoCorrect={false}
-          // autoCapitalize
-          maxLength={30}
-          placeholder="Name"
-          returnKeyType="next"
-          onSubmitEditing={() => emailRef.current.focus()}
-          value={name}
-          onChangeText={setName}
-        />
-        <FieldTitle>Email</FieldTitle>
-        <FormInput
-          icon="mail-outline"
-          autoCorrect={false}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          maxLength={50}
-          placeholder="Email"
-          returnKeyType="next"
-          ref={emailRef}
-          onSubmitEditing={() => mobileRef.current.focus()}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <FieldTitle>Mobile Number</FieldTitle>
-        <FormInput
-          icon="phone"
-          autoCorrect={false}
-          autoCapitalize="none"
-          maxLength={15}
-          keyboardType="phone-pad"
-          placeholder="Mobile Number"
-          returnKeyType="next"
-          ref={mobileRef}
-          onSubmitEditing={() => numberRef.current.focus()}
-          value={mobile}
-          onChangeText={setMobile}
-        />
+    <Background backgroundName="AddResidentBackground">
+      <Container>
+        <Form>
+          <FieldTitle>Name</FieldTitle>
+          <FormInput
+            icon="person-outline"
+            autoCorrect={false}
+            // autoCapitalize
+            maxLength={30}
+            placeholder="Name"
+            returnKeyType="next"
+            onSubmitEditing={() => emailRef.current.focus()}
+            value={name}
+            onChangeText={setName}
+          />
+          <FieldTitle>Email</FieldTitle>
+          <FormInput
+            icon="mail-outline"
+            autoCorrect={false}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            maxLength={50}
+            placeholder="Email"
+            returnKeyType="next"
+            ref={emailRef}
+            onSubmitEditing={() => mobileRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
+          />
+          <FieldTitle>Mobile Number</FieldTitle>
+          <FormInput
+            icon="phone"
+            autoCorrect={false}
+            autoCapitalize="none"
+            maxLength={15}
+            keyboardType="phone-pad"
+            placeholder="Mobile Number"
+            returnKeyType="next"
+            ref={mobileRef}
+            onSubmitEditing={() => numberRef.current.focus()}
+            value={mobile}
+            onChangeText={setMobile}
+          />
 
-        <FieldTitle>Address</FieldTitle>
-        <SelectLayout>
-          <Picker
-            selectedValue={address_id}
-            style={{ height: 50, width: 250, color: '#222' }}
-            onValueChange={(itemValue) => setAddress_id(itemValue)}
-          >
-            {address.length ? (
-              address.map((data) => {
-                return (
-                  <Picker.Item
-                    key={data.id}
-                    label={`${data.street}, ${data.city}, ${data.state}, ${data.postal_code}`}
-                    value={data.id}
-                  />
-                );
-              })
-            ) : (
-              <Picker.Item label="Not found." />
-            )}
-          </Picker>
-        </SelectLayout>
+          <FieldTitle>Address</FieldTitle>
+          <SelectLayout>
+            <Picker
+              selectedValue={address_id}
+              style={{ height: 50, width: 250, color: '#222' }}
+              onValueChange={(itemValue) => setAddress_id(itemValue)}
+            >
+              {address.length ? (
+                address.map((data) => {
+                  return (
+                    <Picker.Item
+                      key={data.id}
+                      label={`${data.street}, ${data.city}, ${data.state}, ${data.postal_code}`}
+                      value={data.id}
+                    />
+                  );
+                })
+              ) : (
+                <Picker.Item label="Not found." />
+              )}
+            </Picker>
+          </SelectLayout>
 
-        <FieldTitle>House Number</FieldTitle>
-        <FormInput
-          // icon="add-location"
-          autoCorrect={false}
-          keyboardType="numeric"
-          placeholder="Number"
-          maxLength={8}
-          returnKeyType="next"
-          onSubmitEditing={() => passwordRef.current.focus()}
-          ref={numberRef}
-          value={number}
-          onChangeText={setNumber}
-        />
+          <FieldTitle>House Number</FieldTitle>
+          <FormInput
+            // icon="add-location"
+            autoCorrect={false}
+            keyboardType="numeric"
+            placeholder="Number"
+            maxLength={8}
+            returnKeyType="next"
+            onSubmitEditing={() => passwordRef.current.focus()}
+            ref={numberRef}
+            value={number}
+            onChangeText={setNumber}
+          />
 
-        <FieldTitle>Password</FieldTitle>
-        <FormInput
-          icon="lock-outline"
-          secureTextEntry
-          placeholder="**********"
-          returnKeyType="send"
-          ref={passwordRef}
-          onSubmitEditing={handleSubmit}
-          value={password}
-          onChangeText={setPassword}
-        />
-        <SubmitButton onPress={handleSubmit} fontSize={19}>
-          Submit
-        </SubmitButton>
-      </Form>
-    </Container>
+          <FieldTitle>Password</FieldTitle>
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="**********"
+            returnKeyType="send"
+            ref={passwordRef}
+            onSubmitEditing={handleSubmit}
+            value={password}
+            onChangeText={setPassword}
+          />
+          <SubmitButton onPress={handleSubmit} fontSize={19}>
+            Submit
+          </SubmitButton>
+        </Form>
+      </Container>
+    </Background>
   );
 }

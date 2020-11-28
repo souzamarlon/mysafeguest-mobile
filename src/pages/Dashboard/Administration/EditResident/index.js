@@ -13,6 +13,7 @@ import {
 } from './styles';
 
 import api from '~/services/api';
+import Background from '~/components/Background';
 
 export default function EditResident({ route }) {
   const { data } = route.params;
@@ -60,86 +61,87 @@ export default function EditResident({ route }) {
   }
 
   return (
-    <Container>
-      <Form>
-        <FieldTitle>Name</FieldTitle>
-        <FormInput
-          icon="person-outline"
-          autoCorrect={false}
-          // autoCapitalize
-          maxLength={30}
-          placeholder="Name"
-          returnKeyType="next"
-          onSubmitEditing={() => emailRef.current.focus()}
-          value={name}
-          onChangeText={setName}
-        />
-        <FieldTitle>Email</FieldTitle>
-        <FormInput
-          icon="mail-outline"
-          autoCorrect={false}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          maxLength={50}
-          placeholder="Email"
-          returnKeyType="next"
-          ref={emailRef}
-          onSubmitEditing={() => mobileRef.current.focus()}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <FieldTitle>Mobile Number</FieldTitle>
-        <FormInput
-          icon="phone"
-          autoCorrect={false}
-          autoCapitalize="none"
-          maxLength={15}
-          keyboardType="phone-pad"
-          placeholder="Mobile Number"
-          returnKeyType="next"
-          ref={mobileRef}
-          onSubmitEditing={() => streetRef.current.focus()}
-          value={mobile}
-          onChangeText={setMobile}
-        />
-        <FieldTitle>Address</FieldTitle>
+    <Background backgroundName="AddResidentBackground">
+      <Container>
+        <Form>
+          <FieldTitle>Name</FieldTitle>
+          <FormInput
+            icon="person-outline"
+            autoCorrect={false}
+            // autoCapitalize
+            maxLength={30}
+            placeholder="Name"
+            returnKeyType="next"
+            onSubmitEditing={() => emailRef.current.focus()}
+            value={name}
+            onChangeText={setName}
+          />
+          <FieldTitle>Email</FieldTitle>
+          <FormInput
+            icon="mail-outline"
+            autoCorrect={false}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            maxLength={50}
+            placeholder="Email"
+            returnKeyType="next"
+            ref={emailRef}
+            onSubmitEditing={() => mobileRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
+          />
+          <FieldTitle>Mobile Number</FieldTitle>
+          <FormInput
+            icon="phone"
+            autoCorrect={false}
+            autoCapitalize="none"
+            maxLength={15}
+            keyboardType="phone-pad"
+            placeholder="Mobile Number"
+            returnKeyType="next"
+            ref={mobileRef}
+            onSubmitEditing={() => streetRef.current.focus()}
+            value={mobile}
+            onChangeText={setMobile}
+          />
+          <FieldTitle>Address</FieldTitle>
 
-        <SelectLayout>
-          <Picker
-            selectedValue={address_id}
-            style={{ height: 50, width: 250, color: '#222' }}
-            onValueChange={(itemValue) => setAddress_id(itemValue)}
-          >
-            {address.length ? (
-              address.map((item) => {
-                return (
-                  <Picker.Item
-                    key={item.id}
-                    label={`${item.street}, ${item.city}, ${item.state}, ${item.postal_code}`}
-                    value={item.id}
-                  />
-                );
-              })
-            ) : (
-              <Picker.Item label="Not found." />
-            )}
-          </Picker>
-        </SelectLayout>
+          <SelectLayout>
+            <Picker
+              selectedValue={address_id}
+              style={{ height: 50, width: 250, color: '#222' }}
+              onValueChange={(itemValue) => setAddress_id(itemValue)}
+            >
+              {address.length ? (
+                address.map((item) => {
+                  return (
+                    <Picker.Item
+                      key={item.id}
+                      label={`${item.street}, ${item.city}, ${item.state}, ${item.postal_code}`}
+                      value={item.id}
+                    />
+                  );
+                })
+              ) : (
+                <Picker.Item label="Not found." />
+              )}
+            </Picker>
+          </SelectLayout>
 
-        <FieldTitle>House Number</FieldTitle>
-        <FormInput
-          // icon="add-location"
-          autoCorrect={false}
-          keyboardType="numeric"
-          placeholder="Number"
-          maxLength={8}
-          returnKeyType="send"
-          onSubmitEditing={handleUpdate}
-          ref={numberRef}
-          value={number}
-          onChangeText={setNumber}
-        />
-        {/* <FormInput
+          <FieldTitle>House Number</FieldTitle>
+          <FormInput
+            // icon="add-location"
+            autoCorrect={false}
+            keyboardType="numeric"
+            placeholder="Number"
+            maxLength={8}
+            returnKeyType="send"
+            onSubmitEditing={handleUpdate}
+            ref={numberRef}
+            value={number}
+            onChangeText={setNumber}
+          />
+          {/* <FormInput
           icon="lock-outline"
           secureTextEntry
           placeholder="**********"
@@ -149,11 +151,12 @@ export default function EditResident({ route }) {
           value={password}
           onChangeText={setPassword}
         /> */}
-        <SubmitButton onPress={handleUpdate} fontSize={19}>
-          Update
-        </SubmitButton>
-      </Form>
-    </Container>
+          <SubmitButton onPress={handleUpdate} fontSize={19}>
+            Update
+          </SubmitButton>
+        </Form>
+      </Container>
+    </Background>
   );
 }
 

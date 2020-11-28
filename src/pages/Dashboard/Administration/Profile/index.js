@@ -16,6 +16,8 @@ import {
 
 import api from '~/services/api';
 
+import Background from '~/components/Background';
+
 export default function Profile() {
   const [street, setStreet] = useState();
   const [number, setNumber] = useState();
@@ -68,86 +70,88 @@ export default function Profile() {
   }
 
   return (
-    <Container>
-      <FieldTitle>Name</FieldTitle>
-      <OwnerView>
-        <OwnerInfo>{name}</OwnerInfo>
-      </OwnerView>
-      <FieldTitle>Email</FieldTitle>
-      <OwnerView>
-        <OwnerInfo>{email}</OwnerInfo>
-      </OwnerView>
-      <Form>
-        <FieldTitle>Address</FieldTitle>
-        <AddressField>
+    <Background backgroundName="ProfileBackground">
+      <Container>
+        <FieldTitle>Name</FieldTitle>
+        <OwnerView>
+          <OwnerInfo>{name}</OwnerInfo>
+        </OwnerView>
+        <FieldTitle>Email</FieldTitle>
+        <OwnerView>
+          <OwnerInfo>{email}</OwnerInfo>
+        </OwnerView>
+        <Form>
+          <FieldTitle>Address</FieldTitle>
+          <AddressField>
+            <FormInput
+              icon="add-location"
+              autoCorrect={false}
+              placeholder="Street"
+              maxLength={15}
+              returnKeyType="next"
+              onSubmitEditing={() => numberRef.current.focus()}
+              ref={streetRef}
+              value={street}
+              onChangeText={setStreet}
+              style={{ width: '50%', marginRight: 2 }}
+            />
+            <FormInput
+              // icon="add-location"
+              autoCorrect={false}
+              keyboardType="numeric"
+              placeholder="Number"
+              maxLength={8}
+              returnKeyType="next"
+              onSubmitEditing={() => cityRef.current.focus()}
+              ref={numberRef}
+              value={number}
+              onChangeText={setNumber}
+              style={{ width: '50%' }}
+            />
+          </AddressField>
+          <AddressField>
+            <FormInput
+              icon="location-city"
+              autoCorrect={false}
+              placeholder="City"
+              maxLength={10}
+              returnKeyType="next"
+              onSubmitEditing={() => stateRef.current.focus()}
+              ref={cityRef}
+              value={city}
+              onChangeText={setCity}
+              style={{ width: '50%', marginRight: 2 }}
+            />
+            <FormInput
+              // icon="location-city"
+              autoCorrect={false}
+              maxLength={10}
+              placeholder="State"
+              returnKeyType="next"
+              onSubmitEditing={() => postalCodeRef.current.focus()}
+              ref={stateRef}
+              value={state}
+              onChangeText={setState}
+              style={{ width: '50%' }}
+            />
+          </AddressField>
           <FormInput
-            icon="add-location"
+            icon="local-post-office"
             autoCorrect={false}
-            placeholder="Street"
             maxLength={15}
+            placeholder="Postal code"
             returnKeyType="next"
-            onSubmitEditing={() => numberRef.current.focus()}
-            ref={streetRef}
-            value={street}
-            onChangeText={setStreet}
-            style={{ width: '50%', marginRight: 2 }}
+            // onSubmitEditing={() => passwordRef.current.focus()}
+            ref={postalCodeRef}
+            value={postal_code}
+            onChangeText={setPostal_code}
           />
-          <FormInput
-            // icon="add-location"
-            autoCorrect={false}
-            keyboardType="numeric"
-            placeholder="Number"
-            maxLength={8}
-            returnKeyType="next"
-            onSubmitEditing={() => cityRef.current.focus()}
-            ref={numberRef}
-            value={number}
-            onChangeText={setNumber}
-            style={{ width: '50%' }}
-          />
-        </AddressField>
-        <AddressField>
-          <FormInput
-            icon="location-city"
-            autoCorrect={false}
-            placeholder="City"
-            maxLength={10}
-            returnKeyType="next"
-            onSubmitEditing={() => stateRef.current.focus()}
-            ref={cityRef}
-            value={city}
-            onChangeText={setCity}
-            style={{ width: '50%', marginRight: 2 }}
-          />
-          <FormInput
-            // icon="location-city"
-            autoCorrect={false}
-            maxLength={10}
-            placeholder="State"
-            returnKeyType="next"
-            onSubmitEditing={() => postalCodeRef.current.focus()}
-            ref={stateRef}
-            value={state}
-            onChangeText={setState}
-            style={{ width: '50%' }}
-          />
-        </AddressField>
-        <FormInput
-          icon="local-post-office"
-          autoCorrect={false}
-          maxLength={15}
-          placeholder="Postal code"
-          returnKeyType="next"
-          // onSubmitEditing={() => passwordRef.current.focus()}
-          ref={postalCodeRef}
-          value={postal_code}
-          onChangeText={setPostal_code}
-        />
 
-        <SubmitButton onPress={handleUpdate} fontSize={19}>
-          Update
-        </SubmitButton>
-      </Form>
-    </Container>
+          <SubmitButton onPress={handleUpdate} fontSize={19}>
+            Update
+          </SubmitButton>
+        </Form>
+      </Container>
+    </Background>
   );
 }

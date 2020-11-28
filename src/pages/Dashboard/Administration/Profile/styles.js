@@ -7,7 +7,7 @@ export const Container = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
 })`
   display: flex;
-  padding: 0 30px;
+  padding: 0 20px;
   width: 100%;
   flex: 1;
   margin-top: 70px;
@@ -47,7 +47,7 @@ export const FieldTitle = styled.Text`
 
 export const FormInput = styled(Input)`
   margin-top: 2px;
-  background: rgba(251, 255, 255, 0.6);
+  background: rgba(251, 255, 255, 0.8);
 `;
 
 export const AddressField = styled.View`
@@ -59,7 +59,7 @@ export const AddressField = styled.View`
 export const SubmitButton = styled(Button)`
   height: 40px;
   margin-top: 15px;
-  background: rgba(162, 210, 255, 1);
+  background: rgba(42, 157, 143, 0.8);
   border-radius: 25px;
   margin-bottom: 5px;
 `;
