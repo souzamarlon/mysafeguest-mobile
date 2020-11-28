@@ -23,25 +23,30 @@ export const Form = styled.View`
 export const FieldTitle = styled.Text`
   font-size: 16px;
   margin: 5px 0 5px 5px;
-  color: #999;
+  color: #eee;
 `;
 
 export const FormInput = styled(Input)`
   margin-top: 2px;
-  background: rgba(251, 255, 255, 0.6);
+  background-color: rgba(251, 255, 255, 0.8);
   border: 1px solid #fff;
 `;
 
-export const AddressField = styled.View`
+export const SelectLayout = styled.View`
+  background-color: rgba(251, 255, 255, 0.8);
+  height: 46px;
+  border-radius: 4px;
+  font-size: 11px;
   flex-direction: row;
-  display: flex;
-  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #fff;
+  width: 100%;
 `;
 
 export const SubmitButton = styled(Button)`
   height: 40px;
   margin-top: 15px;
-  background: rgba(144, 190, 109, 1);
+  background: rgba(144, 190, 109, 0.8);
   border-radius: 25px;
   margin-bottom: 5px;
 `;

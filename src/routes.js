@@ -16,6 +16,7 @@ import GuardCheckIn from './pages/GuardCheckIn';
 import AppointmentInfo from './pages/GuardCheckIn/AppointmentInfo';
 
 import AdminDashboard from './pages/Dashboard/Administration';
+import Profile from './pages/Dashboard/Administration/Profile';
 import AddResident from './pages/Dashboard/Administration/AddResident';
 import EditResident from './pages/Dashboard/Administration/EditResident';
 import Appointment from './pages/Dashboard/Administration/Appointment';
@@ -409,6 +410,32 @@ function NewAppointmentStack({ navigation }) {
   );
 }
 
+function ProfileStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#444',
+        headerTitleStyle: {
+          fontSize: 18,
+          fontWeight: 'bold',
+          textAlign: 'center',
+        },
+        headerLeftContainerStyle: {},
+      }}
+    >
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: 'Profile',
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function createRouter(isSigned = false, isAdmin = false) {
   return !isSigned ? (
     <Tabs.Navigator>
@@ -422,13 +449,12 @@ export default function createRouter(isSigned = false, isAdmin = false) {
     <Tabs.Navigator
       tabBarOptions={{
         keyboardHidesTabBar: true,
-        activeTintColor: '#fff',
-        inactiveTintColor: '#333',
+        activeTintColor: '#eee',
+        inactiveTintColor: '#555',
         inactiveBackgroundColor: '#111',
         activeBackgroundColor: '#222',
         showLabel: false,
         // animationEnabled: true,
-
         labelStyle: {
           fontSize: 14,
           // paddingBottom: 5,
@@ -461,6 +487,18 @@ export default function createRouter(isSigned = false, isAdmin = false) {
           ),
         }}
       />
+      {isAdmin && (
+        <Tabs.Screen
+          name="Profile"
+          component={ProfileStack}
+          options={{
+            // tabBarLabel: 'New appointment',
+            tabBarIcon: ({ color }) => (
+              <Icon name="person-outline" size={30} color={color} />
+            ),
+          }}
+        />
+      )}
     </Tabs.Navigator>
   );
 }

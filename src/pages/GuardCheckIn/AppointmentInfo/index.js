@@ -102,7 +102,7 @@ export default function AppointmentInfo({ route, navigation }) {
               <Icon name="location-on" size={20} color="#ffba08" />
               <ResidentText>
                 {Object.keys(appointment).length >= 1
-                  ? appointment.Resident.street
+                  ? appointment.Resident.Address.street
                   : '0'}
                 ,
               </ResidentText>
@@ -114,7 +114,7 @@ export default function AppointmentInfo({ route, navigation }) {
               </ResidentText>
               <ResidentText>
                 {Object.keys(appointment).length >= 1
-                  ? appointment.Resident.city
+                  ? appointment.Resident.Address.city
                   : '0'}
                 .
               </ResidentText>
@@ -124,7 +124,7 @@ export default function AppointmentInfo({ route, navigation }) {
               <Icon name="local-post-office" size={22} color="#4a4e69" />
               <ResidentText>
                 {Object.keys(appointment).length >= 1
-                  ? appointment.Resident.postal_code
+                  ? appointment.Resident.Address.postal_code
                   : '0'}
               </ResidentText>
             </ResidentView>

@@ -1,38 +1,57 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useSelector } from 'react-redux';
+import { Picker } from '@react-native-picker/picker';
+import { useIsFocused } from '@react-navigation/native';
+
 import {
   Container,
   Form,
   FieldTitle,
   FormInput,
-  AddressField,
+  SelectLayout,
   SubmitButton,
 } from './styles';
 
 import api from '~/services/api';
+import Background from '~/components/Background';
 
 export default function AddResident() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [mobile, setMobile] = useState('');
-  const [street, setStreet] = useState('');
+  const [address, setAddress] = useState([]);
+  const [address_id, setAddress_id] = useState();
   const [number, setNumber] = useState();
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [postal_code, setPostal_code] = useState('');
   const [password, setPassword] = useState('');
+  const [refreshList, setRefreshList] = useState(false);
 
   const { id } = useSelector((selectUser) => selectUser.user.profile);
 
   const emailRef = useRef();
   const mobileRef = useRef();
-  const streetRef = useRef();
   const numberRef = useRef();
-  const cityRef = useRef();
-  const stateRef = useRef();
-  const postalCodeRef = useRef();
   const passwordRef = useRef();
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      setRefreshList(true);
+    }
+  }, [isFocused]);
+
+  useEffect(() => {
+    async function getAddresses() {
+      const response = await api.get(`addresses/${id}`);
+
+      setAddress(response.data);
+      setAddress_id(response.data[0].id);
+      setRefreshList(false);
+    }
+
+    getAddresses();
+  }, [refreshList]);
 
   async function handleSubmit() {
     try {
@@ -41,11 +60,8 @@ export default function AddResident() {
         email,
         mobile,
         owner_id: id,
-        street,
+        address_id,
         number,
-        city,
-        state,
-        postal_code,
         password,
       });
 
@@ -58,62 +74,74 @@ export default function AddResident() {
   }
 
   return (
-    <Container>
-      <Form>
-        <FieldTitle>Name</FieldTitle>
-        <FormInput
-          icon="person-outline"
-          autoCorrect={false}
-          // autoCapitalize
-          maxLength={30}
-          placeholder="Name"
-          returnKeyType="next"
-          onSubmitEditing={() => emailRef.current.focus()}
-          value={name}
-          onChangeText={setName}
-        />
-        <FieldTitle>Email</FieldTitle>
-        <FormInput
-          icon="mail-outline"
-          autoCorrect={false}
-          autoCapitalize="none"
-          keyboardType="email-address"
-          maxLength={50}
-          placeholder="Email"
-          returnKeyType="next"
-          ref={emailRef}
-          onSubmitEditing={() => mobileRef.current.focus()}
-          value={email}
-          onChangeText={setEmail}
-        />
-        <FieldTitle>Mobile Number</FieldTitle>
-        <FormInput
-          icon="phone"
-          autoCorrect={false}
-          autoCapitalize="none"
-          maxLength={15}
-          keyboardType="phone-pad"
-          placeholder="Mobile Number"
-          returnKeyType="next"
-          ref={mobileRef}
-          onSubmitEditing={() => streetRef.current.focus()}
-          value={mobile}
-          onChangeText={setMobile}
-        />
-        <FieldTitle>Address</FieldTitle>
-        <AddressField>
+    <Background backgroundName="AddResidentBackground">
+      <Container>
+        <Form>
+          <FieldTitle>Name</FieldTitle>
           <FormInput
-            icon="add-location"
+            icon="person-outline"
             autoCorrect={false}
-            placeholder="Street"
-            maxLength={15}
+            // autoCapitalize
+            maxLength={30}
+            placeholder="Name"
             returnKeyType="next"
-            onSubmitEditing={() => numberRef.current.focus()}
-            ref={streetRef}
-            value={street}
-            onChangeText={setStreet}
-            style={{ width: '50%', marginRight: 2 }}
+            onSubmitEditing={() => emailRef.current.focus()}
+            value={name}
+            onChangeText={setName}
           />
+          <FieldTitle>Email</FieldTitle>
+          <FormInput
+            icon="mail-outline"
+            autoCorrect={false}
+            autoCapitalize="none"
+            keyboardType="email-address"
+            maxLength={50}
+            placeholder="Email"
+            returnKeyType="next"
+            ref={emailRef}
+            onSubmitEditing={() => mobileRef.current.focus()}
+            value={email}
+            onChangeText={setEmail}
+          />
+          <FieldTitle>Mobile Number</FieldTitle>
+          <FormInput
+            icon="phone"
+            autoCorrect={false}
+            autoCapitalize="none"
+            maxLength={15}
+            keyboardType="phone-pad"
+            placeholder="Mobile Number"
+            returnKeyType="next"
+            ref={mobileRef}
+            onSubmitEditing={() => numberRef.current.focus()}
+            value={mobile}
+            onChangeText={setMobile}
+          />
+
+          <FieldTitle>Address</FieldTitle>
+          <SelectLayout>
+            <Picker
+              selectedValue={address_id}
+              style={{ height: 50, width: 250, color: '#222' }}
+              onValueChange={(itemValue) => setAddress_id(itemValue)}
+            >
+              {address.length ? (
+                address.map((data) => {
+                  return (
+                    <Picker.Item
+                      key={data.id}
+                      label={`${data.street}, ${data.city}, ${data.state}, ${data.postal_code}`}
+                      value={data.id}
+                    />
+                  );
+                })
+              ) : (
+                <Picker.Item label="Not found." />
+              )}
+            </Picker>
+          </SelectLayout>
+
+          <FieldTitle>House Number</FieldTitle>
           <FormInput
             // icon="add-location"
             autoCorrect={false}
@@ -121,66 +149,28 @@ export default function AddResident() {
             placeholder="Number"
             maxLength={8}
             returnKeyType="next"
-            onSubmitEditing={() => cityRef.current.focus()}
+            onSubmitEditing={() => passwordRef.current.focus()}
             ref={numberRef}
             value={number}
             onChangeText={setNumber}
-            style={{ width: '50%' }}
           />
-        </AddressField>
 
-        <AddressField>
+          <FieldTitle>Password</FieldTitle>
           <FormInput
-            icon="location-city"
-            autoCorrect={false}
-            placeholder="City"
-            maxLength={10}
-            returnKeyType="next"
-            onSubmitEditing={() => stateRef.current.focus()}
-            ref={cityRef}
-            value={city}
-            onChangeText={setCity}
-            style={{ width: '50%', marginRight: 2 }}
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="**********"
+            returnKeyType="send"
+            ref={passwordRef}
+            onSubmitEditing={handleSubmit}
+            value={password}
+            onChangeText={setPassword}
           />
-          <FormInput
-            // icon="location-city"
-            autoCorrect={false}
-            placeholder="State"
-            maxLength={10}
-            returnKeyType="next"
-            onSubmitEditing={() => postalCodeRef.current.focus()}
-            ref={stateRef}
-            value={state}
-            onChangeText={setState}
-            style={{ width: '50%' }}
-          />
-        </AddressField>
-        <FormInput
-          icon="local-post-office"
-          autoCorrect={false}
-          placeholder="Postal code"
-          maxLength={15}
-          returnKeyType="next"
-          onSubmitEditing={() => passwordRef.current.focus()}
-          ref={postalCodeRef}
-          value={postal_code}
-          onChangeText={setPostal_code}
-        />
-        <FieldTitle>Password</FieldTitle>
-        <FormInput
-          icon="lock-outline"
-          secureTextEntry
-          placeholder="**********"
-          returnKeyType="send"
-          ref={passwordRef}
-          onSubmitEditing={handleSubmit}
-          value={password}
-          onChangeText={setPassword}
-        />
-        <SubmitButton onPress={handleSubmit} fontSize={19}>
-          Submit
-        </SubmitButton>
-      </Form>
-    </Container>
+          <SubmitButton onPress={handleSubmit} fontSize={19}>
+            Submit
+          </SubmitButton>
+        </Form>
+      </Container>
+    </Background>
   );
 }

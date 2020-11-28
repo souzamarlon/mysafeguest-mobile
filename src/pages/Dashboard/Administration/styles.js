@@ -8,7 +8,7 @@ import adminHeader from '~/assets/adminHeader.jpg';
 export const Container = styled.View`
   margin: 0 auto;
   /* background: rgba(11, 222, 0, 0.1); */
-  background: rgba(255, 255, 255, 0.4);
+  /* background: rgba(255, 255, 255, 0.4); */
   flex: 1;
   width: 100%;
 `;
@@ -52,14 +52,14 @@ export const WelcomeTitle = styled.Text`
 `;
 
 export const ResidentView = styled.View`
-  background: rgba(555, 555, 555, 0.3);
+  background: rgba(555, 555, 555, 0.5);
   margin-top: 10px;
   align-items: center;
   justify-content: center;
   flex-direction: row;
   /* width: 100%; */
   height: 40px;
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
 `;
 
 export const ResidentsTitle = styled.Text`

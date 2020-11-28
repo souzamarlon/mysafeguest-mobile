@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import Background from '~/components/Background';
+
 import {
   Container,
   Profile,
@@ -56,7 +58,7 @@ export default function Administration({ navigation }) {
         setResidents(response.data);
         setRefreshList(false);
       } catch (err) {
-        Alert.alert('Unable to get the residents!');
+        Alert.alert('Failure!', 'Unable to get the residents!');
       }
     }
 
@@ -96,96 +98,100 @@ export default function Administration({ navigation }) {
   }
 
   return (
-    <Container>
-      <Profile>
-        <AlignTitleAndName>
-          <WelcomeTitle>Welcome, &shy;{name}</WelcomeTitle>
-        </AlignTitleAndName>
-        <LogoutButton>
-          <Icon
-            name="exit-to-app"
-            size={24}
-            color="#E74040"
-            onPress={handleLogout}
-          />
-        </LogoutButton>
-      </Profile>
-      <ResidentView>
-        <ResidentsTitle>
-          <Icon name="emoji-people" size={10} color="#43AA8B" />
-          MANAGE YOUR RESIDENTS
-          <Icon name="emoji-people" size={10} color="#43AA8B" />
-        </ResidentsTitle>
-      </ResidentView>
+    <Background backgroundName="AddResidentBackground">
+      <Container>
+        <Profile>
+          <AlignTitleAndName>
+            <WelcomeTitle>Welcome, &shy;{name}</WelcomeTitle>
+          </AlignTitleAndName>
+          <LogoutButton>
+            <Icon
+              name="exit-to-app"
+              size={24}
+              color="#E74040"
+              onPress={handleLogout}
+            />
+          </LogoutButton>
+        </Profile>
+        <ResidentView>
+          <ResidentsTitle>
+            <Icon name="emoji-people" size={10} color="#43AA8B" />
+            MANAGE YOUR RESIDENTS
+            <Icon name="emoji-people" size={10} color="#43AA8B" />
+          </ResidentsTitle>
+        </ResidentView>
 
-      <List
-        data={residents}
-        refreshing={refreshList}
-        onRefresh={loadPage}
-        keyExtractor={(item) => String(item.id)}
-        renderItem={({ item: data }) => (
-          <ResidentInfo
-            onPress={() => {
-              navigation.navigate('Appointments', { data });
-            }}
-          >
-            <Name numberOfLines={1}>{data.name}</Name>
-            <MoreInfo>
-              <ContactView>
-                <Icon name="email" size={20} color="#444" />
-                <Contact dataDetectorType="email" numberOfLines={2}>
-                  {data.email}
-                </Contact>
-              </ContactView>
-              <ContactView>
-                <Icon name="phone" size={20} color="#444" />
-                <Contact dataDetectorType="phoneNumber">{data.mobile}</Contact>
-              </ContactView>
-            </MoreInfo>
+        <List
+          data={residents}
+          refreshing={refreshList}
+          onRefresh={loadPage}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item: data }) => (
+            <ResidentInfo
+              onPress={() => {
+                navigation.navigate('Appointments', { data });
+              }}
+            >
+              <Name numberOfLines={1}>{data.name}</Name>
+              <MoreInfo>
+                <ContactView>
+                  <Icon name="email" size={20} color="#444" />
+                  <Contact dataDetectorType="email" numberOfLines={2}>
+                    {data.email}
+                  </Contact>
+                </ContactView>
+                <ContactView>
+                  <Icon name="phone" size={20} color="#444" />
+                  <Contact dataDetectorType="phoneNumber">
+                    {data.mobile}
+                  </Contact>
+                </ContactView>
+              </MoreInfo>
 
-            <AddressInfo>
-              <Icon name="location-on" size={20} color="#444" />
-              <Address>{data.street},</Address>
-              <Address>{data.number}.</Address>
-            </AddressInfo>
-            <AddressInfo>
-              <Icon name="location-city" size={20} color="#444" />
-              <Address numberOfLines={1}>{data.city},</Address>
-              <Address numberOfLines={1}>{data.state},</Address>
-              <Address numberOfLines={1}>{data.postal_code}.</Address>
-            </AddressInfo>
-            <CancelEdit>
-              <Delete
-                onPress={() =>
-                  handleDelete({
-                    resident_id: data.id,
-                    resident_name: data.name,
-                  })
-                }
-              >
-                Delete
-              </Delete>
-              <Edit
-                onPress={() => {
-                  navigation.navigate('EditResident', { data });
-                }}
-              >
-                Edit
-              </Edit>
-              <Appointment
-                onPress={() => {
-                  navigation.navigate('Appointment', {
-                    resident_id: data.id,
-                  });
-                }}
-              >
-                Appointments
-              </Appointment>
-            </CancelEdit>
-          </ResidentInfo>
-        )}
-      />
-    </Container>
+              <AddressInfo>
+                <Icon name="location-on" size={20} color="#444" />
+                <Address>{data.Address.street},</Address>
+                <Address>{data.number}.</Address>
+              </AddressInfo>
+              <AddressInfo>
+                <Icon name="location-city" size={20} color="#444" />
+                <Address numberOfLines={1}>{data.Address.city},</Address>
+                <Address numberOfLines={1}>{data.Address.state},</Address>
+                <Address numberOfLines={1}>{data.Address.postal_code}.</Address>
+              </AddressInfo>
+              <CancelEdit>
+                <Delete
+                  onPress={() =>
+                    handleDelete({
+                      resident_id: data.id,
+                      resident_name: data.name,
+                    })
+                  }
+                >
+                  Delete
+                </Delete>
+                <Edit
+                  onPress={() => {
+                    navigation.navigate('EditResident', { data });
+                  }}
+                >
+                  Edit
+                </Edit>
+                <Appointment
+                  onPress={() => {
+                    navigation.navigate('Appointment', {
+                      resident_id: data.id,
+                    });
+                  }}
+                >
+                  Appointments
+                </Appointment>
+              </CancelEdit>
+            </ResidentInfo>
+          )}
+        />
+      </Container>
+    </Background>
   );
 }
 
