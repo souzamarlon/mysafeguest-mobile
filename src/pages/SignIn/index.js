@@ -64,6 +64,14 @@ export default function SignIn({ navigation }) {
             >
               Guard
             </GuardButton>
+            <GuardButton
+              fontSize={18}
+              onPress={() => {
+                navigation.navigate('SignUp');
+              }}
+            >
+              Create your Admin account
+            </GuardButton>
           </SignInButtons>
         </Content>
       </Container>
