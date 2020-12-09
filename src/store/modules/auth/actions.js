@@ -26,6 +26,13 @@ export function signUpRequest(name, email, password) {
   };
 }
 
+export function signUpSuccess(id) {
+  return {
+    type: '@auth/SIGN_UP_SUCCESS',
+    payload: { id },
+  };
+}
+
 export function signFailure() {
   return {
     type: '@auth/SIGN_IN_FAILURE',
