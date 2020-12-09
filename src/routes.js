@@ -12,6 +12,7 @@ import SignIn from './pages/SignIn';
 import AdminSignIn from './pages/SignIn/Admin';
 import ResidentSignIn from './pages/SignIn/Resident';
 import SignUp from './pages/SignUp';
+import AddAddress from './pages/SignUp/AddAddress';
 
 import GuardCheckIn from './pages/GuardCheckIn';
 import AppointmentInfo from './pages/GuardCheckIn/AppointmentInfo';
@@ -166,9 +167,9 @@ function SignStack({ navigation }) {
       />
       <Stack.Screen
         name="AddAddress"
-        component={SignUp}
+        component={AddAddress}
         options={{
-          title: '',
+          title: 'Your condominium Address',
           headerShown: true,
           headerTransparent: true,
           headerTitleAlign: 'center',
@@ -177,13 +178,6 @@ function SignStack({ navigation }) {
             fontWeight: 'bold',
             textAlign: 'center',
           },
-          headerLeft: () => (
-            <HeaderBackButton
-              onPress={() => {
-                navigation.navigate('SignInOrUp');
-              }}
-            />
-          ),
         }}
       />
     </Stack.Navigator>

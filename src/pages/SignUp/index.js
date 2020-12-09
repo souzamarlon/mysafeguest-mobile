@@ -7,7 +7,7 @@ import { Container, Form, FormInput, Title, SubmitButton } from './styles';
 
 import { signUpRequest } from '~/store/modules/auth/actions';
 
-export default function SignUp() {
+export default function SignUp({ navigation }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,6 +19,11 @@ export default function SignUp() {
 
   async function handleSubmit() {
     dispatch(signUpRequest(name, email, password));
+
+    navigation.navigate('AddAddress', {
+      name,
+      email,
+    });
   }
 
   return (
@@ -42,8 +47,10 @@ export default function SignUp() {
           <FormInput
             icon="mail-outline"
             autoCorrect={false}
+            autoCapitalize="none"
             maxLength={30}
             // autoCapitalize
+            keyboardType="email-address"
             placeholder="Email"
             returnKeyType="next"
             onSubmitEditing={() => passwordRef.current.focus()}
