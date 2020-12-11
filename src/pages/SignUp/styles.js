@@ -33,6 +33,12 @@ export const Title = styled.Text`
   text-align: left;
 `;
 
+export const AddressField = styled.View`
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const SubmitButton = styled(Button)`
   height: 45px;
   margin-top: 25px;

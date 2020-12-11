@@ -52,7 +52,16 @@ export function* residentSignIn({ payload }) {
 
 export function* signUp({ payload }) {
   try {
-    const { name, email, password } = payload;
+    const {
+      name,
+      email,
+      password,
+      street,
+      number,
+      city,
+      state,
+      postal_code,
+    } = payload;
 
     const response = yield call(api.post, 'users', {
       name,
@@ -65,7 +74,16 @@ export function* signUp({ payload }) {
 
       const { id } = response.data;
 
-      yield put(signUpSuccess(id));
+      yield call(api.post, 'addresses', {
+        owner_id: id,
+        street,
+        number,
+        city,
+        state,
+        postal_code,
+      });
+
+      // yield put(signUpSuccess(id));
       // history.push('/');
     }
   } catch (err) {
