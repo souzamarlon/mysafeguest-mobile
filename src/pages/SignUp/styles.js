@@ -27,7 +27,7 @@ export const FormInput = styled(Input)`
 
 export const Title = styled.Text`
   font-size: 18px;
-  color: #999;
+  color: #fff;
   padding: 0 5px;
   margin-top: 15px;
   text-align: left;

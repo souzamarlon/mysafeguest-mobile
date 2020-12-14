@@ -4,6 +4,9 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { Alert } from 'react-native';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import PropTypes from 'prop-types';
 
@@ -11,19 +14,30 @@ import Background from '~/components/Background';
 
 import {
   Container,
+  InfoButton,
   Title,
   Content,
-  WelcomeText,
+  SignTexts,
   SignInButtons,
   Admin,
   Resident,
   GuardButton,
+  SignUpButton,
 } from './styles';
 
 export default function SignIn({ navigation }) {
+  function getInfo() {
+    Alert.alert(
+      'Information',
+      'The administration button is to manage residents. The resident button is to schedule visits to your home.'
+    );
+  }
   return (
     <Background backgroundName="SignInDashboardImage">
       <Container>
+        <InfoButton onPress={() => getInfo()}>
+          <Icon name="info" size={30} color="#444" />
+        </InfoButton>
         <Title>My Safe Guest.</Title>
         <Content
           style={{
@@ -31,12 +45,8 @@ export default function SignIn({ navigation }) {
             width: responsiveWidth(100),
           }}
         >
-          <WelcomeText>
-            The administration button is to manage residents. The resident
-            button is to schedule visits to your home.
-          </WelcomeText>
-
           <SignInButtons>
+            <SignTexts>Only for Administration:</SignTexts>
             <Admin
               icon="admin-panel-settings"
               fontSize={21}
@@ -46,6 +56,17 @@ export default function SignIn({ navigation }) {
             >
               Administration
             </Admin>
+            <SignUpButton
+              fontSize={14}
+              onPress={() => {
+                navigation.navigate('SignUp');
+              }}
+            >
+              SIGN UP
+            </SignUpButton>
+
+            <SignTexts>Only for Residents and Guards:</SignTexts>
+
             <Resident
               icon="people"
               fontSize={21}
@@ -55,6 +76,7 @@ export default function SignIn({ navigation }) {
             >
               Resident
             </Resident>
+
             <GuardButton
               icon="qr-code-scanner"
               fontSize={21}
@@ -63,14 +85,6 @@ export default function SignIn({ navigation }) {
               }}
             >
               Guard
-            </GuardButton>
-            <GuardButton
-              fontSize={18}
-              onPress={() => {
-                navigation.navigate('SignUp');
-              }}
-            >
-              Create your Admin account
             </GuardButton>
           </SignInButtons>
         </Content>

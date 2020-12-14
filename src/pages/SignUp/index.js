@@ -60,16 +60,16 @@ export default function SignUp({ navigation }) {
             'Your account has been created successfully!'
           );
 
-          navigation.navigate('Payment', {
-            name,
-            email,
-            password,
-            street,
-            number,
-            city,
-            state,
-            postal_code,
-          });
+          // navigation.navigate('Payment', {
+          //   name,
+          //   email,
+          //   password,
+          //   street,
+          //   number,
+          //   city,
+          //   state,
+          //   postal_code,
+          // });
         }
       }
     } catch (err) {
@@ -78,7 +78,7 @@ export default function SignUp({ navigation }) {
   }
 
   return (
-    <Background backgroundName="ResidentImage">
+    <Background backgroundName="SignInDashboardImage">
       <Container>
         <Form>
           <Title>Name</Title>
