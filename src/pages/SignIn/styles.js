@@ -65,7 +65,7 @@ export const SignInButtons = styled.View`
 
 export const SignUpButton = styled(Button)`
   width: 210px;
-  height: 30px;
+  height: 48px;
   align-items: center;
   border-radius: 8px;
   background: rgba(14, 190, 109, 0.8);

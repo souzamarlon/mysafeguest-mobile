@@ -57,12 +57,12 @@ export default function SignIn({ navigation }) {
               Administration
             </Admin>
             <SignUpButton
-              fontSize={14}
+              fontSize={21}
               onPress={() => {
                 navigation.navigate('SignUp');
               }}
             >
-              SIGN UP
+              Sign Up
             </SignUpButton>
 
             <SignTexts>Only for Residents and Guards:</SignTexts>
