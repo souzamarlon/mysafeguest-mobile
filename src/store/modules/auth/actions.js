@@ -19,6 +19,38 @@ export function signInSuccess(token, user) {
   };
 }
 
+export function signUpRequest(
+  name,
+  email,
+  password,
+  street,
+  number,
+  city,
+  state,
+  postal_code
+) {
+  return {
+    type: '@auth/SIGN_UP_REQUEST',
+    payload: {
+      name,
+      email,
+      password,
+      street,
+      number,
+      city,
+      state,
+      postal_code,
+    },
+  };
+}
+
+export function signUpSuccess(id) {
+  return {
+    type: '@auth/SIGN_UP_SUCCESS',
+    payload: { id },
+  };
+}
+
 export function signFailure() {
   return {
     type: '@auth/SIGN_IN_FAILURE',

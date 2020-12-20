@@ -11,6 +11,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import SignIn from './pages/SignIn';
 import AdminSignIn from './pages/SignIn/Admin';
 import ResidentSignIn from './pages/SignIn/Resident';
+import SignUp from './pages/SignUp';
+import Payment from './pages/SignUp/Payment';
 
 import GuardCheckIn from './pages/GuardCheckIn';
 import AppointmentInfo from './pages/GuardCheckIn/AppointmentInfo';
@@ -30,7 +32,7 @@ Icon.loadFont();
 const Stack = createStackNavigator();
 const Tabs = createBottomTabNavigator();
 
-function SignInStack({ navigation }) {
+function SignStack({ navigation }) {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -45,7 +47,7 @@ function SignInStack({ navigation }) {
       }}
     >
       <Stack.Screen
-        name="SignIn"
+        name="SignInOrUp"
         component={SignIn}
         options={{
           headerShown: false,
@@ -68,7 +70,7 @@ function SignInStack({ navigation }) {
           headerLeft: () => (
             <HeaderBackButton
               onPress={() => {
-                navigation.navigate('SignIn');
+                navigation.navigate('SignInOrUp');
               }}
             />
           ),
@@ -90,7 +92,7 @@ function SignInStack({ navigation }) {
           headerLeft: () => (
             <HeaderBackButton
               onPress={() => {
-                navigation.navigate('SignIn');
+                navigation.navigate('SignInOrUp');
               }}
             />
           ),
@@ -113,7 +115,7 @@ function SignInStack({ navigation }) {
             <HeaderBackButton
               tintColor="#fff"
               onPress={() => {
-                navigation.navigate('SignIn');
+                navigation.navigate('SignInOrUp');
               }}
             />
           ),
@@ -139,6 +141,46 @@ function SignInStack({ navigation }) {
               }}
             />
           ),
+        }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{
+          title: '',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: () => (
+            <HeaderBackButton
+              onPress={() => {
+                navigation.navigate('SignInOrUp');
+              }}
+            />
+          ),
+        }}
+      />
+
+      <Stack.Screen
+        name="Payment"
+        component={Payment}
+        options={{
+          title: 'Payment',
+          headerShown: true,
+          headerTransparent: true,
+          headerTitleAlign: 'center',
+          headerLeftContainerStyle: false,
+          headerTitleStyle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          },
+          headerLeft: null,
         }}
       />
     </Stack.Navigator>
@@ -440,8 +482,8 @@ export default function createRouter(isSigned = false, isAdmin = false) {
   return !isSigned ? (
     <Tabs.Navigator>
       <Tabs.Screen
-        name="SignInStack"
-        component={SignInStack}
+        name="SignStack"
+        component={SignStack}
         options={{ tabBarVisible: false }}
       />
     </Tabs.Navigator>

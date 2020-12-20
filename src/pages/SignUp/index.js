@@ -1,30 +1,32 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
+
 import { Alert } from 'react-native';
 
-import { useSelector } from 'react-redux';
+import Background from '~/components/Background';
 
 import {
   Container,
-  OwnerInfo,
-  OwnerView,
   Form,
-  FieldTitle,
   FormInput,
+  Title,
   AddressField,
   SubmitButton,
 } from './styles';
 
 import api from '~/services/api';
 
-import Background from '~/components/Background';
-
-export default function Profile() {
+export default function SignUp({ navigation }) {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [street, setStreet] = useState();
   const [number, setNumber] = useState();
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [postal_code, setPostal_code] = useState('');
-  const [address_id, setAddress_id] = useState();
+
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const streetRef = useRef();
   const numberRef = useRef();
@@ -32,56 +34,83 @@ export default function Profile() {
   const stateRef = useRef();
   const postalCodeRef = useRef();
 
-  const { id, name, email } = useSelector(
-    (selectUser) => selectUser.user.profile
-  );
-
-  useEffect(() => {
-    async function getAddress() {
-      const response = await api.get(`addresses/${id}`);
-
-      setAddress_id(response.data[0].id);
-      setStreet(response.data[0].street);
-      setNumber(response.data[0].number.toString());
-      setCity(response.data[0].city);
-      setState(response.data[0].state);
-      setPostal_code(response.data[0].postal_code);
-    }
-
-    getAddress();
-  }, [id]);
-
-  async function handleUpdate() {
+  async function handleSubmit() {
     try {
-      const response = await api.put(`addresses/${address_id}`, {
-        street,
-        number,
-        city,
-        state,
-        postal_code,
+      const response = await api.post('users', {
+        name,
+        email,
+        password,
       });
 
-      if (response.data) {
-        Alert.alert('The address has been updated successfully.');
+      if (response) {
+        const { id } = response.data;
+
+        const addressResponse = await api.post('addresses', {
+          owner_id: id,
+          street,
+          number,
+          city,
+          state,
+          postal_code,
+        });
+
+        if (addressResponse) {
+          Alert.alert(
+            'Be happy!',
+            'Your account has been created successfully!'
+          );
+
+          // navigation.navigate('Payment', {
+          //   name,
+          //   email,
+          //   password,
+          //   street,
+          //   number,
+          //   city,
+          //   state,
+          //   postal_code,
+          // });
+        }
       }
     } catch (err) {
-      // Alert.alert('The resident could not be created.');
+      // Alert.alert('Failure');
     }
   }
 
   return (
-    <Background backgroundName="ProfileBackground">
+    <Background backgroundName="SignInDashboardImage">
       <Container>
-        <FieldTitle>Name</FieldTitle>
-        <OwnerView>
-          <OwnerInfo>{name}</OwnerInfo>
-        </OwnerView>
-        <FieldTitle>Email</FieldTitle>
-        <OwnerView>
-          <OwnerInfo>{email}</OwnerInfo>
-        </OwnerView>
         <Form>
-          <FieldTitle>Address</FieldTitle>
+          <Title>Name</Title>
+          <FormInput
+            icon="person-outline"
+            autoCorrect={false}
+            maxLength={30}
+            // autoCapitalize
+            placeholder="Name"
+            returnKeyType="next"
+            onSubmitEditing={() => emailRef.current.focus()}
+            value={name}
+            onChangeText={setName}
+          />
+
+          <Title>Email</Title>
+          <FormInput
+            icon="mail-outline"
+            autoCorrect={false}
+            autoCapitalize="none"
+            maxLength={30}
+            // autoCapitalize
+            keyboardType="email-address"
+            placeholder="Email"
+            returnKeyType="next"
+            onSubmitEditing={() => streetRef.current.focus()}
+            ref={emailRef}
+            value={email}
+            onChangeText={setEmail}
+          />
+
+          <Title>Address</Title>
           <AddressField>
             <FormInput
               icon="add-location"
@@ -93,7 +122,7 @@ export default function Profile() {
               ref={streetRef}
               value={street}
               onChangeText={setStreet}
-              style={{ width: '50%', marginRight: 2 }}
+              style={{ width: '49%', marginRight: 2 }}
             />
             <FormInput
               // icon="add-location"
@@ -120,7 +149,7 @@ export default function Profile() {
               ref={cityRef}
               value={city}
               onChangeText={setCity}
-              style={{ width: '50%', marginRight: 2 }}
+              style={{ width: '49%', marginRight: 2 }}
             />
             <FormInput
               // icon="location-city"
@@ -141,14 +170,25 @@ export default function Profile() {
             maxLength={15}
             placeholder="Postal code"
             returnKeyType="next"
-            // onSubmitEditing={() => passwordRef.current.focus()}
+            onSubmitEditing={() => passwordRef.current.focus()}
             ref={postalCodeRef}
             value={postal_code}
             onChangeText={setPostal_code}
           />
+          <Title>Password:</Title>
+          <FormInput
+            icon="lock-outline"
+            secureTextEntry
+            placeholder="**********"
+            returnKeyType="send"
+            ref={passwordRef}
+            onSubmitEditing={handleSubmit}
+            value={password}
+            onChangeText={setPassword}
+          />
 
-          <SubmitButton onPress={handleUpdate} fontSize={19}>
-            Update
+          <SubmitButton onPress={handleSubmit} fontSize={19}>
+            Confirm
           </SubmitButton>
         </Form>
       </Container>

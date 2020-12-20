@@ -25,31 +25,18 @@ export const FormInput = styled(Input)`
   border: 1px solid #fff;
 `;
 
-export const Calendar = styled.View``;
-
 export const Title = styled.Text`
   font-size: 18px;
-  color: #999;
+  color: #fff;
   padding: 0 5px;
   margin-top: 15px;
   text-align: left;
 `;
 
-export const DateButton = styled.TouchableOpacity`
-  height: 46px;
-  margin-top: 2px;
-  padding: 0 5px;
-  background: rgba(255, 255, 255, 0.6);
-  border: 1px solid #fff;
-  border-radius: 4px;
+export const AddressField = styled.View`
   flex-direction: row;
-  align-items: center;
-`;
-
-export const DateText = styled.Text`
-  font-size: 14px;
-  color: #222;
-  padding: 0 5px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const SubmitButton = styled(Button)`

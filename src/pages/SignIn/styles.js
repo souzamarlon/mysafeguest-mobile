@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
 import { Platform } from 'react-native';
 
+import { RectButton } from 'react-native-gesture-handler';
 import Button from '~/components/Button';
 
 export const Container = styled.View`
@@ -25,6 +26,14 @@ export const Content = styled.KeyboardAvoidingView.attrs({
   border: 0;
 `;
 
+export const InfoButton = styled(RectButton)`
+  position: absolute;
+  top: 0;
+  display: flex;
+  right: 0;
+  margin: 5px;
+`;
+
 export const Title = styled.Text`
   display: flex;
   text-align: center;
@@ -35,13 +44,14 @@ export const Title = styled.Text`
   font-weight: bold;
 `;
 
-export const WelcomeText = styled.Text`
+export const SignTexts = styled.Text`
   color: #fff;
   width: 100%;
   font-size: 14px;
   font-weight: bold;
   text-align: center;
-  /* margin-bottom: 15px; */
+  margin-bottom: 5px;
+  margin-top: 10px;
 `;
 
 export const SignInButtons = styled.View`
@@ -53,12 +63,21 @@ export const SignInButtons = styled.View`
   margin-top: 15px;
 `;
 
+export const SignUpButton = styled(Button)`
+  width: 210px;
+  height: 48px;
+  align-items: center;
+  border-radius: 8px;
+  background: rgba(14, 190, 109, 0.8);
+  margin-top: 10px;
+`;
+
 export const Admin = styled(Button)`
   width: 210px;
   height: 50px;
   align-items: center;
   border-radius: 8px;
-  background: rgba(14, 190, 109, 1);
+  background: rgba(32, 32, 32, 0.8);
 `;
 
 export const Resident = styled(Button)`
@@ -66,7 +85,7 @@ export const Resident = styled(Button)`
   height: 50px;
   border-radius: 8px;
   align-items: center;
-  background: rgba(0, 187, 249, 1);
+  background: rgba(0, 187, 249, 0.8);
   margin-top: 10px;
 `;
 
@@ -75,6 +94,6 @@ export const GuardButton = styled(Button)`
   height: 50px;
   border-radius: 8px;
   align-items: center;
-  background: rgba(230, 57, 70, 1);
+  background: rgba(230, 57, 70, 0.8);
   margin-top: 10px;
 `;

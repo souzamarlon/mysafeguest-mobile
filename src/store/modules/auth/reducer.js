@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   signed: false,
   loading: false,
   isAdmin: false,
+  admin_id: null,
 };
 export default function auth(state = INITIAL_STATE, action) {
   return produce(state, (draft) => {
@@ -24,6 +25,11 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.signed = true;
         draft.loading = false;
         draft.isAdmin = action.payload.user.isAdmin;
+        break;
+      }
+
+      case '@auth/SIGN_UP_SUCCESS': {
+        draft.admin_id = action.payload.id;
         break;
       }
 
