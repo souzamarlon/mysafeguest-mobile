@@ -27,7 +27,8 @@ export function signUpRequest(
   number,
   city,
   state,
-  postal_code
+  postal_code,
+  mobile_number
 ) {
   return {
     type: '@auth/SIGN_UP_REQUEST',
@@ -40,6 +41,7 @@ export function signUpRequest(
       city,
       state,
       postal_code,
+      mobile_number,
     },
   };
 }

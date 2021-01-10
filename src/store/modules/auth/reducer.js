@@ -25,6 +25,7 @@ export default function auth(state = INITIAL_STATE, action) {
         draft.signed = true;
         draft.loading = false;
         draft.isAdmin = action.payload.user.isAdmin;
+        draft.active = action.payload.user.active;
         break;
       }
 
