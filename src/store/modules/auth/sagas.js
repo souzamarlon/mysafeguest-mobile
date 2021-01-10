@@ -85,7 +85,7 @@ export function* signUp({ payload }) {
         postal_code,
       });
 
-      // yield put(signUpSuccess(id));
+      yield put(signUpSuccess(id));
       // history.push('/');
     }
   } catch (err) {
