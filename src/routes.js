@@ -478,7 +478,11 @@ function ProfileStack({ navigation }) {
   );
 }
 
-export default function createRouter(isSigned = false, isAdmin = false) {
+export default function createRouter(
+  isSigned = false,
+  isAdmin = false,
+  active = false
+) {
   return !isSigned ? (
     <Tabs.Navigator>
       <Tabs.Screen
@@ -509,26 +513,37 @@ export default function createRouter(isSigned = false, isAdmin = false) {
         },
       }}
     >
-      <Tabs.Screen
-        name={isAdmin ? 'AdminDashboardStack' : 'ResidentDashboardStack'}
-        component={isAdmin ? AdminDashboardStack : ResidentDashboardStack}
-        options={{
-          // tabBarLabel: '',
-          tabBarIcon: ({ color }) => (
-            <Icon name="home" size={30} color={color} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="Add"
-        component={isAdmin ? NewResidentStack : NewAppointmentStack}
-        options={{
-          // tabBarLabel: '',
-          tabBarIcon: ({ color }) => (
-            <Icon name="add-circle-outline" size={30} color={color} />
-          ),
-        }}
-      />
+      {isAdmin && !active ? (
+        <Tabs.Screen
+          name="Uncompleted Payment"
+          component={Payment}
+          options={{ tabBarVisible: false }}
+        />
+      ) : (
+        <>
+          <Tabs.Screen
+            name={isAdmin ? 'AdminDashboardStack' : 'ResidentDashboardStack'}
+            component={isAdmin ? AdminDashboardStack : ResidentDashboardStack}
+            options={{
+              // tabBarLabel: '',
+              tabBarIcon: ({ color }) => (
+                <Icon name="home" size={30} color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="Add"
+            component={isAdmin ? NewResidentStack : NewAppointmentStack}
+            options={{
+              // tabBarLabel: '',
+              tabBarIcon: ({ color }) => (
+                <Icon name="add-circle-outline" size={30} color={color} />
+              ),
+            }}
+          />
+        </>
+      )}
+
       {isAdmin && (
         <Tabs.Screen
           name="Profile"

@@ -61,12 +61,14 @@ export function* signUp({ payload }) {
       city,
       state,
       postal_code,
+      mobile_number,
     } = payload;
 
     const response = yield call(api.post, 'users', {
       name,
       email,
       password,
+      mobile_number,
     });
 
     if (response) {

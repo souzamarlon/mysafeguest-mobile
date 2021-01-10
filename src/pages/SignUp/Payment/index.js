@@ -16,16 +16,18 @@ import { signUpRequest } from '~/store/modules/auth/actions';
 export default function Payment({ route }) {
   const [cardValue, setCardValue] = useState({});
 
-  const {
-    name,
-    email,
-    password,
-    street,
-    number,
-    city,
-    state,
-    postal_code,
-  } = route.params;
+  if (route.params) {
+    const {
+      name,
+      email,
+      password,
+      street,
+      number,
+      city,
+      state,
+      postal_code,
+    } = route.params;
+  }
 
   const dispatch = useDispatch();
 
