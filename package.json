@@ -28,6 +28,7 @@
     "react-native-code-push": "^6.4.0",
     "react-native-credit-card-input": "^0.4.1",
     "react-native-gesture-handler": "^1.8.0",
+    "react-native-iap": "^5.2.3",
     "react-native-qrcode-svg": "^6.0.6",
     "react-native-reanimated": "^1.13.1",
     "react-native-responsive-dimensions": "^3.1.1",

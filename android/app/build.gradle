@@ -162,7 +162,7 @@ android {
             resValue "string", "CodePushDeploymentKey", '""'
         }
           releaseStaging {
-            resValue "string", "CodePushDeploymentKey", '"KEY"'
+            resValue "string", "CodePushDeploymentKey", '"p2sAugxbqzb8aki-qD1tG7rI3S9xu9rICDARo"'
 
             matchingFallbacks = ['debug', 'release']
         }
@@ -173,7 +173,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            resValue "string", "CodePushDeploymentKey", '"jlTjG7IOVCusit4-5h_TTQCSW430wnljv7pzO"'
+            resValue "string", "CodePushDeploymentKey", '"DwcpDH1I4A_hOTaHI1jtpnwkHZ7zwu3Y_CRy1"'
         }
     }
 
