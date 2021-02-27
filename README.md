@@ -13,9 +13,7 @@
 <h4 align="center">
 This app will help you to manage the schedule guest's visit to your condominium.
 
-<span align="left">
-  
-  
+<h4 align="left">
   <strong>What can I do in Administration area?</strong>:
   
 - See all the list of your residents.
@@ -32,7 +30,7 @@ This app will help you to manage the schedule guest's visit to your condominium.
 
 - The guards only have the QR code scanner, this function will read the qr code and it will check if the guard can leave this guest get in the condominium.
 
-</span>
+</h4>
 </h4>
 
 <hr>
