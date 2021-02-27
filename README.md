@@ -15,6 +15,7 @@ This app will help you to manage the schedule guest's visit to your condominium.
 
 <span align="left">
   
+  
   <strong>What can I do in Administration area?</strong>:
   
 - See all the list of your residents.
