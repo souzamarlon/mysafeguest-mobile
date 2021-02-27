@@ -38,7 +38,7 @@ This app will help you to manage the schedule guest's visit to your condominium.
   <a href="#rocket-Libraries and Technologies">Libraries and Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#information_source-TODO">TODO</a>&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;
   <a href="#information_source-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/souzamarlon/R6WomenInLeague-backend">Back-end project</a>&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/souzamarlon/mysafeguest-backend">Back-end project</a>&nbsp;&nbsp;&nbsp;
 </p>
 
 ## 🚀 Preview<a name = "preview"></a>
