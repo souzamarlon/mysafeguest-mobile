@@ -66,8 +66,8 @@ React native:
 
 ## :information_source: TODO
 - Integration with stripe or Google Play card before registering admin account. Obs: This app is able to create the accounts but it won't execute the payment process.
-- Change the payment when the app is download (My first idea was just charge the administration)>
-- 
+- Ask for the payment before to do the app download in Google play (My first idea was just charge the administration accounts every month.).
+- Read the qr code using an IP camera. This will automatically read the QR code, it won't be necessary to read the qr code using one smartphone.
 
 ## :information_source: How To Use
 
