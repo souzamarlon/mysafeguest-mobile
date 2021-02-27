@@ -16,13 +16,13 @@ This app will help you to manage the schedule guest's visit to your condominium.
 <h4 align="left">
   <strong>What can I do in Administration area?</strong>:
   
-- See all the list of your residents.
+- See the list of the residents.
 - Create new residents accounts (The administration will be responsible to create all the access accounts), edit and delete it.
 - See all the appointments from every resident.
 
 <strong>What can I do in Resident area?</strong>:
 
-- See the list of your appointments, create new appointments for the guests and it is possible to change all the appointments to others date using the edit option.
+- See all the appointments, create new appointments for the guests will come to the house and it is possible to change all the appointments to others date using the edit option.
 - When the appointments are created you will be able to share the Qr code, you can share by whatsapp or others social medias.
 
 
