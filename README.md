@@ -17,7 +17,7 @@ This app will help you to manage the schedule guest's visit to your condominium.
   <strong>What can I do in Administration area?</strong>:
   
 - See the list of the residents.
-- Create new residents accounts (The administration will be responsible to create all the access accounts), edit and delete it.
+- Create new residents account (The administration will be responsible to create all the access accounts), edit and delete it.
 - See all the appointments from every resident.
 
 <strong>What can I do in Resident area?</strong>:
