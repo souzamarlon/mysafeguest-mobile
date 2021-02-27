@@ -12,7 +12,7 @@ import SignIn from './pages/SignIn';
 import AdminSignIn from './pages/SignIn/Admin';
 import ResidentSignIn from './pages/SignIn/Resident';
 import SignUp from './pages/SignUp';
-import Payment from './pages/SignUp/Payment';
+import Subscription from './pages/SignUp/Subscription';
 
 import GuardCheckIn from './pages/GuardCheckIn';
 import AppointmentInfo from './pages/GuardCheckIn/AppointmentInfo';
@@ -167,10 +167,10 @@ function SignStack({ navigation }) {
       />
 
       <Stack.Screen
-        name="Payment"
-        component={Payment}
+        name="Subscription"
+        component={Subscription}
         options={{
-          title: 'Payment',
+          title: 'Subscription',
           headerShown: true,
           headerTransparent: true,
           headerTitleAlign: 'center',
@@ -478,6 +478,33 @@ function ProfileStack({ navigation }) {
   );
 }
 
+function SubscriptionStack({ navigation }) {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerTransparent: true,
+        headerTintColor: '#444',
+        headerTitleStyle: {
+          fontSize: 18,
+          fontWeight: 'bold',
+          textAlign: 'center',
+        },
+        headerLeftContainerStyle: {},
+      }}
+    >
+      <Stack.Screen
+        name="Subscription"
+        component={Subscription}
+        options={{
+          title: 'Subscription',
+          headerShown: false,
+          headerTransparent: true,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function createRouter(
   isSigned = false,
   isAdmin = false,
@@ -516,7 +543,7 @@ export default function createRouter(
       {isAdmin && !active ? (
         <Tabs.Screen
           name="Uncompleted Payment"
-          component={Payment}
+          component={SubscriptionStack}
           options={{ tabBarVisible: false }}
         />
       ) : (

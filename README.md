@@ -1,5 +1,5 @@
 <h1 align="center">
-   My Safe Guest
+   My Safe Guest Mobile application:
 </h1>
 
 ![](https://img.shields.io/github/package-json/v/souzamarlon/mysafeguest-mobile.svg)
@@ -12,11 +12,31 @@
 
 <h4 align="center">
 This app will help you to manage the schedule guest's visit to your condominium.
+
+<h4 align="left">
+  <strong>What can I do in Administration area?</strong>:
+  
+- See the list of the residents.
+- Create new residents account (The administration will be responsible to create all the access accounts), edit and delete it.
+- See all the appointments from every resident.
+
+<strong>What can I do in Resident area?</strong>:
+
+- See all the appointments, create new appointments for the guests will come to the house and it is possible to schedule all the appointments to others date using the edit option.
+- When the appointments are created you will be able to share the Qr code, you can share by whatsapp or others social medias.
+
+
+<strong>What can I do in Guard area?</strong>:
+
+- The guards only have the QR code scanner, this function will read the qr code and it will check if the guard can leave this guest get in the condominium.
+
+</h4>
 </h4>
 
 <hr>
 <p align="center">
   <a href="#rocket-Libraries and Technologies">Libraries and Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-TODO">TODO</a>&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;
   <a href="#information_source-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;
   <a href="https://github.com/souzamarlon/R6WomenInLeague-backend">Back-end project</a>&nbsp;&nbsp;&nbsp;
 </p>
@@ -42,6 +62,11 @@ React native:
 
 React native:
 - [VS Code][vc] with [EditorConfig][vceditconfig] and [ESLint][vceslint]
+
+
+## :information_source: TODO
+- Integration with stripe or Google Play card before registering admin account. Obs: This app is able to create the accounts but it won't execute the payment process. OR: Ask for the payment before to do the app download in Google play (My first idea was just charge the administration accounts every month.).
+- Read the qr code using an IP camera. This will automatically read the QR code, it won't be necessary to read the qr code using one smartphone.
 
 ## :information_source: How To Use
 

@@ -3,6 +3,7 @@ import styled from 'styled-components/native';
 import SignInDashboardImage from '~/assets/signInDashboard.jpg';
 import AdminSignInImage from '~/assets/adminSignIn.jpg';
 import ResidentSignIn from '~/assets/residentSignIn.jpg';
+import subsBackground from '~/assets/subsBackground.jpg';
 
 import ResidentImage from '~/assets/residentBackground.jpg';
 import AppointmentImage from '~/assets/appointmentBackground.jpg';
@@ -14,6 +15,7 @@ const defaultImage = {
   SignInDashboardImage,
   AdminSignInImage,
   ResidentSignIn,
+  subsBackground,
   ResidentImage,
   AppointmentImage,
   GuardImage,
