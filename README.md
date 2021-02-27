@@ -19,8 +19,8 @@ What can I do in Administration area?:
 - See all the appointments from every resident.
 
 What can I do in Resident area?:
-- See the list of your appointments, create new appointments for your guests to be able to visit you and edit or delete it.
-- The appointments created has one qrcode to be share, you can share by whatsapp or others social medias.
+- See the list of your appointments, create new appointments for your guests to visit you and you can change this appointment anytime using the edit option.
+- When the appointments are created you will be able to share the Qr code, you can share by whatsapp or others social medias.
 
 </h4>
 
