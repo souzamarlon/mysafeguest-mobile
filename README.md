@@ -13,16 +13,24 @@
 <h4 align="center">
 This app will help you to manage the schedule guest's visit to your condominium.
 
-<h4 align="left">
+<span align="left">
   <b>What can I do in Administration area?</b>:
+  
 - See all the list of your residents.
 - Create new residents accounts (The administration will be responsible to create all the access accounts), edit and delete it.
 - See all the appointments from every resident.
 
-What can I do in Resident area?:
+<b>What can I do in Resident area?</b>:
+
 - See the list of your appointments, create new appointments for your guests to visit you and you can change this appointment anytime using the edit option.
 - When the appointments are created you will be able to share the Qr code, you can share by whatsapp or others social medias.
-</h4>
+
+
+<b>What can I do in Guard area?</b>:
+
+- The guards only have the QR code scanner, this function will read the qr code and it will check if the guard can leave this guest get in the condominium.
+
+</span>
 </h4>
 
 <hr>
@@ -58,6 +66,8 @@ React native:
 
 ## :information_source: TODO
 - Integration with stripe or Google Play card before registering admin account. Obs: This app is able to create the accounts but it won't execute the payment process.
+- Change the payment when the app is download (My first idea was just charge the administration)>
+- 
 
 ## :information_source: How To Use
 
