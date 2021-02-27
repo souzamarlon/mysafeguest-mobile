@@ -14,19 +14,19 @@
 This app will help you to manage the schedule guest's visit to your condominium.
 
 <span align="left">
-  <i>What can I do in Administration area?</i>:
+  <strong>What can I do in Administration area?</strong>:
   
 - See all the list of your residents.
 - Create new residents accounts (The administration will be responsible to create all the access accounts), edit and delete it.
 - See all the appointments from every resident.
 
-<b>What can I do in Resident area?</b>:
+<strong>What can I do in Resident area?</strong>:
 
 - See the list of your appointments, create new appointments for your guests to visit you and you can change this appointment anytime using the edit option.
 - When the appointments are created you will be able to share the Qr code, you can share by whatsapp or others social medias.
 
 
-<i>What can I do in Guard area?</i>:
+<strong>What can I do in Guard area?</strong>:
 
 - The guards only have the QR code scanner, this function will read the qr code and it will check if the guard can leave this guest get in the condominium.
 
