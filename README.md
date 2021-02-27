@@ -17,6 +17,7 @@ This app will help you to manage the schedule guest's visit to your condominium.
 <hr>
 <p align="center">
   <a href="#rocket-Libraries and Technologies">Libraries and Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#information_source-todo">TODO</a>&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;
   <a href="#information_source-how-to-use">How To Use</a>&nbsp;&nbsp;&nbsp|&nbsp;&nbsp;&nbsp;
   <a href="https://github.com/souzamarlon/R6WomenInLeague-backend">Back-end project</a>&nbsp;&nbsp;&nbsp;
 </p>
@@ -42,6 +43,10 @@ React native:
 
 React native:
 - [VS Code][vc] with [EditorConfig][vceditconfig] and [ESLint][vceslint]
+
+
+## :information_todo: TODO
+- Integration with stripe or Google Play card before registering admin account. Obs: This app is able to create the accounts but it won't execute the payment process.
 
 ## :information_source: How To Use
 
