@@ -22,9 +22,8 @@ This app will help you to manage the schedule guest's visit to your condominium.
 
 <strong>What can I do in Resident area?</strong>:
 
-- See all the appointments, create new appointments for the guests will come to the house and it is possible to schedule all the appointments to others date using the edit option.
-- When the appointments are created you will be able to share the Qr code, you can share by whatsapp or others social medias.
-
+- See all the appointments, create new appointments for the guests are coming to the house and change the appointment date using the edit option.
+- Share the Qr code by whatsapp or others social medias.
 
 <strong>What can I do in Guard area?</strong>:
 
